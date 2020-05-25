@@ -1,4 +1,5 @@
 #![allow(non_snake_case)]
+#![allow(warnings)]
 
 #[cfg(feature = "dx12")]
 use gfx_backend_dx12 as back;
