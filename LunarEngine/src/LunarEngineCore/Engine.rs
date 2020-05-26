@@ -9,7 +9,7 @@ pub struct LunarEngine {
 impl LunarEngine {
     pub fn init_engine() -> Self {
         let lWindow = LunarGraphicsCore::LunarWindow::LunarWindow::default();
-        let lHAL = LunarGraphicsCore::LunarGFX::LunarHAL::initialize_lunar_graphics();
+        let lHAL = LunarGraphicsCore::LunarGFX::LunarHAL::initialize_lunar_graphics(&lWindow.window);
 
         Self {
             lWindow: lWindow,

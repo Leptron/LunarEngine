@@ -6,8 +6,8 @@ pub struct LunarHAL {
 }
 
 impl LunarHAL {
-    pub fn initialize_lunar_graphics() -> Self {
-        let mut backend = LunarVkBackend::LunarVk::LVKBackend::create_backend();
+    pub fn initialize_lunar_graphics(window: &winit::Window) -> Self {
+        let mut backend = LunarVkBackend::LunarVk::LVKBackend::create_backend(&window);
 
         Self {
             backend,

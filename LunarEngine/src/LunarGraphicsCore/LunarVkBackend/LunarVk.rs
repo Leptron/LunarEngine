@@ -5,8 +5,8 @@ pub struct LVKBackend {
 }
 
 impl LVKBackend {
-    pub fn create_backend() -> Self {
-        let mut lvk_device = LunarVkDevice::LunarVkDevice::init_vk();
+    pub fn create_backend(window: &winit::Window) -> Self {
+        let mut lvk_device = LunarVkDevice::LunarVkDevice::init_vk(&window);
 
         Self {
             lvk_device,

@@ -32,12 +32,25 @@ use super::LunarVkUtilityTools;
 
 struct QueueFamilyIndices {
     graphics_family: Option<u32>,
+    present_family: Option<u32>,
 }
 
 impl QueueFamilyIndices {
+    pub fn new() -> QueueFamilyIndices {
+        QueueFamilyIndices {
+            graphics_family: None,
+            present_family: None,
+        }
+    }
+
     pub fn is_complete(&self) -> bool {
         self.graphics_family.is_some()
     }
+}
+
+struct SurfaceStuff {
+    surface_loader: ash::extensions::khr::Surface,
+    surface: vk::SurfaceKHR,
 }
 
 struct ValidationInfo {
@@ -48,16 +61,19 @@ struct ValidationInfo {
 pub struct LunarVkDevice {
     _entry: ash::Entry,
     instance: ash::Instance,
+    surface_loader: ash::extensions::khr::Surface,
+    surface: vk::SurfaceKHR,
     validation: ValidationInfo,
     debug_utils_loader: ash::extensions::ext::DebugUtils,
     debug_merssager: vk::DebugUtilsMessengerEXT,
     _physical_device: vk::PhysicalDevice,
     device: ash::Device,
     _graphics_queue: vk::Queue,
+    _present_queue: vk::Queue,
 }
 
 impl LunarVkDevice {
-    pub fn init_vk() -> Self {
+    pub fn init_vk(window: &winit::Window) -> Self {
         let validation = ValidationInfo{
             is_enable: true,
             required_validation_layers: ["VK_LAYER_KHRONOS_validation"],
@@ -66,9 +82,15 @@ impl LunarVkDevice {
         let entry = ash::Entry::new().unwrap();
         let instance = LunarVkDevice::create_instance(&entry, &validation);
         let (debug_utils_loader, debug_merssager) = LunarVkDevice::setup_debug_utils(&validation, &entry, &instance);
-        let physical_device = LunarVkDevice::pick_physical_device(&instance);
-        let (logical_device, graphics_queue) =
-            LunarVkDevice::create_logical_device(&instance, physical_device, &validation);
+        let surface_stuff = LunarVkDevice::create_surface(&entry, &instance, &window);
+        let physical_device = LunarVkDevice::pick_physical_device(&instance, &surface_stuff);
+        let (device, family_indicies) =
+            LunarVkDevice::create_logical_device(&instance, physical_device, &validation, &surface_stuff);
+
+        let graphics_queue =
+            unsafe { device.get_device_queue(family_indicies.graphics_family.unwrap(), 0) };
+        let present_queue =
+            unsafe { device.get_device_queue(family_indicies.present_family.unwrap(), 0) };
 
         Self {
             _entry: entry,
@@ -77,8 +99,11 @@ impl LunarVkDevice {
             debug_utils_loader,
             debug_merssager,
             _physical_device: physical_device,
-            device: logical_device,
+            device: device,
             _graphics_queue: graphics_queue,
+            surface: surface_stuff.surface,
+            surface_loader: surface_stuff.surface_loader,
+            _present_queue: present_queue,
         }
     }
 
@@ -265,7 +290,7 @@ impl LunarVkDevice {
         vk::FALSE
     }
 
-    fn pick_physical_device(instance: &ash::Instance) -> vk::PhysicalDevice {
+    fn pick_physical_device(instance: &ash::Instance, surface_stuff: &SurfaceStuff,) -> vk::PhysicalDevice {
         let physical_devices = unsafe {
             instance
                 .enumerate_physical_devices()
@@ -276,7 +301,7 @@ impl LunarVkDevice {
 
         let mut result = None;
         for &physical_device in physical_devices.iter() {
-            if LunarVkDevice::is_physical_device_suitable(instance, physical_device) {
+            if LunarVkDevice::is_physical_device_suitable(instance, physical_device, surface_stuff) {
                 if result.is_none() {
                     result = Some(physical_device)
                 }
@@ -289,92 +314,69 @@ impl LunarVkDevice {
         }
     }
 
-    fn is_physical_device_suitable(instance: &ash::Instance, physical_device: vk::PhysicalDevice) -> bool {
-        let device_properties = unsafe { instance.get_physical_device_properties(physical_device) };
-        let device_features = unsafe { instance.get_physical_device_features(physical_device) };
-        let device_queue_families =
-            unsafe { instance.get_physical_device_queue_family_properties(physical_device) };
+    fn is_physical_device_suitable(instance: &ash::Instance, physical_device: vk::PhysicalDevice, surface_stuff: &SurfaceStuff,) -> bool {
+        let _device_properties =
+            unsafe { instance.get_physical_device_properties(physical_device) };
+        let _device_features = unsafe { instance.get_physical_device_features(physical_device) };
 
-        let device_type = match device_properties.device_type {
-            vk::PhysicalDeviceType::CPU => "Cpu",
-            vk::PhysicalDeviceType::INTEGRATED_GPU => "Integrated GPU",
-            vk::PhysicalDeviceType::DISCRETE_GPU => "Discrete GPU",
-            vk::PhysicalDeviceType::VIRTUAL_GPU => "Virtual GPU",
-            vk::PhysicalDeviceType::OTHER => "Unknown",
-            _ => panic!(),
-        };
-
-        let device_name = LunarVkUtilityTools::vk_to_string(&device_properties.device_name);
-        println!(
-            "\tDevice Name: {}, id: {}, type: {}",
-            device_name, device_properties.device_id, device_type
-        );
-
-        let major_version = vk_version_major!(device_properties.api_version);
-        let minor_version = vk_version_minor!(device_properties.api_version);
-        let patch_version = vk_version_patch!(device_properties.api_version);
-
-        for queue_family in device_queue_families.iter() {
-            let is_graphics_support = if queue_family.queue_flags.contains(vk::QueueFlags::GRAPHICS)
-            {
-                "support"
-            } else {
-                "unsupport"
-            };
-            let is_compute_support = if queue_family.queue_flags.contains(vk::QueueFlags::COMPUTE) {
-                "support"
-            } else {
-                "unsupport"
-            };
-            let is_transfer_support = if queue_family.queue_flags.contains(vk::QueueFlags::TRANSFER)
-            {
-                "support"
-            } else {
-                "unsupport"
-            };
-            let is_sparse_support = if queue_family
-                .queue_flags
-                .contains(vk::QueueFlags::SPARSE_BINDING)
-            {
-                "support"
-            } else {
-                "unsupport"
-            };
-        }
-
-        let indices = LunarVkDevice::find_queue_family(instance, physical_device);
+        let indices = LunarVkDevice::find_queue_family(instance, physical_device, surface_stuff);
 
         return indices.is_complete();
     }
 
-    fn find_queue_family(instance: &ash::Instance, physical_device: vk::PhysicalDevice,) -> QueueFamilyIndices {
+    fn find_queue_family(instance: &ash::Instance, physical_device: vk::PhysicalDevice, surface_stuff: &SurfaceStuff,) -> QueueFamilyIndices {
         let queue_families =
             unsafe { instance.get_physical_device_queue_family_properties(physical_device) };
 
-        let mut queue_family_indicies = QueueFamilyIndices {
-            graphics_family: None,
-        };
+        let mut queue_family_indices = QueueFamilyIndices::new();
 
         let mut index = 0;
         for queue_family in queue_families.iter() {
             if queue_family.queue_count > 0
                 && queue_family.queue_flags.contains(vk::QueueFlags::GRAPHICS)
             {
-                queue_family_indicies.graphics_family = Some(index);
+                queue_family_indices.graphics_family = Some(index);
             }
 
-            if queue_family_indicies.is_complete() {
+            let is_present_support = unsafe {
+                surface_stuff
+                    .surface_loader
+                    .get_physical_device_surface_support(
+                        physical_device,
+                        index as u32,
+                        surface_stuff.surface,
+                    )
+            };
+            if queue_family.queue_count > 0 && is_present_support {
+                queue_family_indices.present_family = Some(index);
+            }
+
+            if queue_family_indices.is_complete() {
                 break;
             }
 
             index += 1;
         }
 
-        queue_family_indicies
+        queue_family_indices
     }
 
-    fn create_logical_device(instance: &ash::Instance, physical_device: vk::PhysicalDevice, validation: &ValidationInfo) -> (ash::Device, vk::Queue) {
-        let indicies = LunarVkDevice::find_queue_family(instance, physical_device);
+    fn create_surface(entry: &ash::Entry, instance: &ash::Instance, window: &winit::Window) -> SurfaceStuff {
+        let surface = unsafe {
+            create_surface(entry, instance, window)
+                .expect("Failed to create surface")
+        };
+
+        let surface_loader = ash::extensions::khr::Surface::new(entry, instance);
+
+        SurfaceStuff {
+            surface_loader,
+            surface,
+        }
+    }
+    
+    fn create_logical_device(instance: &ash::Instance, physical_device: vk::PhysicalDevice, validation: &ValidationInfo, surface_stuff: &SurfaceStuff,) -> (ash::Device, QueueFamilyIndices) {
+        let indicies = LunarVkDevice::find_queue_family(instance, physical_device, surface_stuff);
 
         let queue_priorities = [1.0_f32];
         let queue_create_info = vk::DeviceQueueCreateInfo  {
@@ -429,7 +431,7 @@ impl LunarVkDevice {
 
         let graphics_queue = unsafe { device.get_device_queue(indicies.graphics_family.unwrap(), 0) };
 
-        (device, graphics_queue)
+        (device, indicies)
     }
 }
 
@@ -443,4 +445,87 @@ impl Drop for LunarVkDevice {
             self.instance.destroy_instance(None);
         }
     }
+}
+
+#[cfg(all(unix, not(target_os = "android"), not(target_os = "macos")))]
+pub unsafe fn create_surface<E: EntryV1_0, I: InstanceV1_0>(
+    entry: &E,
+    instance: &I,
+    window: &winit::Window,
+) -> Result<vk::SurfaceKHR, vk::Result> {
+    use std::ptr;
+    use winit::os::unix::WindowExt;
+
+    let x11_display = window.xlib_display().unwrap();
+    let x11_window = window.xlib_window().unwrap();
+    let x11_create_info = vk::XlibSurfaceCreateInfoKHR {
+        s_type: vk::StructureType::XLIB_SURFACE_CREATE_INFO_KHR,
+        p_next: ptr::null(),
+        flags: Default::default(),
+        window: x11_window as vk::Window,
+        dpy: x11_display as *mut vk::Display,
+    };
+    let xlib_surface_loader = XlibSurface::new(entry, instance);
+    xlib_surface_loader.create_xlib_surface(&x11_create_info, None)
+}
+
+#[cfg(target_os = "macos")]
+pub unsafe fn create_surface<E: EntryV1_0, I: InstanceV1_0>(
+    entry: &E,
+    instance: &I,
+    window: &winit::Window,
+) -> Result<vk::SurfaceKHR, vk::Result> {
+    use std::mem;
+    use std::os::raw::c_void;
+    use std::ptr;
+    use winit::os::macos::WindowExt;
+
+    let wnd: cocoa_id = mem::transmute(window.ns_window());
+
+    let layer = CoreAnimationLayer::new();
+
+    layer.set_edge_antialiasing_mask(0);
+    layer.set_presents_with_transaction(false);
+    layer.remove_all_animations();
+
+    let view = wnd.contentView();
+
+    layer.set_contents_scale(view.backingScaleFactor());
+    view.setLayer(mem::transmute(layer.as_ref()));
+    view.setWantsLayer(YES);
+
+    let create_info = vk::MacOSSurfaceCreateInfoMVK {
+        s_type: vk::StructureType::MACOS_SURFACE_CREATE_INFO_M,
+        p_next: ptr::null(),
+        flags: Default::default(),
+        p_view: window.ns_view() as *const c_void,
+    };
+
+    let macos_surface_loader = MacOSSurface::new(entry, instance);
+    macos_surface_loader.create_mac_os_surface_mvk(&create_info, None)
+}
+
+#[cfg(target_os = "windows")]
+pub unsafe fn create_surface<E: EntryV1_0, I: InstanceV1_0>(
+    entry: &E,
+    instance: &I,
+    window: &winit::Window,
+) -> Result<vk::SurfaceKHR, vk::Result> {
+    use std::os::raw::c_void;
+    use std::ptr;
+    use winapi::shared::windef::HWND;
+    use winapi::um::libloaderapi::GetModuleHandleW;
+    use winit::os::windows::WindowExt;
+
+    let hwnd = window.get_hwnd() as HWND;
+    let hinstance = GetModuleHandleW(ptr::null()) as *const c_void;
+    let win32_create_info = vk::Win32SurfaceCreateInfoKHR {
+        s_type: vk::StructureType::WIN32_SURFACE_CREATE_INFO_KHR,
+        p_next: ptr::null(),
+        flags: Default::default(),
+        hinstance,
+        hwnd: hwnd as *const c_void,
+    };
+    let win32_surface_loader = Win32Surface::new(entry, instance);
+    win32_surface_loader.create_win32_surface(&win32_create_info, None)
 }
