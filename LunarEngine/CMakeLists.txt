@@ -11,4 +11,8 @@ include_directories(${CMAKE_SOURCE_DIR}/Lib/include
                     ${CMAKE_SOURCE_DIR}/glfw/include)
 
 add_library(LunarEngine STATIC ${SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} glfw ${GLFW_LIBRARIES} VkLayer_utils vulkan pthread)
+if(WIN32)
+target_link_libraries(${PROJECT_NAME} base ${Vulkan_LIBRARY} ${ASSIMP_LIBRARIES} ${WINLIBS})
+else(UNIX)
+target_link_libraries(${PROJECT_NAME} base )
+endif()
