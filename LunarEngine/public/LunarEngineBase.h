@@ -86,5 +86,10 @@ namespace LunarEngine {
         void buildCommandBuffers();
         void draw();
         void prepareVertices(bool useStagingBuffers);
+		void setupDescriptorPool();
+		void setupDescriptorSetLayout();
+		void setupDescriptorSet();
+		void setupDepthStencil();
+		void setupFrameBuffer();
 	};
 }

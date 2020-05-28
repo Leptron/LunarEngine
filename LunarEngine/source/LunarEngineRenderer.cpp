@@ -365,6 +365,158 @@ namespace LunarEngine {
             memcpy(data, vertexBuffer.data(), vertexBufferSize);
             vkUnmapMemory(device, vertices.memory);
             VK_CHECK_RESULT(vkBindBufferMemory(device, vertices.buffer, vertices.memory, 0));
+
+			//Index buffer
+			VkBufferCreateInfo indexBufferInfo = {};
+			indexBufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
+			indexBufferInfo.size = indexBufferSize;
+			indexBufferInfo.usage = VK_BUFFER_USAGE_INDEX_BUFFER_BIT;
+
+			// Copy index data to a buffer visible to the host
+			VK_CHECK_RESULT(vkCreateBuffer(device, &indexBufferInfo, nullptr, &indices.buffer));
+			vkGetBufferMemoryRequirements(device, indices.buffer, &memReqs);
+			memAlloc.allocationSize = memReqs.size;
+			memAlloc.memoryTypeIndex = getMemoryTypeIndex(memReqs.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
+			VK_CHECK_RESULT(vkAllocateMemory(device, &memAlloc, nullptr, &indices.memory));
+			VK_CHECK_RESULT(vkMapMemory(device, indices.memory, 0, indexBufferSize, 0, &data));
+			memcpy(data, indexBuffer.data(), indexBufferSize);
+			vkUnmapMemory(device, indices.memory);
+			VK_CHECK_RESULT(vkBindBufferMemory(device, indices.buffer, indices.memory, 0));
         }
 	}
+
+	void LunarEngineRenderer::setupDescriptorPool() {
+		// We need to tell the API the number of max. requested descriptors per type
+		VkDescriptorPoolSize typeCounts[1];
+		//currently only using one descriptor type and only requests on descriptor of this type
+		typeCounts[0].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+		typeCounts[0].descriptorCount = 1;
+		// For additional types you need to add new entries in the type count list
+		// E.g. for two combined image samplers :
+		// typeCounts[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+		// typeCounts[1].descriptorCount = 2;
+
+		// Create the global descriptor pool
+		// All descriptors used in this example are allocated from this pool
+		VkDescriptorPoolCreateInfo descriptorPoolInfo = {};
+		descriptorPoolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+		descriptorPoolInfo.pNext = nullptr;
+		descriptorPoolInfo.poolSizeCount = 1;
+		descriptorPoolInfo.pPoolSizes = typeCounts;
+		//max descriptors
+		descriptorPoolInfo.maxSets = 1;
+
+		VK_CHECK_RESULT(vkCreateDescriptorPool(device, &descriptorPoolInfo, nullptr, &descriptorPool));
+	}
+
+	void LunarEngineRenderer::setupDescriptorSetLayout() {
+		//setup of layout of descriptors
+		// Basically connects the different shader stages to descriptors for binding uniform buffers, image samplers, etc.
+		// So every shader binding should map to one descriptor set layout binding
+
+		//binding : 0 Uniform Buffer (vertex shader)
+		VkDescriptorSetLayoutBinding layoutBinding = {};
+		layoutBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+		layoutBinding.descriptorCount = 1;
+		layoutBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+		layoutBinding.pImmutableSamplers = nullptr;
+
+		VkDescriptorSetLayoutCreateInfo descriptorLayout = {};
+		descriptorLayout.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+		descriptorLayout.pNext = nullptr;
+		descriptorLayout.bindingCount = 1;
+		descriptorLayout.pBindings = &layoutBinding;
+
+		VK_CHECK_RESULT(vkCreateDescriptorSetLayout(device, &descriptorLayout, nullptr, &descriptorSetLayout));
+
+
+		// Create the pipeline layout that is used to generate the rendering pipelines that are based on this descriptor set layout
+		// In a more complex scenario you would have different pipeline layouts for different descriptor set layouts that could be reused
+		VkPipelineLayoutCreateInfo pPipelineLayoutCreateInfo = {};
+		pPipelineLayoutCreateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+		pPipelineLayoutCreateInfo.pNext = nullptr;
+		pPipelineLayoutCreateInfo.setLayoutCount = 1;
+		pPipelineLayoutCreateInfo.pSetLayouts = &descriptorSetLayout;
+
+		VK_CHECK_RESULT(vkCreatePipelineLayout(device, &pPipelineLayoutCreateInfo, nullptr, &pipelineLayout));
+	}
+
+	void LunarEngineRenderer::setupDescriptorSet() {
+		// Allocate a new descriptor set from the global descriptor pool
+		VkDescriptorSetAllocateInfo allocInfo = {};
+		allocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+		allocInfo.descriptorPool = descriptorPool;
+		allocInfo.descriptorSetCount = 1;
+		allocInfo.pSetLayouts = &descriptorSetLayout;
+
+		VK_CHECK_RESULT(vkAllocateDescriptorSets(device, &allocInfo, &descriptorSet));
+
+		// Update the descriptor set determining the shader binding points
+		// For every binding point used in a shader there needs to be one
+		// descriptor set matching that binding point
+
+		VkWriteDescriptorSet writeDescriptorSet = {};
+
+		//Binding: 0 uniform buffer
+		writeDescriptorSet.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+		writeDescriptorSet.dstSet = descriptorSet;
+		writeDescriptorSet.descriptorCount = 1;
+		writeDescriptorSet.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+		writeDescriptorSet.pBufferInfo = &uniformBufferVS.descriptor;
+		// Binds this uniform buffer to binding point 0
+		writeDescriptorSet.dstBinding = 0;
+
+		vkUpdateDescriptorSets(device, 1, &writeDescriptorSet, 0, nullptr);
+	}
+
+	// Create the depth (and stencil) buffer attachments used by our framebuffers
+	// Note: Override of virtual function in the base class and called from within VulkanExampleBase::prepare
+	void LunarEngineRenderer::setupDepthStencil() {
+		//create an optimal image used as the depth stencil attachment
+		VkImageCreateInfo image = {};
+		image.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+		image.imageType = VK_IMAGE_TYPE_2D;
+		image.format = depthFormat;
+		//use height and width
+		image.extent = { height, width };
+		image.mipLevels = 1;
+		image.arrayLayers = 1;
+		image.samples = VK_SAMPLE_COUNT_1_BIT;
+		image.tiling = VK_IMAGE_TILING_OPTIMAL;
+		image.usage = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;
+		image.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+		VK_CHECK_RESULT(vkCreateImage(device, &image, nullptr, &depthStencil.image));
+
+		// Allocate memory for the image (device local) and bind it to our image
+		VkMemoryAllocateInfo memAlloc = {};
+		memAlloc.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+
+		VkMemoryRequirements memReqs;
+		vkGetImageMemoryRequirements(device, depthStencil.image, &memReqs);
+		memAlloc.allocationSize = memReqs.size;
+		memAlloc.memoryTypeIndex = getMemoryTypeIndex(memReqs.memoryTypeBits, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+
+		VK_CHECK_RESULT(vkAllocateMemory(device, &memAlloc, nullptr, &depthStencil.mem));
+		VK_CHECK_RESULT(vkBindImageMemory(device, depthStencil.image, depthStencil.mem, 0));
+
+		// Create a view for the depth stencil image
+		// Images aren't directly accessed in Vulkan, but rather through views described by a subresource range
+		// This allows for multiple views of one image with differing ranges (e.g. for different layers)
+		VkImageViewCreateInfo depthStencilView = {};
+		depthStencilView.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+		depthStencilView.viewType = VK_IMAGE_VIEW_TYPE_2D;
+		depthStencilView.format = depthFormat;
+		depthStencilView.subresourceRange = {};
+		depthStencilView.subresourceRange.aspectMask = VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT;
+		depthStencilView.subresourceRange.baseMipLevel = 0;
+		depthStencilView.subresourceRange.levelCount = 1;
+		depthStencilView.subresourceRange.baseArrayLayer = 0;
+		depthStencilView.subresourceRange.layerCount = 1;
+		depthStencilView.image = depthStencil.image;
+
+		VK_CHECK_RESULT(vkCreateImageView(device, &depthStencilView, nullptr, &depthStencil.view));
+	}
+
+	// Create a frame buffer for each swap chain image
+	// Note: Override of virtual function in the base class and called from within VulkanExampleBase::prepare
 }
