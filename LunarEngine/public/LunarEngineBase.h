@@ -91,5 +91,14 @@ namespace LunarEngine {
 		void setupDescriptorSet();
 		void setupDepthStencil();
 		void setupFrameBuffer();
+		void setupRenderPass();
+		VkShaderModule loadSPIRVShader(std::string filename);
+		void preparePipelines();
+		void prepareUniformBuffers();
+		void updateUniformBuffers();
+		void prepare();
+
+		virtual void render();
+		virtual void viewChanged();
 	};
 }
