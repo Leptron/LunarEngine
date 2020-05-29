@@ -4,6 +4,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <vulkan/vulkan.h>
 
+#include "../../../base/VulkanBuffer.hpp"
+//#include "../../../base/VulkanTexture.hpp"
+
 namespace LunarDataTypes {
     struct Vertex {
         float position[3];
@@ -23,18 +26,17 @@ namespace LunarDataTypes {
     };
 
     struct ObjectData {
-        std::vector<Vertex> vertices;
-        VkBuffer vertexBuffer; // Handle to the Vulkan buffer object that the memory is bound to
-        VkDeviceMemory vertexBufferMemory; // Handle to the device memory for this buffer
+        std::vector<Vertex> vertices; //cleared after loaded into gpu
 
         //Index data
-        std::vector<uint32_t> indices;
-        VkBuffer indexBuffer;
-        VkDeviceMemory indexBufferMemory;
+        std::vector<uint32_t> indices; // cleared after loaded into gpu
         uint32_t indexCount;
+
+        uint32_t indexBase;
     };
 
     struct LayerMarshalData {
         VkDevice passedDevice;
+        VkPhysicalDeviceMemoryProperties deviceMemoryProperties;
     };
 }
