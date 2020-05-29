@@ -69,11 +69,6 @@ namespace LunarRenderingCore {
             StagingBuffer indices;
         } stagingBuffers;
 
-        struct {
-            VkBuffer vertexBuffer;
-            VkBuffer indexBuffer;
-        } targetBuffer;
-
         //vertex buffer, staging buffer
         VkBufferCreateInfo vertexStagingBufferInfo = {};
         vertexStagingBufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
@@ -96,7 +91,7 @@ namespace LunarRenderingCore {
         VK_CHECK_RESULT(vkMapMemory(layerNeededVars.passedDevice, stagingBuffers.vertices.memory, 0, memAlloc.allocationSize, 0, &mapped));
         memcpy(mapped, vertices.data(), vertexDataSize);
         vkUnmapMemory(layerNeededVars.passedDevice, stagingBuffers.vertices.memory);
-
+        // attach the memory to the buffer object
         VK_CHECK_RESULT(vkBindBufferMemory(layerNeededVars.passedDevice, stagingBuffers.vertices.buffer, stagingBuffers.vertices.memory, 0));
     }
 

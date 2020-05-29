@@ -51,6 +51,11 @@ namespace LunarRenderingCore {
         //buffer helpers
         uint32_t getMemoryTypeIndex(uint32_t typeBits, VkMemoryPropertyFlags properties);
 
+        struct {
+            VkBuffer vertexBuffer;
+            VkBuffer indexBuffer;
+        } targetBuffer;
+
         std::vector<LunarDataTypes::ObjectData> layerGeometry; // todo implement an entity system so this is all streamlined but i would have to do alloc in the layer
         LunarDataTypes::LayerMarshalData layerNeededVars;
 
@@ -58,9 +63,6 @@ namespace LunarRenderingCore {
         VkDescriptorSetLayout descriptorSetLayout;
         VkDescriptorSet descriptorSet;
         VkPipeline pipeline;
-
-        vks::Buffer vertexBuffer;
-        vks::Buffer indexBuffer;
     public:
     
         static LunarLayer *GetLayerInstance();
