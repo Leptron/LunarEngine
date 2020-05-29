@@ -96,6 +96,8 @@ namespace LunarRenderingCore {
         VK_CHECK_RESULT(vkMapMemory(layerNeededVars.passedDevice, stagingBuffers.vertices.memory, 0, memAlloc.allocationSize, 0, &mapped));
         memcpy(mapped, vertices.data(), vertexDataSize);
         vkUnmapMemory(layerNeededVars.passedDevice, stagingBuffers.vertices.memory);
+
+        VK_CHECK_RESULT(vkBindBufferMemory(layerNeededVars.passedDevice, stagingBuffers.vertices.buffer, stagingBuffers.vertices.memory, 0));
     }
 
     void LunarLayer::cleanGeometry() {
