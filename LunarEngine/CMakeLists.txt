@@ -12,7 +12,7 @@ include_directories(${CMAKE_SOURCE_DIR}/Lib/include
 
 add_library(LunarEngine STATIC ${SOURCE_FILES})
 if(WIN32)
-target_link_libraries(${PROJECT_NAME} base ${Vulkan_LIBRARY} ${ASSIMP_LIBRARIES} ${WINLIBS})
+target_link_libraries(${PROJECT_NAME} ${Vulkan_LIBRARY} ${ASSIMP_LIBRARIES} ${WINLIBS} glfw)
 else(UNIX)
-target_link_libraries(${PROJECT_NAME} base )
+target_link_libraries(${PROJECT_NAME} glfw )
 endif()

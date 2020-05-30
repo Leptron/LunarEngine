@@ -12,7 +12,7 @@ include_directories(external/gli)
 include_directories(external/assimp)
 include_directories(external/imgui)
 include_directories(external/tinygltf)
-include_directories(base)
+include_directories(external/glfw/include)
 
 OPTION(USE_D2D_WSI "Build the project using Direct to Display swapchain" OFF)
 OPTION(USE_WAYLAND_WSI "Build the project using Wayland swapchain" OFF)
@@ -94,7 +94,7 @@ endif()
 
 
 add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 file(GLOB SOURCE *.cpp )
@@ -120,8 +120,8 @@ ENDIF(WIN32)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/")
 
-add_subdirectory(base)
 add_subdirectory(external)
+add_subdirectory(external/glfw)
 
 add_subdirectory(LunarEngine)
 add_subdirectory(sandbox)
