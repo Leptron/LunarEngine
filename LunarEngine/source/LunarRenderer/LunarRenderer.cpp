@@ -17,6 +17,10 @@ namespace LunarRenderer {
 
     void LunarRenderer::cleanup() {
         //call all the various sub cleaning functions
+        //pipeline
+        vkDestroyPipeline(device, graphicsPipeline, nullptr);
+        vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
+        vkDestroyRenderPass(device, renderPass, nullptr);
         //image views
         for (auto imageView : swapChainImageViews) {
             vkDestroyImageView(device, imageView, nullptr);

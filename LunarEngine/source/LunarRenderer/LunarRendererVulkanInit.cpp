@@ -8,6 +8,9 @@ namespace LunarRenderer {
         pickPhysicalDevice();
         createLogicalDevice();
         createSwapChain();
+        createImageViews();
+        createRenderPass();
+        createGraphicsPipeline();
     }
 
     void LunarRenderer::createInstance() {

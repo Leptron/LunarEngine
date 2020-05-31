@@ -6,6 +6,7 @@
 #include <optional>
 #include <set>
 #include <algorithm>
+#include <fstream>
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -65,7 +66,7 @@ namespace LunarRenderer {
         void pickPhysicalDevice();
         bool isDeviceSuitable(VkPhysicalDevice device);
         QueueFamilyIndicies findQueueFamilies(VkPhysicalDevice device);
-
+        
         void createLogicalDevice();
 
         //presentation
@@ -77,7 +78,17 @@ namespace LunarRenderer {
         void createSwapChain();
         void createImageViews();
 
+        //graphics pipeline (eventual layer implementation)
+        void createGraphicsPipeline();
+        void createRenderPass();
+        static std::vector<char> readFile(const std::string& filename);
+        VkShaderModule createShaderModule(const std::vector<char>& code);
+
         //variables and handles
+        //pipeline
+        VkPipeline graphicsPipeline;
+        VkRenderPass renderPass;
+        VkPipelineLayout pipelineLayout;
         //surface + presentation
         VkSurfaceKHR surface;
         VkQueue presentQueue;
@@ -104,7 +115,7 @@ namespace LunarRenderer {
         #ifdef NDEBUG
             const bool enableValidationLayers = false;
         #else
-            const bool enableValidationLayers = true;
+            const bool enableValidationLayers = false;
         #endif
 
         VkDebugUtilsMessengerEXT debugMessenger;

@@ -118,10 +118,10 @@ ELSE(WIN32)
 	link_libraries(${XCB_LIBRARIES} ${Vulkan_LIBRARY} ${Vulkan_LIBRARY} ${ASSIMP_LIBRARIES} ${WAYLAND_CLIENT_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 ENDIF(WIN32)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/")
-
 add_subdirectory(external)
 add_subdirectory(external/glfw)
 
 add_subdirectory(LunarEngine)
 add_subdirectory(sandbox)
+
+FILE(COPY ${CMAKE_SOURCE_DIR}/shaders DESTINATION ${CMAKE_BINARY_DIR}/sandbox)
