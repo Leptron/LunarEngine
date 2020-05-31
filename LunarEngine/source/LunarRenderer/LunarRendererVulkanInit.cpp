@@ -11,6 +11,10 @@ namespace LunarRenderer {
         createImageViews();
         createRenderPass();
         createGraphicsPipeline();
+        createFrameBuffer();
+        createCommandPool();
+        createCommandBuffers();
+        createSyncObjects();
     }
 
     void LunarRenderer::createInstance() {

@@ -13,6 +13,9 @@
 #include <cstdint>
 
 namespace LunarRenderer {
+    const int MAX_FRAMES_IN_FLIGHT = 2;
+
+
     static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
         VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
         VkDebugUtilsMessageTypeFlagsEXT messageType,
@@ -84,7 +87,30 @@ namespace LunarRenderer {
         static std::vector<char> readFile(const std::string& filename);
         VkShaderModule createShaderModule(const std::vector<char>& code);
 
+        //drawing
+        void createFrameBuffer();
+        void createCommandPool();
+        void createCommandBuffers();
+        void drawFrame();
+        void createSyncObjects();
+
+        //recreate swap chain
+        void recreateSwapChain();
+        void cleanupSwapChain();
+
         //variables and handles
+        //drawing
+        std::vector<VkFramebuffer> swapChainFrameBuffers;
+        std::vector<VkCommandBuffer> commandBuffers;
+        VkCommandPool commandPool;
+
+        //semaphores
+        std::vector<VkSemaphore> imageAvailableSemaphores;
+        std::vector<VkSemaphore> renderFinishedSemaphores;
+        std::vector<VkFence> inFlightFences;
+        std::vector<VkFence> imagesInFlight;
+        size_t currentFrame = 0;
+
         //pipeline
         VkPipeline graphicsPipeline;
         VkRenderPass renderPass;

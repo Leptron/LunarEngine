@@ -13,7 +13,10 @@ namespace LunarRenderer {
     void LunarRenderer::MainLoop() {
         while(!glfwWindowShouldClose(window)) {
             glfwPollEvents();
+            drawFrame();
         }
+
+        vkDeviceWaitIdle(device);
         cleanup();
     }
 }
