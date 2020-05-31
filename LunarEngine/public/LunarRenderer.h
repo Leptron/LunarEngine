@@ -4,9 +4,12 @@
 #include <cstring>
 #include <vector>
 #include <optional>
+#include <set>
+#include <algorithm>
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
+#include <cstdint>
 
 namespace LunarRenderer {
     static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
@@ -20,10 +23,17 @@ namespace LunarRenderer {
 
     struct QueueFamilyIndicies {
         std::optional<uint32_t> graphicsFamily;
+        std::optional<uint32_t> presentFamily;
 
         bool isComplete() {
-            return graphicsFamily.has_value();
+            return graphicsFamily.has_value() && presentFamily.has_value();
         }
+    };
+
+    struct SwapChainSupportDetails {
+        VkSurfaceCapabilitiesKHR capabilities;
+        std::vector<VkSurfaceFormatKHR> formats;
+        std::vector<VkPresentModeKHR> presentModes;
     };
     
     class LunarRenderer {
@@ -47,6 +57,7 @@ namespace LunarRenderer {
         void createInstance();
         //validaton and debugging layer funcs
         bool checkValidationLayerSupport();
+        bool checkDeviceExtensionSupport(VkPhysicalDevice device);
         std::vector<const char*> getRequiredExtensions();
         void setupDebugMessenger();
         void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
@@ -57,13 +68,37 @@ namespace LunarRenderer {
 
         void createLogicalDevice();
 
+        //presentation
+        void createSurface();
+        SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
+        VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
+        VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
+        VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
+        void createSwapChain();
+        void createImageViews();
+
         //variables and handles
+        //surface + presentation
+        VkSurfaceKHR surface;
+        VkQueue presentQueue;
+        VkSwapchainKHR swapChain;
+        std::vector<VkImage> swapChainImages;
+        VkFormat swapChainImageFormat;
+        VkExtent2D swapChainExtent;
+        std::vector<VkImageView> swapChainImageViews;
+        //Queue
+        VkQueue graphicsQueue;
         //physical device
         VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
         VkDevice device;
         //validation layers
         const std::vector<const char*> validationLayers = {
             "VK_LAYER_KHRONOS_validation"
+        };
+
+        //extensions
+        const std::vector<const char*> deviceExtensions = {
+            VK_KHR_SWAPCHAIN_EXTENSION_NAME
         };
 
         #ifdef NDEBUG

@@ -4,8 +4,10 @@ namespace LunarRenderer {
     void LunarRenderer::initVulkan() {
         createInstance();
         setupDebugMessenger();
+        createSurface();
         pickPhysicalDevice();
         createLogicalDevice();
+        createSwapChain();
     }
 
     void LunarRenderer::createInstance() {
