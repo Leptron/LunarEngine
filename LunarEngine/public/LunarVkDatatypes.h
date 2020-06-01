@@ -1,3 +1,5 @@
+#pragma once
+
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
@@ -13,42 +15,9 @@
 #include <glm/glm.hpp>
 #include <array>
 
+#include "LunarBuffer.hpp"
+
 namespace LunarRenderer {
-    struct Vertex {
-        glm::vec2 pos;
-        glm::vec3 color;
-
-        static VkVertexInputBindingDescription getBindingDescription() {
-            VkVertexInputBindingDescription bindingDescription{};
-            bindingDescription.binding = 0;
-            bindingDescription.stride = sizeof(Vertex);
-            bindingDescription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
-
-            return bindingDescription;
-        }
-
-        static std::array<VkVertexInputAttributeDescription, 2> getAttributeDescriptions() {
-            std::array<VkVertexInputAttributeDescription, 2> attributeDescriptions = {};
-
-            attributeDescriptions[0].binding = 0;
-            attributeDescriptions[0].location = 0;
-            attributeDescriptions[0].format = VK_FORMAT_R32G32_SFLOAT;
-            attributeDescriptions[0].offset = offsetof(Vertex, pos);
-
-            attributeDescriptions[1].binding = 0;
-            attributeDescriptions[1].location = 1;
-            attributeDescriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT;
-            attributeDescriptions[1].offset = offsetof(Vertex, color);
-
-            return attributeDescriptions;
-        }
-    };
-
-    struct Object {
-        std::vector<Vertex> vertices;
-        LNPipeline *pipelineUsed;
-    };
-
     struct LNPipeline {
         VkPipeline graphicsPipeline;
         VkRenderPass renderPass;
@@ -56,11 +25,45 @@ namespace LunarRenderer {
     };
 
     struct GeometryLayer {
-        std::vector<std::vector<Vertex>> GeomVertices;
-        struct {
-            glm::mat4 projection;
-            glm::mat4 model;
-            glm::mat4 view;
-        } mvpProjection;
+        std::vector<GeometryBuffer> GeometryList;
     };
+
+    struct Vertex {
+        glm::vec3 pos;
+        glm::vec3 color;
+    };
+
+    struct GeometryBuffer {
+        std::vector<Geometry> geometry;
+
+        struct {
+            VkDeviceMemory memory;
+            VkBuffer buffer;
+        } vertexBuffer;
+
+        struct {
+            VkDeviceMemory memory;
+            VkBuffer buffer;
+            uint32_t count;
+        } indexBuffer;
+    };
+
+    struct Geometry {
+        std::vector<Vertex> Vertices;
+        std::vector<uint32_t> Indices;
+
+        uint32_t indexBase;
+        uint32_t indexCount;
+
+        struct Matrices {
+			glm::mat4 projection;
+			glm::mat4 view;
+			glm::mat4 model;
+		} matrices;
+
+        VkDescriptorSet descriptorSet;
+        LunarBuffer uniformBuffer;
+        glm::vec3 pos; //implement push constants (faster)
+        glm::vec3 rot; // ^^
+    };  
 }
