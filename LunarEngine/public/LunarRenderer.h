@@ -7,10 +7,14 @@
 #include <set>
 #include <algorithm>
 #include <fstream>
+#include <glm/glm.hpp>
+#include <array>
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 #include <cstdint>
+
+#include "LunarVkDatatypes.h"
 
 namespace LunarRenderer {
     const int MAX_FRAMES_IN_FLIGHT = 2;
@@ -24,6 +28,7 @@ namespace LunarRenderer {
 
     VkResult CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger);
     void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
+    static void framebufferResizeCallback(GLFWwindow* window, int width, int height);
 
     struct QueueFamilyIndicies {
         std::optional<uint32_t> graphicsFamily;
@@ -48,6 +53,10 @@ namespace LunarRenderer {
         // Initialization
         void InitResources();
         void MainLoop();
+        bool framebufferResized = false;
+
+        //layer prototypes
+        
 
     private:
         void cleanup();
@@ -87,6 +96,9 @@ namespace LunarRenderer {
         static std::vector<char> readFile(const std::string& filename);
         VkShaderModule createShaderModule(const std::vector<char>& code);
 
+        //layer prototypes
+        void prepareUniformBuffers();
+
         //drawing
         void createFrameBuffer();
         void createCommandPool();
@@ -110,6 +122,9 @@ namespace LunarRenderer {
         std::vector<VkFence> inFlightFences;
         std::vector<VkFence> imagesInFlight;
         size_t currentFrame = 0;
+
+        std::vector<GeometryLayer> layers;
+        
 
         //pipeline
         VkPipeline graphicsPipeline;
@@ -139,9 +154,9 @@ namespace LunarRenderer {
         };
 
         #ifdef NDEBUG
-            const bool enableValidationLayers = false;
+            const bool enableValidationLayers = true;
         #else
-            const bool enableValidationLayers = false;
+            const bool enableValidationLayers = true;
         #endif
 
         VkDebugUtilsMessengerEXT debugMessenger;

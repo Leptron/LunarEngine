@@ -53,7 +53,13 @@ namespace LunarRenderer {
         if(capabilities.currentExtent.width != UINT32_MAX) {
             return capabilities.currentExtent;
         } else {
-            VkExtent2D actualExtent = {width, height};
+            int w, h;
+            glfwGetFramebufferSize(window, &w, &h);
+
+            VkExtent2D actualExtent = {
+                static_cast<uint32_t>(w),
+                static_cast<uint32_t>(h)
+            };
 
             actualExtent.width = std::max(capabilities.minImageExtent.width, std::min(capabilities.maxImageExtent.width, actualExtent.width));
             actualExtent.height = std::max(capabilities.minImageExtent.height, std::min(capabilities.maxImageExtent.height, actualExtent.height));

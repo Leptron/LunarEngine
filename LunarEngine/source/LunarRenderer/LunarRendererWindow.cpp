@@ -5,9 +5,15 @@ namespace LunarRenderer {
         glfwInit();
 
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
         
-        window = glfwCreateWindow(this->width, this->height, "Vulkan", nullptr, nullptr);
+        window = glfwCreateWindow(width, height, "Vulkan", nullptr, nullptr);
+        glfwSetWindowUserPointer(window, this);
+        glfwSetFramebufferSizeCallback(window, framebufferResizeCallback);
+    }
+
+    void framebufferResizeCallback(GLFWwindow* window, int width, int height) {
+        auto app = reinterpret_cast<LunarRenderer*>(glfwGetWindowUserPointer(window));
+        app->framebufferResized = true;
     }
 
     void LunarRenderer::MainLoop() {
