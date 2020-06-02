@@ -21,6 +21,28 @@
 namespace LunarRenderer {
     const int MAX_FRAMES_IN_FLIGHT = 2;
 
+#if defined(__ANDROID__)
+#define VK_CHECK_RESULT(f)																				\
+{																										\
+	VkResult res = (f);																					\
+	if (res != VK_SUCCESS)																				\
+	{																									\
+		LOGE("Fatal : VkResult is \" %s \" in %s at line %d", vks::tools::errorString(res).c_str(), __FILE__, __LINE__); \
+		assert(res == VK_SUCCESS);																		\
+	}																									\
+}
+#else
+#define VK_CHECK_RESULT(f)																				\
+{																										\
+	VkResult res = (f);																					\
+	if (res != VK_SUCCESS)																				\
+	{																									\
+		std::cout << "Fatal : VkResult is \"" << "not good" << "\" in " << __FILE__ << " at line " << __LINE__ << std::endl; \
+		assert(res == VK_SUCCESS);																		\
+	}																									\
+}
+#endif
+
 
     static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
         VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
@@ -170,5 +192,27 @@ namespace LunarRenderer {
         //vulkan handler
         //vulkan instance
         VkInstance instance;
+
+    //LAYER STUFF
+    public:
+        void CreateMaterial(std::string materialName);
+
+        int AddGeometry(Geometry addGeometry);
+        int FlushGeometry();
+    private:
+        //layer helpers
+        uint32_t getMemoryTypeIndex(uint32_t typeBits, VkMemoryPropertyFlags properties);
+        std::vector<GeometryLayer> layer;
+        std::vector<Geometry> tmpGeometryBuffer;
+        void cleanAllLayers();
+
+        //command buffer
+        VkCommandBuffer getLayerCommandBuffer(bool begin);
+        void layerFlushCommandBuffer(VkCommandBuffer commandBuffer);
+
+        int geomIndex = 0;
+        int currGeomLayer = 0;
+
+        VkPhysicalDeviceMemoryProperties deviceMemoryProperties;
     };
 }

@@ -1,7 +1,7 @@
-#include "../../public/LunarLayer.h"
+#include "../../public/LunarRenderer.h"
 
 namespace LunarRenderer{
-    void LunarLayer::CreateMaterial(std::string materialName) {
+    void LunarRenderer::CreateMaterial(std::string materialName) {
         //TODO : Implement
     }
 }

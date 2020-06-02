@@ -18,23 +18,44 @@
 #include "LunarBuffer.hpp"
 
 namespace LunarRenderer {
+    struct Vertex {
+        glm::vec3 pos;
+        glm::vec3 color;
+    };
+
     struct LNPipeline {
         VkPipeline graphicsPipeline;
         VkRenderPass renderPass;
         VkPipelineLayout pipelineLayout;
     };
 
-    struct GeometryLayer {
-        std::vector<GeometryBuffer> GeometryList;
+    struct Geometry { // tmp geom bffer
+        std::vector<Vertex> Vertices; //gotten
+        std::vector<uint32_t> Indices; //gotten
+
+        uint32_t indexBase; //gotten
+        uint32_t indexCount; //gotten
+
+        glm::vec3 model; //implement push constants (faster)
+        glm::vec3 view; // ^^
+        glm::vec3 projection; // ^^
     };
 
-    struct Vertex {
-        glm::vec3 pos;
-        glm::vec3 color;
-    };
+    struct StagingBuffer {
+		VkDeviceMemory memory;
+		VkBuffer buffer;
+	};
 
-    struct GeometryBuffer {
-        std::vector<Geometry> geometry;
+    struct GeometryLayer { // geom buffer
+        std::vector<Geometry> geometry; //gotten
+
+        std::vector<Vertex> Vertices; //gotten
+        std::vector<uint32_t> Indices; //gotten
+
+        struct {
+			StagingBuffer vertices; //finished doing this bufferve
+			StagingBuffer indices;
+		} stagingBuffers;
 
         struct {
             VkDeviceMemory memory;
@@ -46,24 +67,7 @@ namespace LunarRenderer {
             VkBuffer buffer;
             uint32_t count;
         } indexBuffer;
+
+
     };
-
-    struct Geometry {
-        std::vector<Vertex> Vertices;
-        std::vector<uint32_t> Indices;
-
-        uint32_t indexBase;
-        uint32_t indexCount;
-
-        struct Matrices {
-			glm::mat4 projection;
-			glm::mat4 view;
-			glm::mat4 model;
-		} matrices;
-
-        VkDescriptorSet descriptorSet;
-        LunarBuffer uniformBuffer;
-        glm::vec3 pos; //implement push constants (faster)
-        glm::vec3 rot; // ^^
-    };  
 }

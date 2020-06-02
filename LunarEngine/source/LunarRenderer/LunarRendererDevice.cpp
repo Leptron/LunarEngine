@@ -20,6 +20,8 @@ namespace LunarRenderer {
 
         if(physicalDevice == VK_NULL_HANDLE)
             throw std::runtime_error("failed to find a suitable GPU!");
+
+        vkGetPhysicalDeviceMemoryProperties(physicalDevice, &deviceMemoryProperties);
     }
 
     bool LunarRenderer::isDeviceSuitable(VkPhysicalDevice device) {
@@ -127,5 +129,7 @@ namespace LunarRenderer {
 
         vkGetDeviceQueue(device, indices.graphicsFamily.value(), 0, &graphicsQueue);
         vkGetDeviceQueue(device, indices.presentFamily.value(), 0, &presentQueue);
+
+        
     }
 }

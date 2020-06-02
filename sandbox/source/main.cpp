@@ -1,7 +1,6 @@
 #include <iostream>
 #include <LunarRenderer.h>
 #include <LunarVkDatatypes.h>
-#include <LunarLayer.h>
 
 int main() {
 	//layer testing
@@ -24,8 +23,10 @@ int main() {
 	LunarRenderer::LunarRenderer rendererSandbox;
 	rendererSandbox.InitResources();
 
-	LunarRenderer::LunarLayer layerOne;
-	int geomIndex = layerOne.AddGeometry(layerTestGeometry);
+	int i = rendererSandbox.AddGeometry(layerTestGeometry);
+	int x = rendererSandbox.FlushGeometry();
+
+	std::cout << x << std::endl;
 
 	rendererSandbox.MainLoop();
 
