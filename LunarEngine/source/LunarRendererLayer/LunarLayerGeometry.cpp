@@ -7,187 +7,217 @@ namespace LunarRenderer {
     }
 
     int LunarRenderer::FlushGeometry() {
-        //bases
-        uint32_t indexBase = 0;
-        //create our layer
-        GeometryLayer newLayer = {};
-        std::vector<Geometry> flushGeometry;
-
-        for(auto Geom : tmpGeometryBuffer) {
-            Geometry flushGeo = {};
-            flushGeo.indexBase = indexBase;
-            flushGeo.indexCount = static_cast<uint32_t>(Geom.Indices.size());
-            flushGeo.Vertices = Geom.Vertices;
-            flushGeo.Indices = Geom.Indices;
-
-            for(auto v : Geom.Vertices)
-                newLayer.Vertices.push_back(v);
-                
-            for(auto i : Geom.Indices)
-                newLayer.Indices.push_back(i);
-
-            flushGeometry.push_back(flushGeo);
-            indexBase += static_cast<uint32_t>(Geom.Indices.size());
-        }
-
+        GeometryLayer layer = {};
+        std::vector<Geometry> unflushedGeom = tmpGeometryBuffer;
         tmpGeometryBuffer.clear();
-        newLayer.geometry = flushGeometry;
 
-        uint32_t vertexBufferSize = static_cast<uint32_t>(newLayer.Vertices.size());
-        uint32_t indexBufferSize = static_cast<uint32_t>(newLayer.Indices.size());
+        std::vector<Vertex> vertices;
+        std::vector<uint32_t> indices;
+        uint32_t indexBase = 0;
 
-        VkMemoryAllocateInfo memAlloc = {};
-		memAlloc.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-		VkMemoryRequirements memReqs;
+        for(auto unflushedGeo : unflushedGeom) {
+            auto appGeo = unflushedGeo;
+            appGeo.indexBase = indexBase;
 
-		void *data;
+            for(auto vert : unflushedGeo.Vertices)
+                vertices.push_back(vert);
+            for(auto index : unflushedGeo.Indices)
+                indices.push_back(index);
 
-        VkBufferCreateInfo vertexBufferInfo = {};
-        vertexBufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
-        vertexBufferInfo.size = vertexBufferSize;
-        // Buffer is used as the copy source
-		vertexBufferInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
-        // Create a host-visible buffer to copy the vertex data to (staging buffer)
-        VK_CHECK_RESULT(vkCreateBuffer(device, &vertexBufferInfo, nullptr, &newLayer.stagingBuffers.vertices.buffer));
-        vkGetBufferMemoryRequirements(device, newLayer.stagingBuffers.vertices.buffer, &memReqs);
-        memAlloc.allocationSize = memReqs.size;
-        // Request a host visible memory type that can be used to copy our data do
-		// Also request it to be coherent, so that writes are visible to the GPU right after unmapping the buffer
-        memAlloc.memoryTypeIndex = getMemoryTypeIndex(memReqs.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
-        VK_CHECK_RESULT(vkAllocateMemory(device, &memAlloc, nullptr, &newLayer.stagingBuffers.vertices.memory));
-        //map and copy
-        VK_CHECK_RESULT(vkMapMemory(device, newLayer.stagingBuffers.vertices.memory, 0, memAlloc.allocationSize, 0, &data));
-        memcpy(data, newLayer.Vertices.data(), vertexBufferSize);
-        vkUnmapMemory(device, newLayer.stagingBuffers.vertices.memory);
-        VK_CHECK_RESULT(vkBindBufferMemory(device, newLayer.stagingBuffers.vertices.buffer, newLayer.stagingBuffers.vertices.memory, 0));
-
-        //create a device local buffer which the vertex data will be copied to
-        vertexBufferInfo.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
-        VK_CHECK_RESULT(vkCreateBuffer(device, &vertexBufferInfo, nullptr, &newLayer.vertexBuffer.buffer));
-        vkGetBufferMemoryRequirements(device, newLayer.vertexBuffer.buffer, &memReqs);
-        memAlloc.allocationSize = memReqs.size;
-        memAlloc.memoryTypeIndex = getMemoryTypeIndex(memReqs.memoryTypeBits, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
-        VK_CHECK_RESULT(vkAllocateMemory(device, &memAlloc, nullptr, &newLayer.vertexBuffer.memory));
-        VK_CHECK_RESULT(vkBindBufferMemory(device, newLayer.vertexBuffer.buffer, newLayer.vertexBuffer.memory, 0));
-
-        //index buffer
-        VkBufferCreateInfo indexbufferInfo = {};
-        indexbufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
-        indexbufferInfo.size = indexBufferSize;
-        indexbufferInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
-        // Copy index data to a buffer visible to the host (staging buffer)
-        VK_CHECK_RESULT(vkCreateBuffer(device, &indexbufferInfo, nullptr, &newLayer.stagingBuffers.indices.buffer));
-        vkGetBufferMemoryRequirements(device, newLayer.stagingBuffers.indices.buffer, &memReqs);
-        memAlloc.allocationSize = memReqs.size;
-        memAlloc.memoryTypeIndex = getMemoryTypeIndex(memReqs.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
-        VK_CHECK_RESULT(vkAllocateMemory(device, &memAlloc, nullptr, &newLayer.stagingBuffers.indices.memory));
-        VK_CHECK_RESULT(vkMapMemory(device, newLayer.stagingBuffers.indices.memory, 0, indexBufferSize, 0, &data));
-        memcpy(data, newLayer.Indices.data(), indexBufferSize);
-        vkUnmapMemory(device, newLayer.stagingBuffers.indices.memory);
-        VK_CHECK_RESULT(vkBindBufferMemory(device, newLayer.stagingBuffers.indices.buffer, newLayer.stagingBuffers.indices.memory, 0));
-
-        //create destination buffer
-        indexbufferInfo.usage = VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
-        VK_CHECK_RESULT(vkCreateBuffer(device, &indexbufferInfo, nullptr, &newLayer.indexBuffer.buffer));
-        vkGetBufferMemoryRequirements(device, newLayer.indexBuffer.buffer, &memReqs);
-        memAlloc.allocationSize = memReqs.size;
-        memAlloc.memoryTypeIndex = getMemoryTypeIndex(memReqs.memoryTypeBits, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
-        VK_CHECK_RESULT(vkAllocateMemory(device, &memAlloc, nullptr, &newLayer.indexBuffer.memory));
-        VK_CHECK_RESULT(vkBindBufferMemory(device, newLayer.indexBuffer.buffer, newLayer.indexBuffer.memory, 0));
-
-        //buffer copies need to be submitted to a queue
-        VkCommandBuffer copyCmd = getLayerCommandBuffer(true);
-        VkBufferCopy copyRegion = {};
-        
-        //vertex buffer
-        copyRegion.size = vertexBufferSize;
-        vkCmdCopyBuffer(copyCmd, newLayer.stagingBuffers.vertices.buffer, newLayer.vertexBuffer.buffer, 1, &copyRegion);
-        //index buffer
-        copyRegion.size = indexBufferSize;
-        vkCmdCopyBuffer(copyCmd, newLayer.stagingBuffers.indices.buffer, newLayer.indexBuffer.buffer, 1, &copyRegion);
-
-        //flush command buffer
-        layerFlushCommandBuffer(copyCmd);
-
-        //destroy staging buffers
-        vkDestroyBuffer(device, newLayer.stagingBuffers.vertices.buffer, nullptr);
-        vkFreeMemory(device, newLayer.stagingBuffers.vertices.memory, nullptr);
-        vkDestroyBuffer(device, newLayer.stagingBuffers.indices.buffer, nullptr);
-        vkFreeMemory(device, newLayer.stagingBuffers.indices.memory, nullptr);
-    
-        this->layer.push_back(newLayer);
-        return this->layer.size() - 1;
-    }
-
-    void LunarRenderer::cleanAllLayers() {
-        for(auto l : this->layer) {
-            vkDestroyBuffer(device, l.vertexBuffer.buffer, nullptr);
-            vkFreeMemory(device, l.vertexBuffer.memory, nullptr);
-
-            vkDestroyBuffer(device, l.indexBuffer.buffer, nullptr);
-            vkFreeMemory(device, l.indexBuffer.memory, nullptr);
-        }
-    }
-
-    uint32_t LunarRenderer::getMemoryTypeIndex(uint32_t typeBits, VkMemoryPropertyFlags properties) {
-        for (uint32_t i = 0; i < deviceMemoryProperties.memoryTypeCount; i++) {
-            if ((typeBits & 1) == 1) {
-                if ((deviceMemoryProperties.memoryTypes[i].propertyFlags & properties) == properties)
-                    return i;
-            }
-
-            typeBits >>= 1;
+            layer.geometry.push_back(appGeo);
         }
 
-        throw "Could not find a suitable memory type!";
+        layer.Vertices = vertices;
+        layer.Indices = indices;
+
+        createVertexBuffer(vertices, layer);
+        createIndexBuffer(indices, layer);
+
+        layers.push_back(layer);
+
+        return 0;
     }
 
-    VkCommandBuffer LunarRenderer::getLayerCommandBuffer(bool begin) {
-        VkCommandBuffer cmdBuffer;
+    void LunarRenderer::createVertexBuffer(std::vector<Vertex> vertices, GeometryLayer& geoLayer) {
+        VkDeviceSize bufferSize = sizeof(vertices[0]) * vertices.size();
 
-        VkCommandBufferAllocateInfo cmdBufAllocateInfo = {};
-        cmdBufAllocateInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-        cmdBufAllocateInfo.commandPool = commandPool;
-        cmdBufAllocateInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-        cmdBufAllocateInfo.commandBufferCount = 1;
+        VkBuffer stagingBuffer;
+        VkDeviceMemory stagingBufferMemory;
+        createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
 
-        VK_CHECK_RESULT(vkAllocateCommandBuffers(device, &cmdBufAllocateInfo, &cmdBuffer));
+        void* data;
+        vkMapMemory(device, stagingBufferMemory, 0, bufferSize, 0, &data);
+            memcpy(data, vertices.data(), (size_t) bufferSize);
+        vkUnmapMemory(device, stagingBufferMemory);
 
-        if(begin) {
-            VkCommandBufferBeginInfo cmdBufInfo = {};
-            cmdBufInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-            VK_CHECK_RESULT(vkBeginCommandBuffer(cmdBuffer, &cmdBufInfo));
-        }
+        createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, geoLayer.vertexBuffer, geoLayer.vertexBufferMemory);
 
-        return cmdBuffer;
+        copyBuffer(stagingBuffer, geoLayer.vertexBuffer, bufferSize);
+
+        vkDestroyBuffer(device, stagingBuffer, nullptr);
+        vkFreeMemory(device, stagingBufferMemory, nullptr);
     }
 
-    void LunarRenderer::layerFlushCommandBuffer(VkCommandBuffer commandBuffer) {
-        assert(commandBuffer != VK_NULL_HANDLE);
+    void LunarRenderer::createIndexBuffer(std::vector<uint32_t> indices, GeometryLayer& geoLayer) {
+        VkDeviceSize bufferSize = sizeof(indices[0]) * indices.size();
 
-        VK_CHECK_RESULT(vkEndCommandBuffer(commandBuffer));
+        VkBuffer stagingBuffer;
+        VkDeviceMemory stagingBufferMemory;
+        createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
 
-        VkSubmitInfo submitInfo = {};
+        void* data;
+        vkMapMemory(device, stagingBufferMemory, 0, bufferSize, 0, &data);
+        memcpy(data, indices.data(), (size_t) bufferSize);
+        vkUnmapMemory(device, stagingBufferMemory);
+
+        createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, geoLayer.indexBuffer, geoLayer.indexBufferMemory);
+
+        copyBuffer(stagingBuffer, geoLayer.indexBuffer, bufferSize);
+
+        vkDestroyBuffer(device, stagingBuffer, nullptr);
+        vkFreeMemory(device, stagingBufferMemory, nullptr);
+    }
+
+    void LunarRenderer::copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) {
+        VkCommandBufferAllocateInfo allocInfo{};
+        allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+        allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+        allocInfo.commandPool = commandPool;
+        allocInfo.commandBufferCount = 1;
+
+        VkCommandBuffer commandBuffer;
+        vkAllocateCommandBuffers(device, &allocInfo, &commandBuffer);
+
+        VkCommandBufferBeginInfo beginInfo{};
+        beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+        beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+
+        vkBeginCommandBuffer(commandBuffer, &beginInfo);
+
+            VkBufferCopy copyRegion{};
+            copyRegion.size = size;
+            vkCmdCopyBuffer(commandBuffer, srcBuffer, dstBuffer, 1, &copyRegion);
+
+        vkEndCommandBuffer(commandBuffer);
+
+        VkSubmitInfo submitInfo{};
         submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
         submitInfo.commandBufferCount = 1;
         submitInfo.pCommandBuffers = &commandBuffer;
 
-        VkFenceCreateInfo fenceCreateInfo = {};
-        fenceCreateInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
-        fenceCreateInfo.flags = 0;
-        VkFence fence;
-        VK_CHECK_RESULT(vkCreateFence(device, &fenceCreateInfo, nullptr, &fence));  
+        vkQueueSubmit(graphicsQueue, 1, &submitInfo, VK_NULL_HANDLE);
+        vkQueueWaitIdle(graphicsQueue);
 
-        //submit to the queue
-        VK_CHECK_RESULT(vkQueueSubmit(graphicsQueue, 1, &submitInfo, fence));
-        // Wait for the fence to signal that command buffer has finished executing
-        VK_CHECK_RESULT(vkWaitForFences(device, 1, &fence, VK_TRUE, 100000000000));
-
-        vkDestroyFence(device, fence, nullptr);
         vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
     }
 
-    void LunarRenderer::FlushToCommandBuffer(int index) {
-        
+    void LunarRenderer::createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory) {
+        VkBufferCreateInfo bufferInfo{};
+        bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
+        bufferInfo.size = size;
+        bufferInfo.usage = usage;
+        bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+
+        if (vkCreateBuffer(device, &bufferInfo, nullptr, &buffer) != VK_SUCCESS) {
+            throw std::runtime_error("failed to create buffer!");
+        }
+
+        VkMemoryRequirements memRequirements;
+        vkGetBufferMemoryRequirements(device, buffer, &memRequirements);
+
+        VkMemoryAllocateInfo allocInfo{};
+        allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+        allocInfo.allocationSize = memRequirements.size;
+        allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, properties);
+
+        if (vkAllocateMemory(device, &allocInfo, nullptr, &bufferMemory) != VK_SUCCESS) {
+            throw std::runtime_error("failed to allocate buffer memory!");
+        }
+
+        vkBindBufferMemory(device, buffer, bufferMemory, 0);
+    }
+
+    uint32_t LunarRenderer::findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties) {
+        VkPhysicalDeviceMemoryProperties memProperties;
+        vkGetPhysicalDeviceMemoryProperties(physicalDevice, &memProperties);
+
+        for (uint32_t i = 0; i < memProperties.memoryTypeCount; i++) {
+            if ((typeFilter & (1 << i)) && (memProperties.memoryTypes[i].propertyFlags & properties) == properties) {
+                return i;
+            }
+        }
+
+        throw std::runtime_error("failed to find suitable memory type!");
+    }
+
+    void LunarRenderer::cleanAllLayers() {
+        for (auto layer : layers) {
+            vkDestroyBuffer(device, layer.indexBuffer, nullptr);
+            vkFreeMemory(device, layer.indexBufferMemory, nullptr);
+
+            vkDestroyBuffer(device, layer.vertexBuffer, nullptr);
+            vkFreeMemory(device, layer.vertexBufferMemory, nullptr);
+        }
+    }
+
+
+
+    void LunarRenderer::FlushToCommandBuffer() {
+        //gen the command buffers
+        commandBuffers.resize(swapChainFrameBuffers.size());
+
+        VkCommandBufferAllocateInfo allocInfo = {};
+        allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+        allocInfo.commandPool = commandPool;
+        allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+        allocInfo.commandBufferCount = (uint32_t) commandBuffers.size();
+
+        if(vkAllocateCommandBuffers(device, &allocInfo, commandBuffers.data()) != VK_SUCCESS)
+            throw std::runtime_error("Failed to allocate the command buffers");
+
+        for(size_t i = 0; i < commandBuffers.size(); i++) {
+            VkCommandBufferBeginInfo beginInfo = {};
+            beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+            beginInfo.flags = 0; // Optional
+            beginInfo.pInheritanceInfo = nullptr; // Optional
+            
+            if(vkBeginCommandBuffer(commandBuffers[i], &beginInfo) != VK_SUCCESS) 
+                throw std::runtime_error("failed to begin recording command buffer");
+
+            VkClearValue clearValues[2];
+            clearValues[0].color = {0.0f, 0.0f, 0.0f, 1.0f};
+            clearValues[1].depthStencil = { 1.0f, 0 };
+
+            VkRenderPassBeginInfo renderPassInfo = {};
+            renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+            renderPassInfo.renderPass = renderPass;
+            renderPassInfo.framebuffer = swapChainFrameBuffers[i];
+            renderPassInfo.renderArea.offset = {0, 0};
+            renderPassInfo.renderArea.extent = swapChainExtent;
+            renderPassInfo.clearValueCount = 2;
+            renderPassInfo.pClearValues = clearValues;
+
+            vkCmdBeginRenderPass(commandBuffers[i], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
+
+            for(auto layer : layers) {
+                vkCmdBindPipeline(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
+
+                VkBuffer vertexBuffers[] = {
+                    layer.vertexBuffer
+                };
+                VkDeviceSize offsets[] = {0};
+
+                vkCmdBindVertexBuffers(commandBuffers[i], 0, 1, &layer.vertexBuffer, offsets);
+                vkCmdBindIndexBuffer(commandBuffers[i], layer.indexBuffer, 0, VK_INDEX_TYPE_UINT32);
+
+                for (auto mesh : layer.geometry)
+                    vkCmdDrawIndexed(commandBuffers[i], static_cast<uint32_t>(mesh.Indices.size()), 1, 0, mesh.indexBase, 0);
+            }
+
+            vkCmdEndRenderPass(commandBuffers[i]);
+
+            if(vkEndCommandBuffer(commandBuffers[i]) != VK_SUCCESS)
+                throw std::runtime_error("failed to record command buffer");
+        }
     }
 }

@@ -178,9 +178,9 @@ namespace LunarRenderer {
         };
 
         #ifdef NDEBUG
-            const bool enableValidationLayers = true;
+            const bool enableValidationLayers = false;
         #else
-            const bool enableValidationLayers = true;
+            const bool enableValidationLayers = false;
         #endif
 
         VkDebugUtilsMessengerEXT debugMessenger;
@@ -199,11 +199,15 @@ namespace LunarRenderer {
 
         int AddGeometry(Geometry addGeometry);
         int FlushGeometry();
-        void FlushToCommandBuffer(int index);
+        void FlushToCommandBuffer();
     private:
+        void createVertexBuffer(std::vector<Vertex> vertices, GeometryLayer& geoLayer);
+        void createIndexBuffer(std::vector<uint32_t> indices, GeometryLayer& geoLayer);
+        void createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory);
+        void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size);
+        uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
+
         //layer helpers
-        uint32_t getMemoryTypeIndex(uint32_t typeBits, VkMemoryPropertyFlags properties);
-        std::vector<GeometryLayer> layer;
         std::vector<Geometry> tmpGeometryBuffer;
         void cleanAllLayers();
 
@@ -216,8 +220,6 @@ namespace LunarRenderer {
         int geomIndex = 0;
         int currGeomLayer = 0;
 
-        VkPhysicalDeviceMemoryProperties deviceMemoryProperties;
-
-        
+        VkPhysicalDeviceMemoryProperties deviceMemoryProperties; 
     };
 }

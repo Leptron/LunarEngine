@@ -1,17 +1,18 @@
 #include <iostream>
 #include <LunarRenderer.h>
-#include <LunarVkDatatypes.h>cd 
+#include <LunarVkDatatypes.h> 
 
 int main() {
 	//layer testing
 	std::vector<LunarRenderer::Vertex> layerTestVerts = {
-		{{1.0f,  1.0f, 0.0f}, {1.0f, 0.0f, 0.0f}},
-		{ { -1.0f,  1.0f, 0.0f }, { 0.0f, 1.0f, 0.0f } },
-		{ {  0.0f, -1.0f, 0.0f }, { 0.0f, 0.0f, 1.0f } }
+		{{-0.5f, -0.5f}, {1.0f, 0.0f, 0.0f}},
+		{{0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}},
+		{{0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}},
+		{{-0.5f, 0.5f}, {1.0f, 1.0f, 1.0f}}
 	};
 
 	std::vector<uint32_t> layerTestIndices = {
-		0, 1, 2
+		 0, 1, 2, 2, 3, 0
 	};
 
 	//create a geometry object
@@ -26,7 +27,7 @@ int main() {
 	int i = rendererSandbox.AddGeometry(layerTestGeometry);
 	int x = rendererSandbox.FlushGeometry();
 
-	//int layerToRender = rendererSandbox.FlushToCommandBuffer(x);
+	rendererSandbox.FlushToCommandBuffer();
 
 	rendererSandbox.MainLoop();
 
