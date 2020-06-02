@@ -186,4 +186,8 @@ namespace LunarRenderer {
         vkDestroyFence(device, fence, nullptr);
         vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
     }
+
+    void LunarRenderer::FlushToCommandBuffer(int index) {
+        
+    }
 }

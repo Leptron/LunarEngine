@@ -52,6 +52,8 @@ namespace LunarRenderer {
         std::vector<Vertex> Vertices; //gotten
         std::vector<uint32_t> Indices; //gotten
 
+        std::vector<VkCommandBuffer> layerCommandBuffer;
+
         struct {
 			StagingBuffer vertices; //finished doing this bufferve
 			StagingBuffer indices;
@@ -67,7 +69,5 @@ namespace LunarRenderer {
             VkBuffer buffer;
             uint32_t count;
         } indexBuffer;
-
-
     };
 }

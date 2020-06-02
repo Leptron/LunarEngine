@@ -199,12 +199,15 @@ namespace LunarRenderer {
 
         int AddGeometry(Geometry addGeometry);
         int FlushGeometry();
+        void FlushToCommandBuffer(int index);
     private:
         //layer helpers
         uint32_t getMemoryTypeIndex(uint32_t typeBits, VkMemoryPropertyFlags properties);
         std::vector<GeometryLayer> layer;
         std::vector<Geometry> tmpGeometryBuffer;
         void cleanAllLayers();
+
+        std::vector<VkCommandBuffer> layerCommandBuffer;
 
         //command buffer
         VkCommandBuffer getLayerCommandBuffer(bool begin);
@@ -214,5 +217,7 @@ namespace LunarRenderer {
         int currGeomLayer = 0;
 
         VkPhysicalDeviceMemoryProperties deviceMemoryProperties;
+
+        
     };
 }
