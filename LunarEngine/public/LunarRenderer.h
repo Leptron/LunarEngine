@@ -1,5 +1,6 @@
 #pragma once
-
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEFAULT_ALIGNED_GENTYPES
 #include <iostream>
 #include <stdexcept>
 #include <cstdlib>
@@ -12,8 +13,8 @@
 #include <glm/glm.hpp>
 #include <array>
 #include <tuple>
-#include <glm/gtc/quaternion.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <chrono>
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -182,9 +183,9 @@ namespace LunarRenderer {
         };
 
         #ifdef NDEBUG
-            const bool enableValidationLayers = false;
+            const bool enableValidationLayers = true;
         #else
-            const bool enableValidationLayers = false;
+            const bool enableValidationLayers = true;
         #endif
 
         VkDebugUtilsMessengerEXT debugMessenger;
@@ -234,18 +235,20 @@ namespace LunarRenderer {
         std::vector<std::tuple<std::string, int>> materialNames;
 
     public:
-        void createDescriptorSets();
-        void CreateGeomUBO(int layer);
     private:
         
-        void updateGeomUBO();
-        void setupDescriptors();
+        void createDescriptorSetLayout();
+        void createUniformBuffers();
+        void updateUniformBuffer(uint32_t currentImage);
         void createDescriptorPool();
+        void createDescriptorSets();
 
         int totalGeom = 0;
 
         VkDescriptorSetLayout descriptorSetLayout;
+        std::vector<VkBuffer> uniformBuffers;
+        std::vector<VkDeviceMemory> uniformBuffersMemory;
         VkDescriptorPool descriptorPool;
-        std::vector<UBOMemory> uboMem;  
+        std::vector<VkDescriptorSet> descriptorSets;
     };
 }

@@ -100,7 +100,7 @@ namespace LunarRenderer {
 
                 for (auto mesh : layer.geometry) {
                     vkCmdBindPipeline(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, materialIndex[mesh.materialIndex].pipeline);
-                    vkCmdBindDescriptorSets(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, materialIndex[mesh.materialIndex].pipelineLayout, 0, 1, &uboMem[mesh.uboMemIndex].descriptorSets[i], 0, nullptr);
+                    vkCmdBindDescriptorSets(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, materialIndex[mesh.materialIndex].pipelineLayout, 0, 1, &descriptorSets[i], 0, nullptr);
                     vkCmdDrawIndexed(commandBuffers[i], static_cast<uint32_t>(mesh.Indices.size()), 1, 0, mesh.indexBase, 0);
                 }
             }

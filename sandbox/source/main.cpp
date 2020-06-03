@@ -31,8 +31,6 @@ int main() {
 	
 
 	rendererSandbox.CreateMaterial("basic_pos", 1);
-	rendererSandbox.CreateGeomUBO(0);
-	rendererSandbox.createDescriptorSets();
 
 	rendererSandbox.FlushToCommandBuffer();
 

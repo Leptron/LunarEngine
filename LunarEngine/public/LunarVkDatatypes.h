@@ -1,5 +1,5 @@
 #pragma once
-
+#define GLM_FORCE_DEFAULT_ALIGNED_GENTYPES
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
@@ -66,6 +66,12 @@ namespace LunarRenderer {
 		} matrices;
 
         int uboMemIndex;
+    };
+
+    struct UniformBufferObject {
+        alignas(16) glm::mat4 model;
+        alignas(16) glm::mat4 view;
+        alignas(16) glm::mat4 proj;
     };
 
     struct UBOMemory {
