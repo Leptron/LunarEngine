@@ -58,6 +58,20 @@ namespace LunarRenderer {
         std::array<glm::vec4, 1> ModelMatrix;
 
         int materialIndex;
+
+        struct Matrices {
+			glm::mat4 projection;
+			glm::mat4 view;
+			glm::mat4 model;
+		} matrices;
+
+        int uboMemIndex;
+    };
+
+    struct UBOMemory {
+        std::vector<VkBuffer> uniformBuffers;
+        std::vector<VkDeviceMemory> uniformBuffersMemory;
+        std::vector<VkDescriptorSet> descriptorSets;
     };
 
     struct GeometryLayer { // geom buffer
@@ -71,15 +85,12 @@ namespace LunarRenderer {
 
         VkBuffer indexBuffer;
         VkDeviceMemory indexBufferMemory;
-
-        struct {
-            glm::mat4 view;
-            glm::mat4 proj;
-        } ubo;
     };
 
     struct LunarMaterial {
         VkPipeline pipeline;
         VkPipelineLayout pipelineLayout;
     };
+
+    
 }

@@ -61,6 +61,8 @@ namespace LunarRenderer {
             vkDestroyFence(device, inFlightFences[i], nullptr);
         }
 
+        vkDestroyDescriptorSetLayout(device, descriptorSetLayout, nullptr);
+
         vkDestroyCommandPool(device, commandPool, nullptr);
 
         vkDestroyDevice(device, nullptr);

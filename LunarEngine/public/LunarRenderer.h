@@ -12,12 +12,15 @@
 #include <glm/glm.hpp>
 #include <array>
 #include <tuple>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 #include <cstdint>
 
 #include "LunarVkDatatypes.h"
+#include "LunarBuffer.hpp"
 
 namespace LunarRenderer {
     const int MAX_FRAMES_IN_FLIGHT = 2;
@@ -229,5 +232,20 @@ namespace LunarRenderer {
         //graphics pipeline for layers
         std::vector<LunarMaterial> materialIndex;
         std::vector<std::tuple<std::string, int>> materialNames;
+
+    public:
+        void createDescriptorSets();
+        void CreateGeomUBO(int layer);
+    private:
+        
+        void updateGeomUBO();
+        void setupDescriptors();
+        void createDescriptorPool();
+
+        int totalGeom = 0;
+
+        VkDescriptorSetLayout descriptorSetLayout;
+        VkDescriptorPool descriptorPool;
+        std::vector<UBOMemory> uboMem;  
     };
 }
