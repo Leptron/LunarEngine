@@ -10,7 +10,6 @@ namespace LunarRenderer {
         createSwapChain();
         createImageViews();
         createRenderPass();
-        createGraphicsPipeline();
         createFrameBuffer();
         createCommandPool();
         createSyncObjects();

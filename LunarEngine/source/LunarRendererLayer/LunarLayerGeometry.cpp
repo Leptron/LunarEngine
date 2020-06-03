@@ -200,7 +200,7 @@ namespace LunarRenderer {
             vkCmdBeginRenderPass(commandBuffers[i], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
 
             for(auto layer : layers) {
-                vkCmdBindPipeline(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
+                
 
                 VkBuffer vertexBuffers[] = {
                     layer.vertexBuffer
@@ -210,8 +210,10 @@ namespace LunarRenderer {
                 vkCmdBindVertexBuffers(commandBuffers[i], 0, 1, &layer.vertexBuffer, offsets);
                 vkCmdBindIndexBuffer(commandBuffers[i], layer.indexBuffer, 0, VK_INDEX_TYPE_UINT32);
 
-                for (auto mesh : layer.geometry)
+                for (auto mesh : layer.geometry) {
+                    vkCmdBindPipeline(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, materialIndex[mesh.materialIndex].pipeline);
                     vkCmdDrawIndexed(commandBuffers[i], static_cast<uint32_t>(mesh.Indices.size()), 1, 0, mesh.indexBase, 0);
+                }
             }
 
             vkCmdEndRenderPass(commandBuffers[i]);

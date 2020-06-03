@@ -221,5 +221,12 @@ namespace LunarRenderer {
         int currGeomLayer = 0;
 
         VkPhysicalDeviceMemoryProperties deviceMemoryProperties; 
+
+        //material
+        void cleanMaterials();
+    private:
+        //graphics pipeline for layers
+        std::vector<LunarMaterial> materialIndex;
+        std::vector<std::string> materialNames;
     };
 }

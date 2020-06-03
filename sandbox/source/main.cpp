@@ -20,12 +20,16 @@ int main() {
 	//only set those two
 	layerTestGeometry.Vertices = layerTestVerts;
 	layerTestGeometry.Indices = layerTestIndices;
+	layerTestGeometry.materialIndex = 0;
 
 	LunarRenderer::LunarRenderer rendererSandbox;
 	rendererSandbox.InitResources();
-
+	rendererSandbox.CreateMaterial("basic_pos");
+	
 	int i = rendererSandbox.AddGeometry(layerTestGeometry);
 	int x = rendererSandbox.FlushGeometry();
+
+	
 
 	rendererSandbox.FlushToCommandBuffer();
 

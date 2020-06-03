@@ -48,12 +48,6 @@ namespace LunarRenderer {
         }
     };
 
-    struct LNPipeline {
-        VkPipeline graphicsPipeline;
-        VkRenderPass renderPass;
-        VkPipelineLayout pipelineLayout;
-    };
-
     struct Geometry { // tmp geom bffer
         std::vector<Vertex> Vertices; //gotten
         std::vector<uint32_t> Indices; //gotten
@@ -61,15 +55,10 @@ namespace LunarRenderer {
         uint32_t indexBase; //gotten
         uint32_t indexCount; //gotten
 
-        glm::vec3 model; //implement push constants (faster)
-        glm::vec3 view; // ^^
-        glm::vec3 projection; // ^^
-    };
+        std::array<glm::vec4, 1> ModelMatrix;
 
-    struct StagingBuffer {
-		VkDeviceMemory memory;
-		VkBuffer buffer;
-	};
+        int materialIndex;
+    };
 
     struct GeometryLayer { // geom buffer
         std::vector<Geometry> geometry; //gotten
@@ -82,5 +71,15 @@ namespace LunarRenderer {
 
         VkBuffer indexBuffer;
         VkDeviceMemory indexBufferMemory;
+
+        struct {
+            glm::mat4 view;
+            glm::mat4 proj;
+        } ubo;
+    };
+
+    struct LunarMaterial {
+        VkPipeline pipeline;
+        VkPipelineLayout pipelineLayout;
     };
 }

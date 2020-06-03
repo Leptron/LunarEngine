@@ -30,9 +30,9 @@ namespace LunarRenderer {
         createSwapChain();
         createImageViews();
         createRenderPass();
-        createGraphicsPipeline();
+        CreateMaterial("");
         createFrameBuffer();
-        createCommandBuffers();
+        FlushToCommandBuffer();
     }
 
     void LunarRenderer::cleanupSwapChain() {
@@ -42,8 +42,7 @@ namespace LunarRenderer {
 
         vkFreeCommandBuffers(device, commandPool, static_cast<uint32_t>(commandBuffers.size()), commandBuffers.data());
 
-        vkDestroyPipeline(device, graphicsPipeline, nullptr);
-        vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
+        cleanMaterials();
         vkDestroyRenderPass(device, renderPass, nullptr);
 
         for (auto imageView : swapChainImageViews) {
