@@ -30,7 +30,7 @@ namespace LunarRenderer {
         createSwapChain();
         createImageViews();
         createRenderPass();
-        CreateMaterial("");
+        CreateMaterial("", 1298719287);
         createFrameBuffer();
         FlushToCommandBuffer();
     }

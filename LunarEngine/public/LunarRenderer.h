@@ -11,6 +11,7 @@
 #include <fstream>
 #include <glm/glm.hpp>
 #include <array>
+#include <tuple>
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -195,7 +196,7 @@ namespace LunarRenderer {
 
     //LAYER STUFF
     public:
-        void CreateMaterial(std::string materialName);
+        void CreateMaterial(std::string mName, int target);
 
         int AddGeometry(Geometry addGeometry);
         int FlushGeometry();
@@ -227,6 +228,6 @@ namespace LunarRenderer {
     private:
         //graphics pipeline for layers
         std::vector<LunarMaterial> materialIndex;
-        std::vector<std::string> materialNames;
+        std::vector<std::tuple<std::string, int>> materialNames;
     };
 }

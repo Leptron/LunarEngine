@@ -24,12 +24,13 @@ int main() {
 
 	LunarRenderer::LunarRenderer rendererSandbox;
 	rendererSandbox.InitResources();
-	rendererSandbox.CreateMaterial("basic_pos");
+	
 	
 	int i = rendererSandbox.AddGeometry(layerTestGeometry);
 	int x = rendererSandbox.FlushGeometry();
-
 	
+
+	rendererSandbox.CreateMaterial("basic_pos", 1);
 
 	rendererSandbox.FlushToCommandBuffer();
 

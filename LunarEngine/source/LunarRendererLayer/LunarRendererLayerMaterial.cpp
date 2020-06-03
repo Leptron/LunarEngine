@@ -1,15 +1,22 @@
 #include "../../public/LunarRenderer.h"
 
 namespace LunarRenderer{
-    void LunarRenderer::CreateMaterial(std::string materialName) {
-        if(materialName != "")   
-            materialNames.push_back(materialName);
+    void LunarRenderer::CreateMaterial(std::string mName, int target_layer) {
+        if(mName != "" && target_layer != 0)   {
+            std::tuple<std::string, int> appendTuple;
+            appendTuple = std::make_tuple(mName, target_layer);
+            materialNames.push_back(appendTuple);
+        }
+            
 
         materialIndex.clear();
 
-        for(auto materialName : materialNames) {
+        for(auto tuple : materialNames) {
             VkPipelineLayout tmpPipelineLayout;
             VkPipeline tmpPipeline;
+
+            auto materialName = std::get<0>(tuple);
+            auto target = std::get<1>(tuple) - 1;
 
             //TODO : Implement
             auto vertShaderCode = readFile("shaders/" + materialName + "/" + materialName + ".vert.spv");
