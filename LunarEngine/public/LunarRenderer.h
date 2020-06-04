@@ -83,13 +83,15 @@ namespace LunarRenderer {
         // Initialization
         void InitResources();
         void MainLoop();
-        void LayerLoop(LayerManager* manager);
+        void AttachManager(LayerManager* manager);
+
+        void LayerLoop();
 
         bool framebufferResized = false;
 
         //layer prototypes
         LunarLayerConstruction globConstruct();
-        void CreateCommandBuffers(LayerManager* manager);
+        void CreateCommandBuffers();
 
     private:
         void cleanup();
@@ -124,13 +126,8 @@ namespace LunarRenderer {
         void createImageViews();
 
         //graphics pipeline (eventual layer implementation)
-        void createGraphicsPipeline();
         void createRenderPass();
-        static std::vector<char> readFile(const std::string& filename);
-        VkShaderModule createShaderModule(const std::vector<char>& code);
 
-        //layer prototypes
-        void prepareUniformBuffers();
 
         //drawing
         void createFrameBuffer();
@@ -201,6 +198,8 @@ namespace LunarRenderer {
         //vulkan handler
         //vulkan instance
         VkInstance instance;
+
+        LayerManager* manager;
 
     //LAYER STUFF
     public:

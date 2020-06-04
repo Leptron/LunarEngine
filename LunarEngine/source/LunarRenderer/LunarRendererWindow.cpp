@@ -26,7 +26,7 @@ namespace LunarRenderer {
         cleanup();
     }
 
-    void LunarRenderer::LayerLoop(LayerManager* manager) {
+    void LunarRenderer::LayerLoop() {
         while(!glfwWindowShouldClose(window)) {
             glfwPollEvents();
             drawFrame();

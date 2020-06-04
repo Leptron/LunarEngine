@@ -35,7 +35,7 @@ namespace LunarRenderer {
             throw std::runtime_error("failed to create a command pool");
     }
 
-    void LunarRenderer::CreateCommandBuffers(LayerManager* manager) {
+    void LunarRenderer::CreateCommandBuffers() {
         manager->FlushCommandBuffer(commandBuffers);
     }
 
@@ -56,7 +56,6 @@ namespace LunarRenderer {
             vkWaitForFences(device, 1, &imagesInFlight[imageIndex], VK_TRUE, UINT64_MAX);
         }
         imagesInFlight[imageIndex] = inFlightFences[currentFrame];
-        updateUniformBuffer(imageIndex);
 
         VkSubmitInfo submitInfo{};
         submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
