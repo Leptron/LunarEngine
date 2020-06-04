@@ -55,8 +55,6 @@ namespace LunarRenderer {
         uint32_t indexBase; //gotten
         uint32_t indexCount; //gotten
 
-        std::array<glm::vec4, 1> ModelMatrix;
-
         int materialIndex;
 
         struct Matrices {
@@ -94,6 +92,7 @@ namespace LunarRenderer {
     };
 
     struct LunarMaterial {
+        std::string matID;
         VkPipeline pipeline;
         VkPipelineLayout pipelineLayout;
     };

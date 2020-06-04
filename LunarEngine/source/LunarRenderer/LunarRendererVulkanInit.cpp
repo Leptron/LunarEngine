@@ -13,6 +13,9 @@ namespace LunarRenderer {
         createFrameBuffer();
         createCommandPool();
         createSyncObjects();
+        
+
+        //descriptors
         createDescriptorSetLayout();
         createUniformBuffers();
         createDescriptorPool();

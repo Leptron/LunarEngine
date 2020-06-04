@@ -16,66 +16,72 @@ namespace LunarRenderer {
     }
 
     void LunarRenderer::recreateSwapChain() {
-        int w = 0, h = 0;
-        glfwGetFramebufferSize(window, &w, &h);
-        while (w == 0 || height == 0) {
-            glfwGetFramebufferSize(window, &w, &h);
-            glfwWaitEvents();
-        }
-
         vkDeviceWaitIdle(device);
-
-        cleanupSwapChain();
 
         createSwapChain();
         createImageViews();
         createRenderPass();
-        CreateMaterial("", 1298719287);
+        createGraphicsPipeline();
         createFrameBuffer();
-        FlushToCommandBuffer();
+        createCommandBuffers();
     }
 
     void LunarRenderer::cleanupSwapChain() {
-        for (auto framebuffer : swapChainFrameBuffers) {
-            vkDestroyFramebuffer(device, framebuffer, nullptr);
+        for (size_t i = 0; i < this->swapChainFrameBuffers.size(); i++) {
+            vkDestroyFramebuffer(device, this->swapChainFrameBuffers[i], nullptr);
         }
 
         vkFreeCommandBuffers(device, commandPool, static_cast<uint32_t>(commandBuffers.size()), commandBuffers.data());
 
-        cleanMaterials();
+        vkDestroyPipeline(device, graphicsPipeline, nullptr);
+        vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
         vkDestroyRenderPass(device, renderPass, nullptr);
 
-        for (auto imageView : swapChainImageViews) {
-            vkDestroyImageView(device, imageView, nullptr);
+        for (size_t i = 0; i < swapChainImageViews.size(); i++) {
+            vkDestroyImageView(device, swapChainImageViews[i], nullptr);
         }
 
         vkDestroySwapchainKHR(device, swapChain, nullptr);
     }
 
+    LunarLayerConstruction LunarRenderer::globConstruct() {
+        LunarLayerConstruction construct = {};
+
+        construct.device = device;
+        construct.physicalDevice = physicalDevice;
+        construct.renderPass = renderPass;
+        construct.swapChainExtent = swapChainExtent;
+        construct.swapChainImages = swapChainImages;
+        construct.commandPool = commandPool;
+        construct.graphicsQueue = graphicsQueue;
+
+        return construct;
+    }
+
     void LunarRenderer::cleanup() {
+        //call all the various sub cleaning functions
         cleanupSwapChain();
-        cleanAllLayers();
+        //semaphores
         for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++) {
             vkDestroySemaphore(device, renderFinishedSemaphores[i], nullptr);
             vkDestroySemaphore(device, imageAvailableSemaphores[i], nullptr);
             vkDestroyFence(device, inFlightFences[i], nullptr);
         }
-
-        vkDestroyDescriptorSetLayout(device, descriptorSetLayout, nullptr);
-
+        //command pool
         vkDestroyCommandPool(device, commandPool, nullptr);
-
+        //cleanup device
         vkDestroyDevice(device, nullptr);
-
-        if (enableValidationLayers) {
+        //destroy debugging
+        if(enableValidationLayers)
             DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
-        }
-
+        //destroy surface
         vkDestroySurfaceKHR(instance, surface, nullptr);
+        //destroy instance
         vkDestroyInstance(instance, nullptr);
-
+        //destroy window
         glfwDestroyWindow(window);
 
+        //terminate glfw
         glfwTerminate();
     }
 }

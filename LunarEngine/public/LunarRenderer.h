@@ -22,6 +22,7 @@
 
 #include "LunarVkDatatypes.h"
 #include "LunarBuffer.hpp"
+#include "LunarLayerManager.h"
 
 namespace LunarRenderer {
     const int MAX_FRAMES_IN_FLIGHT = 2;
@@ -85,7 +86,7 @@ namespace LunarRenderer {
         bool framebufferResized = false;
 
         //layer prototypes
-        
+        LunarLayerConstruction globConstruct();
 
     private:
         void cleanup();
