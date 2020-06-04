@@ -81,6 +81,7 @@ namespace LunarRenderer {
         VkPhysicalDevice physicalDevice;
         VkCommandPool commandPool;
         VkQueue graphicsQueue;
+        std::vector<VkFramebuffer> swapChainFrameBuffers;
     };
 
     class LayerManager {
@@ -102,6 +103,7 @@ namespace LunarRenderer {
         std::vector<VkDescriptorPool> descriptorPools;
         VkCommandPool commandPool;
         VkQueue graphicsQueue;
+        std::vector<VkFramebuffer> swapChainFrameBuffers
 
         std::vector<BufferLayer> buffers;
         std::vector<LayerMaterial> materials;

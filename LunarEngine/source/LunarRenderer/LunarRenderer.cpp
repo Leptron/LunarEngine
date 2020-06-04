@@ -54,6 +54,7 @@ namespace LunarRenderer {
         construct.swapChainImages = swapChainImages;
         construct.commandPool = commandPool;
         construct.graphicsQueue = graphicsQueue;
+        construct.swapChainFrameBuffers = swapChainFrameBuffers;
 
         return construct;
     }

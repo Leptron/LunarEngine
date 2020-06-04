@@ -13,6 +13,7 @@ namespace LunarRenderer {
         this->physicalDevice = construction->physicalDevice;
         this->commandPool = construction->commandPool;
         this->graphicsQueue = construction->graphicsQueue;
+        this->swapChainFrameBuffers = construction->swapChainFrameBuffers;
 
         //create the descriptor set layout
         createDescriptorSetLayout();
