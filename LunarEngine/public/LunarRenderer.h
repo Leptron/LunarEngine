@@ -83,10 +83,13 @@ namespace LunarRenderer {
         // Initialization
         void InitResources();
         void MainLoop();
+        void LayerLoop(LayerManager* manager);
+
         bool framebufferResized = false;
 
         //layer prototypes
         LunarLayerConstruction globConstruct();
+        void CreateCommandBuffers(LayerManager* manager);
 
     private:
         void cleanup();
@@ -132,7 +135,7 @@ namespace LunarRenderer {
         //drawing
         void createFrameBuffer();
         void createCommandPool();
-        void createCommandBuffers();
+        
         void drawFrame();
         void createSyncObjects();
 

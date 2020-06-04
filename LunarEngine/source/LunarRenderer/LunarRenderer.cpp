@@ -23,7 +23,6 @@ namespace LunarRenderer {
         createRenderPass();
         createGraphicsPipeline();
         createFrameBuffer();
-        createCommandBuffers();
     }
 
     void LunarRenderer::cleanupSwapChain() {

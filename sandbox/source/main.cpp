@@ -2,8 +2,8 @@
 #include <LunarLayerManager.h>
 #include <LunarVkDatatypes.h>
 #include <LunarRenderer.h>
-/*
-int main() {
+
+/*int main() {
 	//layer testing
 	std::vector<LunarRenderer::Vertex> layerTestVerts = {
 		{{-0.5f, -0.5f}, {1.0f, 0.0f, 0.0f}},
@@ -55,6 +55,10 @@ int main() {
 	LunarRenderer::LunarRenderer rendererSandbox;
 	rendererSandbox.InitResources();
 	LunarRenderer::LayerManager objectRenderer = LunarRenderer::LayerManager(&rendererSandbox.globConstruct());
+	
 	objectRenderer.CreateObject(layerTestVerts, layerTestIndices, "basic_pos", false);
 	objectRenderer.AllocateObjects();
+	
+	rendererSandbox.CreateCommandBuffers(&objectRenderer);
+	rendererSandbox.LayerLoop(&objectRenderer);
 }

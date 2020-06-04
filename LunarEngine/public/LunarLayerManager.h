@@ -94,6 +94,8 @@ namespace LunarRenderer {
     public:
         void CreateObject(std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::string requestedMaterial, bool singular);
         void AllocateObjects();
+        void FlushCommandBuffer(std::vector<VkCommandBuffer>& commandBuffers);
+        void updateUniformBuffer();
     private:
         VkDevice device;
         VkExtent2D swapChainExtent;
@@ -103,7 +105,7 @@ namespace LunarRenderer {
         std::vector<VkDescriptorPool> descriptorPools;
         VkCommandPool commandPool;
         VkQueue graphicsQueue;
-        std::vector<VkFramebuffer> swapChainFrameBuffers
+        std::vector<VkFramebuffer> swapChainFrameBuffers;
 
         std::vector<BufferLayer> buffers;
         std::vector<LayerMaterial> materials;
@@ -118,7 +120,7 @@ namespace LunarRenderer {
         void createDescriptorPool();
         void createDescirptorSets(BufferLayer& m_buf);
 
-        void updateUniformBuffer();
+        
 
         void allocateBufferMemory(BufferLayer& m_buf);
         void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize Dsize);
@@ -134,6 +136,6 @@ namespace LunarRenderer {
         VkShaderModule createShaderModule(const std::vector<char>& code);
 
         //flush
-        void FlushCommandBuffer(std::vector<VkCommandBuffer>& commandBuffers);
+        
     };
 }

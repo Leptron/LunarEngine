@@ -25,4 +25,15 @@ namespace LunarRenderer {
         vkDeviceWaitIdle(device);
         cleanup();
     }
+
+    void LunarRenderer::LayerLoop(LayerManager* manager) {
+        while(!glfwWindowShouldClose(window)) {
+            glfwPollEvents();
+            drawFrame();
+            manager->updateUniformBuffer();
+        }
+
+        vkDeviceWaitIdle(device);
+        cleanup();
+    }
 }
