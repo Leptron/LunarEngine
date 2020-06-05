@@ -22,6 +22,8 @@ namespace LunarRenderer {
         createImageViews();
         createRenderPass();
         createFrameBuffer();
+
+        manager->RebuildMaterials(&renderPass);
     }
 
     void LunarRenderer::AttachManager(LayerManager* manager) {
@@ -35,6 +37,7 @@ namespace LunarRenderer {
 
         vkFreeCommandBuffers(device, commandPool, static_cast<uint32_t>(commandBuffers.size()), commandBuffers.data());
 
+        manager->CleanMaterials();
         
         vkDestroyRenderPass(device, renderPass, nullptr);
 

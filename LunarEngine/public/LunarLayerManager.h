@@ -96,6 +96,13 @@ namespace LunarRenderer {
         void AllocateObjects();
         void FlushCommandBuffer(std::vector<VkCommandBuffer>& commandBuffers);
         void updateUniformBuffer();
+
+        //cleaning commands
+        void CleanMaterials();
+        void CleanAllStorageBuffers();
+
+        //rebuilding commands
+        void RebuildMaterials(VkRenderPass* rPass);
     private:
         VkDevice device;
         VkExtent2D swapChainExtent;
@@ -108,8 +115,10 @@ namespace LunarRenderer {
         std::vector<VkFramebuffer> swapChainFrameBuffers;
 
         std::vector<BufferLayer> buffers;
-        std::vector<LayerMaterial> materials;
         std::vector<ThreeDObject> objects;
+
+        std::vector<LayerMaterial> materials;
+        std::vector<std::string> matidList;
 
     protected:
         VkDescriptorSetLayout descriptorSetLayout;
