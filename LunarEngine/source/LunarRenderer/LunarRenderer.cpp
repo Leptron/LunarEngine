@@ -16,14 +16,26 @@ namespace LunarRenderer {
     }
 
     void LunarRenderer::recreateSwapChain() {
+        int width = 0, height = 0;
+        glfwGetFramebufferSize(window, &width, &height);
+        while (width == 0 || height == 0) {
+            glfwGetFramebufferSize(window, &width, &height);
+            glfwWaitEvents();
+        }
+
         vkDeviceWaitIdle(device);
+
+        cleanupSwapChain();
 
         createSwapChain();
         createImageViews();
         createRenderPass();
+        
         createFrameBuffer();
-
+        manager->ReAttachComponents(&globConstruct());
         manager->RebuildMaterials(&renderPass);
+        manager->RecreateUBO();
+        manager->FlushCommandBuffer(commandBuffers);
     }
 
     void LunarRenderer::AttachManager(LayerManager* manager) {
@@ -38,7 +50,6 @@ namespace LunarRenderer {
         vkFreeCommandBuffers(device, commandPool, static_cast<uint32_t>(commandBuffers.size()), commandBuffers.data());
 
         manager->CleanMaterials();
-        
         vkDestroyRenderPass(device, renderPass, nullptr);
 
         for (size_t i = 0; i < swapChainImageViews.size(); i++) {
@@ -46,6 +57,8 @@ namespace LunarRenderer {
         }
 
         vkDestroySwapchainKHR(device, swapChain, nullptr);
+
+        manager->CleanAllUBO();
     }
 
     LunarLayerConstruction LunarRenderer::globConstruct() {
@@ -72,6 +85,9 @@ namespace LunarRenderer {
             vkDestroySemaphore(device, imageAvailableSemaphores[i], nullptr);
             vkDestroyFence(device, inFlightFences[i], nullptr);
         }
+
+        manager->CleanAllStorageBuffers();
+
         //command pool
         vkDestroyCommandPool(device, commandPool, nullptr);
         //cleanup device

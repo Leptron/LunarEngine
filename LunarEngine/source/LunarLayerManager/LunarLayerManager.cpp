@@ -97,4 +97,53 @@ namespace LunarRenderer {
             index_base = 0;
         }
     }
+
+    void LayerManager::CleanAllUBO() {
+        for(auto layer : buffers) {
+            for(auto object : layer.objects) {
+                for(size_t i = 0; i < 1; i++) {
+                    vkDestroyBuffer(device, object.uniformBuffers[i], nullptr);
+                    vkFreeMemory(device, object.uniformBuffersMemory[i], nullptr);
+                }
+            }
+        }
+
+        for(auto pool : descriptorPools) {
+            vkDestroyDescriptorPool(device, pool, nullptr);
+        }
+
+        descriptorPools.clear();
+    }
+
+    void LayerManager::ReAttachComponents(LunarLayerConstruction *construction) {
+        this->device = construction->device;
+        this->swapChainExtent = construction->swapChainExtent;
+        this->renderPass = construction->renderPass;
+        this->swapChainImages = construction->swapChainImages;
+        this->physicalDevice = construction->physicalDevice;
+        this->commandPool = construction->commandPool;
+        this->graphicsQueue = construction->graphicsQueue;
+        this->swapChainFrameBuffers = construction->swapChainFrameBuffers;
+    }
+
+    void LayerManager::RecreateUBO() {
+        for(auto& m_buf : buffers) {
+            createDescriptorPool();
+            m_buf.poolIndex = descriptorPools.size() - 1;
+
+            for(auto& obj : m_buf.objects)
+                createUniformBuffers(obj);
+            createDescirptorSets(m_buf);
+        }
+    }
+
+    void LayerManager::CleanAllStorageBuffers() {
+        for(auto layer : buffers) {
+            vkDestroyBuffer(device, layer.indexBuffer, nullptr);
+            vkFreeMemory(device, layer.indexBufferMemory, nullptr);
+
+            vkDestroyBuffer(device, layer.vertexBuffer, nullptr);
+            vkFreeMemory(device, layer.vertexBufferMemory, nullptr);
+        }
+    }
 }

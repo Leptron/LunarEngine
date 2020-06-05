@@ -100,9 +100,13 @@ namespace LunarRenderer {
         //cleaning commands
         void CleanMaterials();
         void CleanAllStorageBuffers();
+        void CleanAllUBO();
 
         //rebuilding commands
         void RebuildMaterials(VkRenderPass* rPass);
+        void RecreateUBO();
+
+        void ReAttachComponents(LunarLayerConstruction *construction);
     private:
         VkDevice device;
         VkExtent2D swapChainExtent;
