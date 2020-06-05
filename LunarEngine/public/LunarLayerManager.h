@@ -15,6 +15,7 @@
 #include <tuple>
 #include <glm/gtc/matrix_transform.hpp>
 #include <chrono>
+#include <unordered_map>
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -44,6 +45,8 @@ namespace LunarRenderer {
         uint32_t indexCount;
 
         bool singular;
+
+        std::string ID;
     };
 
     struct BufferLayer {
@@ -92,7 +95,7 @@ namespace LunarRenderer {
         ~LayerManager();
 
     public:
-        void CreateObject(std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::string requestedMaterial, bool singular);
+        void CreateObject(std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::string requestedMaterial, bool singular, std::string id);
         void AllocateObjects();
         void FlushCommandBuffer(std::vector<VkCommandBuffer>& commandBuffers);
         void updateUniformBuffer();
@@ -123,6 +126,8 @@ namespace LunarRenderer {
 
         std::vector<LayerMaterial> materials;
         std::vector<std::string> matidList;
+
+        std::unordered_map<std::string, ProjectionMatricies> objectProjectionID;
 
     protected:
         VkDescriptorSetLayout descriptorSetLayout;

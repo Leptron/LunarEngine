@@ -36,4 +36,11 @@ namespace LunarRenderer {
         vkDeviceWaitIdle(device);
         cleanup();
     }
+
+    EngineRelinquish LunarRenderer::RelinquishEngine() {
+        return EngineRelinquish {
+            device,
+            window
+        };
+    }
 }

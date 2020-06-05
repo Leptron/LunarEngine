@@ -23,13 +23,14 @@ namespace LunarRenderer {
 
     }
 
-    void LayerManager::CreateObject(std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::string requestedMaterial, bool singular) {
+    void LayerManager::CreateObject(std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::string requestedMaterial, bool singular, std::string id) {
         ThreeDObject obj = {};
         obj.vertices = vertices;
         obj.indices = indices;
         obj.indexCount = static_cast<uint32_t>(indices.size());
         obj.singular = singular;
         obj.matID = requestedMaterial;
+        obj.ID = id;
 
         //check if material was created
         LayerMaterial query = {};
@@ -49,6 +50,8 @@ namespace LunarRenderer {
             createRequestedMaterial(requestedMaterial);
             obj.materialIndex = materials.size() - 1;
         }
+
+        objectProjectionID[obj.ID] = ProjectionMatricies{};
 
         //create the uniforms
         createUniformBuffers(obj);

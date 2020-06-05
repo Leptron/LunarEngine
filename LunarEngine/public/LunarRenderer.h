@@ -74,6 +74,11 @@ namespace LunarRenderer {
         std::vector<VkSurfaceFormatKHR> formats;
         std::vector<VkPresentModeKHR> presentModes;
     };
+
+    struct EngineRelinquish {
+        VkDevice device;
+        GLFWwindow* window;
+    };
     
     class LunarRenderer {
     public:
@@ -86,16 +91,16 @@ namespace LunarRenderer {
         void AttachManager(LayerManager* manager);
 
         void LayerLoop();
+        EngineRelinquish RelinquishEngine();
 
         bool framebufferResized = false;
 
         //layer prototypes
         LunarLayerConstruction globConstruct();
         void CreateCommandBuffers();
-
-    private:
+        void drawFrame();
         void cleanup();
-
+    private:
         //create the window
         void initWindow();
 
@@ -133,7 +138,7 @@ namespace LunarRenderer {
         void createFrameBuffer();
         void createCommandPool();
         
-        void drawFrame();
+        
         void createSyncObjects();
 
         //recreate swap chain
