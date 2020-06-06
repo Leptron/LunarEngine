@@ -15,7 +15,7 @@
 #include <tuple>
 #include <glm/gtc/matrix_transform.hpp>
 #include <chrono>
-#include <unordered_map>
+#include <map>
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -110,9 +110,12 @@ namespace LunarRenderer {
         void RecreateUBO();
 
         void ReAttachComponents(LunarLayerConstruction *construction);
+
+        //update specific uniforms
+        void UpdateObjectUniform(ProjectionMatricies newMatricies, std::string id);
+        VkExtent2D swapChainExtent;
     private:
         VkDevice device;
-        VkExtent2D swapChainExtent;
         VkRenderPass renderPass;
         std::vector<VkImage> swapChainImages;
         VkPhysicalDevice physicalDevice;
@@ -127,7 +130,10 @@ namespace LunarRenderer {
         std::vector<LayerMaterial> materials;
         std::vector<std::string> matidList;
 
-        std::unordered_map<std::string, ProjectionMatricies> objectProjectionID;
+        std::map<std::string, ProjectionMatricies> objectProjectionID;
+
+        //camera projection
+        glm::mat4 cameraView;
 
     protected:
         VkDescriptorSetLayout descriptorSetLayout;

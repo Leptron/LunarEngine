@@ -32,6 +32,12 @@ namespace LunarEngine {
         manager.CreateObject(testQuad, testIndicies, "basic_pos", false, "epic");
         manager.AllocateObjects();
 
+        LunarRenderer::ProjectionMatricies matricies = {};
+        matricies.model = glm::mat4(1.0);
+        matricies.proj = glm::perspective(glm::radians(45.0f), manager.swapChainExtent.width / (float) manager.swapChainExtent.height, 0.1f, 10.0f);
+
+        manager.UpdateObjectUniform(matricies, "epic");
+
         renderer.CreateCommandBuffers();
     }
 

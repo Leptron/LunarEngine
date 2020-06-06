@@ -10,7 +10,8 @@ file(GLOB_RECURSE HEADER_FILES
 
 include_directories(${CMAKE_SOURCE_DIR}/Lib/include
 	${CMAKE_SOURCE_DIR}/LunarEngine/public
-        ${CMAKE_SOURCE_DIR}/glfw/include)
+        ${CMAKE_SOURCE_DIR}/glfw/include
+        ${CMAKE_SOURCE_DIR}/external/imgui)
 link_directories(${CMAKE_SOURCE_DIR}/lib/bin)
 
 add_executable(${PROJECT_NAME} ${HEADER_FILES} ${SOURCE_FILES})

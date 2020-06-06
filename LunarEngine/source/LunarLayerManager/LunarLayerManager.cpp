@@ -17,6 +17,10 @@ namespace LunarRenderer {
 
         //create the descriptor set layout
         createDescriptorSetLayout();
+
+        cameraView = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), 
+                                    glm::vec3(0.0f, 0.0f, 0.0f), 
+                                    glm::vec3(0.0f, 1.0f, 0.0f));
     }
 
     LayerManager::~LayerManager() {
@@ -148,5 +152,9 @@ namespace LunarRenderer {
             vkDestroyBuffer(device, layer.vertexBuffer, nullptr);
             vkFreeMemory(device, layer.vertexBufferMemory, nullptr);
         }
+    }
+
+    void LayerManager::UpdateObjectUniform(ProjectionMatricies newMatricies, std::string id) {
+        objectProjectionID[id] = newMatricies;
     }
 }
