@@ -114,8 +114,8 @@ namespace LunarRenderer {
         //update specific uniforms
         void UpdateObjectUniform(ProjectionMatricies newMatricies, std::string id);
         VkExtent2D swapChainExtent;
-    private:
         VkDevice device;
+    private:
         VkRenderPass renderPass;
         std::vector<VkImage> swapChainImages;
         VkPhysicalDevice physicalDevice;
