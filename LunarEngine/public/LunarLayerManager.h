@@ -119,8 +119,9 @@ namespace LunarRenderer {
         VkDevice device;
         VkCommandPool commandPool;
         VkQueue graphicsQueue;
-    private:
         VkRenderPass renderPass;
+
+    private:
         std::vector<VkImage> swapChainImages;
         VkPhysicalDevice physicalDevice;
         std::vector<VkDescriptorPool> descriptorPools;

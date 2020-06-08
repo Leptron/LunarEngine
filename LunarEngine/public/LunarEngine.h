@@ -8,6 +8,7 @@
 #include "LunarRenderer.h"
 #include "LunarLayerManager.h"
 #include "LunarBuffer.hpp"
+#include "LunarIMGUI.h"
 
 namespace LunarEngine {
     class LunarEngine {
@@ -20,7 +21,7 @@ namespace LunarEngine {
     private:
         LunarRenderer::LayerManager manager;
         LunarRenderer::LunarRenderer renderer;
-
+        LunarEditor::LunarEditorGUI editorGUI;
     private:
         VkDevice device;
         GLFWwindow* window;

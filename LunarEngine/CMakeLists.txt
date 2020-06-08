@@ -12,7 +12,7 @@ include_directories(${CMAKE_SOURCE_DIR}/Lib/include
                     ${CMAKE_SOURCE_DIR}/glfw/include
                     ${CMAKE_SOURCE_DIR}/external/imgui)
 
-add_library(LunarEngine STATIC ${SOURCE_FILES})
+add_library(LunarEngine STATIC ${SOURCE_FILES} "source/LunarIMGUI/LunarIMGUIInit.cpp")
 if(WIN32)
 target_link_libraries(${PROJECT_NAME} ${Vulkan_LIBRARY} ${ASSIMP_LIBRARIES} ${WINLIBS} glfw)
 else(UNIX)

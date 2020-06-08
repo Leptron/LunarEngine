@@ -28,6 +28,7 @@ namespace LunarEngine {
         // attach
         manager = LunarRenderer::LayerManager(&renderer.globConstruct());
         renderer.AttachManager(&manager);
+        editorGUI = LunarEditor::LunarEditorGUI(&manager);
 
         manager.CreateObject(testQuad, testIndicies, "basic_pos", false, "epic");
         manager.AllocateObjects();

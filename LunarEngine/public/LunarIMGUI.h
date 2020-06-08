@@ -9,6 +9,8 @@
 
 #include <imgui.h>
 
+#include <iostream>
+
 
 #include "LunarLayerManager.h"
 
@@ -38,6 +40,7 @@ namespace LunarEditor {
         VkDescriptorSetLayout descriptorSetLayout;
 	    VkDescriptorSet descriptorSet;
 
+        bool resourceAcquired = false;
         VkDevice device;
         LunarRenderer::LayerManager *manager;
 
@@ -47,6 +50,7 @@ namespace LunarEditor {
             glm::vec2 translate;
         } pushConstBlock;
 
+        LunarEditorGUI();
         LunarEditorGUI(LunarRenderer::LayerManager *manager);
         ~LunarEditorGUI();
 
@@ -64,6 +68,6 @@ namespace LunarEditor {
 			VkPipelineStageFlags srcStageMask,
 			VkPipelineStageFlags dstStageMask);
 
-        void descriptorPoolSize(VkDescriptorType type, uint32_t descriptorCount);
+        VkDescriptorPoolSize descriptorPoolSize(VkDescriptorType type, uint32_t descriptorCount);
     };
 }
