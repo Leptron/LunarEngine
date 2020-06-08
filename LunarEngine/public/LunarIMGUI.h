@@ -9,6 +9,7 @@
 
 #include <imgui.h>
 
+
 #include "LunarLayerManager.h"
 
 namespace LunarEditor {
@@ -63,6 +64,6 @@ namespace LunarEditor {
 			VkPipelineStageFlags srcStageMask,
 			VkPipelineStageFlags dstStageMask);
 
-        void descriptorPoolCreateInfo(uint32_t poolSizeCount, VkDescriptorPoolSize* pPoolSizes, uint32_t maxSets);
+        void descriptorPoolSize(VkDescriptorType type, uint32_t descriptorCount);
     };
 }

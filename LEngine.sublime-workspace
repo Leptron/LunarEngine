@@ -11,16 +11,8 @@
 			"file": "LEngine.sublime-project",
 			"settings":
 			{
-				"buffer_size": 257,
+				"buffer_size": 285,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/C/Users/Overlord/AppData/Roaming/Sublime Text 3/Packages/EasyClangComplete/docs/pc_readme.md",
-			"settings":
-			{
-				"buffer_size": 1707,
 				"line_ending": "Unix"
 			}
 		}
@@ -85,13 +77,11 @@
 	},
 	"expanded_folders":
 	[
-		"/D/code/Rust/LunarEngine/LNEngine/LunarEngine",
-		"/D/code/Rust/LunarEngine/LNEngine/LunarEngine/LunarEngine",
-		"/D/code/Rust/LunarEngine/LNEngine/LunarEngine/LunarEngine/source",
-		"/D/code/Rust/LunarEngine/LNEngine/LunarEngine/LunarEngine/source/Lunar2dPrimitives"
+		"/home/akshantlanjewar/code/LunarEngine"
 	],
 	"file_history":
 	[
+		"/C/Users/Overlord/AppData/Roaming/Sublime Text 3/Packages/EasyClangComplete/docs/pc_readme.md",
 		"/D/code/Rust/LunarEngine/LNEngine/LunarEngine/LunarEngine/source/Lunar2dPrimitives/QuadRenderer.cpp",
 		"/D/code/Rust/LunarEngine/LNEngine/LunarEngine/LunarEngine/source/LunarIMGUI/LunarIMGUI.cpp",
 		"/D/code/Rust/LunarEngine/LNEngine/LunarEngine/LEngine.sublime-project",
@@ -139,54 +129,27 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 257,
+						"buffer_size": 285,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								242,
-								242
+								39,
+								39
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/Users/Overlord/AppData/Roaming/Sublime Text 3/Packages/EasyClangComplete/docs/pc_readme.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1707,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								278,
-								278
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
 					"type": "text"
 				}
 			]

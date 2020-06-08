@@ -192,8 +192,83 @@ namespace LunarEditor {
 
         //descriptor pool
         std::vector<VkDescriptorPoolSize> poolSizes = {
-
+            descriptorPoolCreateInfo(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1);
         };
+
+        VkDescriptorPoolCreateInfo descriptorPoolInfo = {};
+        descriptorPoolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+        descriptorPoolInfo.poolSizeCount = static_cast<uint32_t>(poolSizes.size());
+        descriptorPoolInfo.pPoolSizes = poolSizes.data();
+        descriptorPoolInfo.maxSets = 2;
+        if(vkCreateDescriptorPool(device, &descriptorPoolInfo, nullptr, &descriptorPool) != VK_SUCCES) 
+            throw std::runtime_error("failed to create descriptor pool");
+
+        //descriptor set layout
+        VkDescriptorSetLayoutBinding setLayoutBindingS = {};
+        setLayoutBindingS.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+        setLayoutBindingS.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+        setLayoutBindingS.binding = 0;
+        setLayoutBindingS.descriptorCount = 1;
+
+        std::vector<VkDescriptorSetLayoutBinding> setLayoutBinding = {
+            setLayoutBindingS
+        };
+
+        VkDescriptorSetLayoutCreateInfo descriptorSetLayoutCreateInfo = {};
+        descriptorSetLayoutCreateInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+        descriptorSetLayoutCreateInfo.pBindings = setLayoutBinding.data();
+        descriptorSetLayoutCreateInfo.bindingCount = static_cast<uint32_t>(setLayoutBinding.size());
+        if(vkCreateDescriptorSetLayout(device, &descriptorLayout, nullptr, &descriptorSetLayout) != VK_SUCCESS) 
+            throw std::runtime_error("failed to create descriptor layout");
+
+        //descriptor set
+        VkDescriptorSetAllocateInfo allocInfo = {};
+        allocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+        allocInfo.descriptorPool = descriptorPool;
+        allocInfo.pSetLayouts = &descriptorSetLayout;
+        allocInfo.descriptorSetCount = 1;
+        if(vkAllocateDescriptorSets(device, &allocInfo, &descriptorSet) != VK_SUCCESS)
+            throw std::runtime_error("failed to allocate descriptor sets");
+
+        VkDescriptorImageInfo fontDescriptor = {};
+        fontDescriptor.sampler = sampler;
+        fontDescriptor.imageView = fontView;
+        fontDescriptor.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+
+        VkWriteDescriptorSet writeDescriptorSet = {};
+        writeDescriptorSet.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+        writeDescriptorSet.dstSet = descriptorSet;
+        writeDescriptorSet.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+        writeDescriptorSet.dstBinding = 0;
+        writeDescriptorSet.pBufferInfo = &fontLayout;
+        writeDescriptorSet.descriptorCount = 1;
+
+        std::vector<VkWriteDescriptorSet> writeDescriptorSets = {
+            writeDescriptorSet,
+        };
+        vkUpdateDescriptorSets(device, static_cast<uint32_t>(writeDescriptorSets.size()), writeDescriptorSets.data(), 0, nullptr);
+
+        //pipeline cache
+        VkPipelineCacheCreateInfo pipelineCacheCreateInfo = {};
+        pipelineCacheCreateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO;
+        if(vkCreatePipelineCache(device, &pipelineCacheCreateInfo, nullptr, &pipelineCache) != VK_SUCCESS)
+            throw std::runtime_error("failed to create pipeline cahce");
+
+        //pipeline layout
+        // Push constants for UI rendering parameters
+        VkPushConstantRange pushConstantRange = {};
+        pushConstantRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+        pushConstantRange.offset = 0;
+        pushConstantRange.size = sizeof(PushConstBlock);
+
+        VkPipelineLayoutCreateInfo pipelineLayoutCreateInfo = {};
+        pipelineLayoutCreateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+        pipelineLayoutCreateInfo.setLayoutCount = 1;
+        pipelineLayoutCreateInfo.pSetLayouts = &descriptorSetLayout;
+        pipelineLayoutCreateInfo.pushConstantRangeCount = 1;
+        pipelineLayoutCreateInfo.pPushConstantRanges = &pushConstantRange;
+        if(vkCreatePipelineLayout(device, &pipelineLayoutCreateInfo, nullptr, &pipelineLayout) != VK_SUCCESS)
+            throw std::runtime_error("failed to create pipeline layout");
     }
 
     void LunarEditorGUI::setImageLayout(
@@ -296,8 +371,10 @@ namespace LunarEditor {
         vkBindBufferMemory(device, buffer, bufferMemory, 0);
     }
 
-    void LunarIMGUI::descriptorPoolCreateInfo(uint32_t poolSizeCount, VkDescriptorPoolSize* pPoolSizes, uint32_t maxSets) {
-        VkDescriptorPoolCreateInfo descriptorPoolInfo = {};
-        descriptorPoolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+    void LunarEditorGUI::descriptorPoolSize(VkDescriptorType type, uint32_t descriptorCount) {
+        VkDescriptorPoolSize descriptorPoolSize {};
+        descriptorPoolSize.type = type;
+        descriptorPoolSize.descriptorCount = descriptorCount;
+        return descriptorPoolSize;
     }
 }
