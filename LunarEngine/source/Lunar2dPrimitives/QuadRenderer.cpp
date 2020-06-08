@@ -11,5 +11,6 @@ namespace Lunar2DPrimitives {
 
     void Quad::AttachLayerManager(LunarRenderer::LayerManager* Lmanager) {
         this->layerManager = Lmanager;
+        
     }
 }

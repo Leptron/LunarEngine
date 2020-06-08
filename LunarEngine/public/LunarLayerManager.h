@@ -105,6 +105,8 @@ namespace LunarRenderer {
         void CleanAllStorageBuffers();
         void CleanAllUBO();
 
+        uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
+
         //rebuilding commands
         void RebuildMaterials(VkRenderPass* rPass);
         void RecreateUBO();
@@ -115,13 +117,13 @@ namespace LunarRenderer {
         void UpdateObjectUniform(ProjectionMatricies newMatricies, std::string id);
         VkExtent2D swapChainExtent;
         VkDevice device;
+        VkCommandPool commandPool;
+        VkQueue graphicsQueue;
     private:
         VkRenderPass renderPass;
         std::vector<VkImage> swapChainImages;
         VkPhysicalDevice physicalDevice;
         std::vector<VkDescriptorPool> descriptorPools;
-        VkCommandPool commandPool;
-        VkQueue graphicsQueue;
         std::vector<VkFramebuffer> swapChainFrameBuffers;
 
         std::vector<BufferLayer> buffers;
@@ -150,7 +152,6 @@ namespace LunarRenderer {
         void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize Dsize);
 
         void createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory);
-        uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
         //per object uniforms
         void createUniformBuffers(ThreeDObject& object);
 

@@ -1,0 +1,24 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"include_autocomplete_settings": {
+		"include_locations": [
+			{
+				"path": "<external/>",
+				"ignore": []
+			},
+		]
+	},
+	"settings": {
+		"ecc_flags_sources": [
+			{
+				"file": "CMakeLists.txt",
+			}
+		],
+		"ecc_use_libclang": true
+	}
+}

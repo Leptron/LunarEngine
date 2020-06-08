@@ -122,7 +122,7 @@ namespace LunarRenderer {
         descriptorPools.clear();
     }
 
-    void LayerManager:VkDevice device;:ReAttachComponents(LunarLayerConstruction *construction) {
+    void LayerManager::ReAttachComponents(LunarLayerConstruction *construction) {
         this->device = construction->device;
         this->swapChainExtent = construction->swapChainExtent;
         this->renderPass = construction->renderPass;

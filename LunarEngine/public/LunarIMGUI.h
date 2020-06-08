@@ -48,5 +48,21 @@ namespace LunarEditor {
 
         LunarEditorGUI(LunarRenderer::LayerManager *manager);
         ~LunarEditorGUI();
+
+        void init(float width, float height);
+        void initResources(VkRenderPass renderPass, VkQueue copyQueue, const std::string& shadersPath);
+
+    private:
+        void createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory);
+        void setImageLayout(
+			VkCommandBuffer cmdbuffer,
+			VkImage image,
+			VkImageLayout oldImageLayout,
+			VkImageLayout newImageLayout,
+			VkImageSubresourceRange subresourceRange,
+			VkPipelineStageFlags srcStageMask,
+			VkPipelineStageFlags dstStageMask);
+
+        void descriptorPoolCreateInfo(uint32_t poolSizeCount, VkDescriptorPoolSize* pPoolSizes, uint32_t maxSets);
     };
 }
