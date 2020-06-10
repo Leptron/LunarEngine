@@ -5,10 +5,6 @@
 #include <string>
 #include <tuple>
 
-#include "LunarRenderer.h"
-#include "LunarLayerManager.h"
-#include "LunarBuffer.hpp"
-
 namespace LunarEngine {
     class LunarEngine {
     public:

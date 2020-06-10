@@ -10,13 +10,12 @@ file(GLOB_RECURSE HEADER_FILES
 
 include_directories(${CMAKE_SOURCE_DIR}/Lib/include
 	${CMAKE_SOURCE_DIR}/LunarEngine/public
-        ${CMAKE_SOURCE_DIR}/glfw/include
-        ${CMAKE_SOURCE_DIR}/external/imgui)
+        ${CMAKE_SOURCE_DIR}/glfw/include)
 link_directories(${CMAKE_SOURCE_DIR}/lib/bin)
 
 add_executable(${PROJECT_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 if(WIN32)
-target_link_libraries(${PROJECT_NAME} ${Vulkan_LIBRARY} ${ASSIMP_LIBRARIES} ${WINLIBS} LunarEngine glfw)
+target_link_libraries(${PROJECT_NAME} LunarEngine glfw)
 else(UNIX)
 target_link_libraries(${PROJECT_NAME} LunarEngine glfw)
 endif()
