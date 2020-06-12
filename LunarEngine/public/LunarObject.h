@@ -10,7 +10,8 @@
 namespace LunarRenderer {
 	class LunarOpenglObject {
 	public:
-		LunarOpenglObject(std::vector<float> verts, std::vector<unsigned int> indices, LunarShader* shader);
+		LunarOpenglObject();
+		LunarOpenglObject(std::vector<float> verts, std::vector<unsigned int> indices, LunarShader* shader, std::string stexture="checker");
 
 		void Draw();
 		void Clean();
@@ -18,6 +19,15 @@ namespace LunarRenderer {
 		unsigned int VBO, VAO, EBO;
 		int indexCount;
 
+		//texture
+		std::string textureLoc = "";
+		unsigned int texture;
+
 		LunarShader* shader;
+	};
+
+	struct LayerObject {
+		std::string id;
+		LunarOpenglObject object;
 	};
 }

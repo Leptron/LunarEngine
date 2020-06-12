@@ -7,12 +7,15 @@
 #include <sstream>
 #include <iostream>
 
+#include "LunarShaderGen.h"
+
 namespace LunarRenderer {
 	class LunarShader {
 	public:
 		unsigned int ID;
 
 		LunarShader(const char* vertexPath, const char* fragmentPath);
+		LunarShader(LunarUtils::LunarShaderGenerator vertexShader, LunarUtils::LunarShaderGenerator fragmentShader);
 		//use the shader
 		void use();
 		//uniform functions

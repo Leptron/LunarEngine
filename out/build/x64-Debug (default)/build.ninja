@@ -567,6 +567,15 @@ build LunarEngine\CMakeFiles\LunarEngine.dir\source\LunarRenderer\LunarShader.cp
   TARGET_COMPILE_PDB = LunarEngine\CMakeFiles\LunarEngine.dir\LunarEngine.pdb
   TARGET_PDB = LunarEngine\LunarEngine.pdb
 
+build LunarEngine\CMakeFiles\LunarEngine.dir\source\LunarUtils\LunarShaderGen.cpp.obj: CXX_COMPILER__LunarEngine_Debug ..\..\..\LunarEngine\source\LunarUtils\LunarShaderGen.cpp || cmake_object_order_depends_target_LunarEngine_Debug
+  DEFINES = -DVK_EXAMPLE_DATA_DIR=\"D:/code/LunarEngine/data/\" -D_CRT_SECURE_NO_WARNINGS
+  FLAGS = -fpermissive -DVK_USE_PLATFORM_WIN32_KHR -DNOMINMAX -D_USE_MATH_DEFINES /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++17
+  INCLUDES = -I..\..\..\external -I..\..\..\external\glm -I..\..\..\external\gli -I..\..\..\external\assimp -I..\..\..\external\imgui -I..\..\..\external\tinygltf -I..\..\..\external\glfw\include -I..\..\..\Lib\include -I..\..\..\glfw\include
+  OBJECT_DIR = LunarEngine\CMakeFiles\LunarEngine.dir
+  OBJECT_FILE_DIR = LunarEngine\CMakeFiles\LunarEngine.dir\source\LunarUtils
+  TARGET_COMPILE_PDB = LunarEngine\CMakeFiles\LunarEngine.dir\LunarEngine.pdb
+  TARGET_PDB = LunarEngine\LunarEngine.pdb
+
 build LunarEngine\CMakeFiles\LunarEngine.dir\source\glad.c.obj: C_COMPILER__LunarEngine_Debug ..\..\..\LunarEngine\source\glad.c || cmake_object_order_depends_target_LunarEngine_Debug
   DEFINES = -DVK_EXAMPLE_DATA_DIR=\"D:/code/LunarEngine/data/\" -D_CRT_SECURE_NO_WARNINGS
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
@@ -584,7 +593,7 @@ build LunarEngine\CMakeFiles\LunarEngine.dir\source\glad.c.obj: C_COMPILER__Luna
 #############################################
 # Link the static library LunarEngine\LunarEngine.lib
 
-build LunarEngine\LunarEngine.lib: CXX_STATIC_LIBRARY_LINKER__LunarEngine_Debug LunarEngine\CMakeFiles\LunarEngine.dir\source\LunarEngine\LunarEngine.cpp.obj LunarEngine\CMakeFiles\LunarEngine.dir\source\LunarRenderer\LunarLayer.cpp.obj LunarEngine\CMakeFiles\LunarEngine.dir\source\LunarRenderer\LunarObject.cpp.obj LunarEngine\CMakeFiles\LunarEngine.dir\source\LunarRenderer\LunarShader.cpp.obj LunarEngine\CMakeFiles\LunarEngine.dir\source\glad.c.obj || external\glfw\src\glfw3.lib
+build LunarEngine\LunarEngine.lib: CXX_STATIC_LIBRARY_LINKER__LunarEngine_Debug LunarEngine\CMakeFiles\LunarEngine.dir\source\LunarEngine\LunarEngine.cpp.obj LunarEngine\CMakeFiles\LunarEngine.dir\source\LunarRenderer\LunarLayer.cpp.obj LunarEngine\CMakeFiles\LunarEngine.dir\source\LunarRenderer\LunarObject.cpp.obj LunarEngine\CMakeFiles\LunarEngine.dir\source\LunarRenderer\LunarShader.cpp.obj LunarEngine\CMakeFiles\LunarEngine.dir\source\LunarUtils\LunarShaderGen.cpp.obj LunarEngine\CMakeFiles\LunarEngine.dir\source\glad.c.obj || external\glfw\src\glfw3.lib
   LANGUAGE_COMPILE_FLAGS = -fpermissive -DVK_USE_PLATFORM_WIN32_KHR -DNOMINMAX -D_USE_MATH_DEFINES /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = LunarEngine\CMakeFiles\LunarEngine.dir

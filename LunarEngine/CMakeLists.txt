@@ -10,7 +10,7 @@ file(GLOB_RECURSE HEADER_FILES
 include_directories(${CMAKE_SOURCE_DIR}/Lib/include 
                     ${CMAKE_SOURCE_DIR}/glfw/include)
 
-add_library(LunarEngine STATIC ${SOURCE_FILES})
+add_library(LunarEngine STATIC ${SOURCE_FILES} "public/LunarShaderGen.h" "source/LunarUtils/LunarShaderGen.cpp")
 if(WIN32)
 target_link_libraries(${PROJECT_NAME} glfw)
 else(UNIX)

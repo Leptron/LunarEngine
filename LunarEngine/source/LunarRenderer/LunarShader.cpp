@@ -74,6 +74,10 @@ namespace LunarRenderer {
 		glDeleteShader(fragment);
 	}
 
+	LunarShader::LunarShader(LunarUtils::LunarShaderGenerator vertexShader, LunarUtils::LunarShaderGenerator fragmentShader) {
+
+	}
+
 	void LunarShader::use() {
 		glUseProgram(ID);
 	}

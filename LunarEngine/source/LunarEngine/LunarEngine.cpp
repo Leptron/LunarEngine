@@ -37,21 +37,46 @@ namespace LunarEngine {
         //test shader
         LunarRenderer::LunarShader testShader("shaders/shader.vert", "shaders/shader.frag");
         shaders.push_back(testShader);
-    }
 
-    void LunarEngine::MainLoop() {
-        std::vector<float> vertices ({
-            0.5f,  0.5f, 0.0f,  // top right
-            0.5f, -0.5f, 0.0f,  // bottom right
-            -0.5f, -0.5f, 0.0f,  // bottom left
-            -0.5f,  0.5f, 0.0f   // top left 
+        std::vector<float> vertices({
+            0.2f,  0.2f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+             0.2f, -0.2f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+            -0.2f, -0.2f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+            -0.2f,  0.2f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
         });
-        std::vector<unsigned int> indices ({  // note that we start from 0!
+        std::vector<unsigned int> indices({  // note that we start from 0!
             0, 1, 3,  // first Triangle
             1, 2, 3   // second Triangle
         });
 
+        LunarUtils::LunarShaderGenerator vertShader;
+
+        vertShader.AddLayout("0", "vec3", "aPos");
+        vertShader.AddLayout("1", "vec3", "aColor");
+        vertShader.AddLayout("2", "vec2", "aTexCoord");
+
+        vertShader.AddOutput("ourColor", "vec3");
+        vertShader.AddOutput("TexCoord", "vec2");
+
+        vertShader.SetVertexPosition("aPos");
+        vertShader.SetVariable("ourColor", "aColor");
+        vertShader.SetVariable("TexCoord", "aTexCoord");
+
+        LunarUtils::LunarShaderGenerator fragShader;
+
+        fragShader.AddOutput("FragColor", "vec4");
+        
+        fragShader.AddInput("ourColor", "vec3");
+        fragShader.AddInput("TexCoord", "vec2");
+        fragShader.AddUniform("ourTexture", "sampler2D");
+
+        fragShader.SetVariable("FragColor", fragShader.ShaderTexture("ourTexture", "TexCoord"));
+
         LunarRenderer::LunarOpenglObject testObject(vertices, indices, &shaders[0]);
+        layers[0].addObject(testObject, "quad");
+    }
+
+    void LunarEngine::MainLoop() {
 
         while (!glfwWindowShouldClose(window)) {
             processInput();
@@ -59,13 +84,15 @@ namespace LunarEngine {
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            testObject.Draw();
+            for (auto layer : layers)
+                layer.Draw();
 
             glfwSwapBuffers(window);
             glfwPollEvents();
         }
 
-        testObject.Clean();
+        for (auto layer : layers)
+            layer.Clean();
 
         for(auto shader : shaders)
             shader.Clean();
