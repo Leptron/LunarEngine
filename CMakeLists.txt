@@ -127,3 +127,4 @@ add_subdirectory(LunarEngine)
 add_subdirectory(sandbox)
 
 FILE(COPY ${CMAKE_SOURCE_DIR}/shaders DESTINATION ${CMAKE_BINARY_DIR}/sandbox)
+FILE(COPY ${CMAKE_SOURCE_DIR}/textures DESTINATION ${CMAKE_BINARY_DIR}/sandbox)

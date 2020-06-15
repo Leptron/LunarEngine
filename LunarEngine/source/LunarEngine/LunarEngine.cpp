@@ -9,46 +9,70 @@ namespace LunarEngine {
     }
 
     void LunarEngine::InitResources() {
-        renderer.InitResources();
-        LunarRenderer::EngineRelinquish rel = renderer.RelinquishEngine();
-        this->device = rel.device;
-        this->window = rel.window;
+        width = 1280;
+        height = 720;
 
-        std::vector<LunarRenderer::Vertex> testQuad = {
-            {{-0.5f, -0.5f}, {1.0f, 0.0f, 0.0f}},
-            {{0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}},
-            {{0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}},
-            {{-0.5f, 0.5f}, {1.0f, 1.0f, 1.0f}}
-        };
+        testSpriteManager.UpdateScreenDims(width, height);
 
-        std::vector<uint32_t> testIndicies = {
-            0, 1, 2, 2, 3, 0
-        };
+        glfwInit();
 
-        // attach
-        manager = LunarRenderer::LayerManager(&renderer.globConstruct());
-        renderer.AttachManager(&manager);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-        manager.CreateObject(testQuad, testIndicies, "basic_pos", false, "epic");
-        manager.AllocateObjects();
+        //creating the window
+        window = glfwCreateWindow(width, height, "Lunar Engine", NULL, NULL);
+        if (window == NULL) {
+            glfwTerminate();
+            throw std::runtime_error("failed to create a glfw window");
+            return;
+        }
+        glfwMakeContextCurrent(window);
 
-        LunarRenderer::ProjectionMatricies matricies = {};
-        matricies.model = glm::mat4(1.0);
-        matricies.proj = glm::perspective(glm::radians(45.0f), manager.swapChainExtent.width / (float) manager.swapChainExtent.height, 0.1f, 10.0f);
+        //load glad
+        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+            throw std::runtime_error("failed to load GLAD");
 
-        manager.UpdateObjectUniform(matricies, "epic");
+        glViewport(0, 0, width, height);
+        glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-        renderer.CreateCommandBuffers();
+        testSpriteManager.InitResources();
+        testSpriteManager.CreateSprite("zhongou");
     }
 
     void LunarEngine::MainLoop() {
-        while(!glfwWindowShouldClose(window)) {
+
+        while (!glfwWindowShouldClose(window)) {
+            processInput();
+
+            glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT);
+
+            for (auto layer : layers)
+                layer.Draw();
+            
+            testSpriteManager.Draw();
+
+            glfwSwapBuffers(window);
             glfwPollEvents();
-            renderer.drawFrame();
-            manager.updateUniformBuffer();
         }
 
-        vkDeviceWaitIdle(device);
-        renderer.cleanup();
+        for (auto layer : layers)
+            layer.Clean();
+
+        for(auto shader : shaders)
+            shader.Clean();
+
+        glfwTerminate();
+    }
+
+    void LunarEngine::processInput() {
+        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+            glfwSetWindowShouldClose(window, true);
+    }
+
+    void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+        glViewport(0, 0, width, height);
+        
     }
 }

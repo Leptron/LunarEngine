@@ -1,11 +1,21 @@
-#define GLFW_INCLUDE_VULKAN
-#include <GLFW/glfw3.h>
-
 #include <vector>
 #include <string>
-#include <tuple>
+#include <stdexcept>
+#include <array>
+
+#include "../public/glad/glad.h"
+#include <GLFW/glfw3.h>
+
+#include "LuanarShader.h"
+#include "LunarObject.h"
+#include "LunarLayer.h"
+#include "LunarShaderGen.h"
+#include "LunarShaderManager.h"
+#include "LunarPrimitives/SpriteManager.h"
 
 namespace LunarEngine {
+    void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
     class LunarEngine {
     public:
         LunarEngine();
@@ -14,11 +24,19 @@ namespace LunarEngine {
         void InitResources();
         void MainLoop();
     private:
-        LunarRenderer::LayerManager manager;
-        LunarRenderer::LunarRenderer renderer;
-
-    private:
-        VkDevice device;
         GLFWwindow* window;
+        int width, height;
+
+        std::vector<LunarRenderer::LunarShader> shaders;
+        std::array<LunarRenderer::Layer, 1> layers;
+
+        //sprite manager
+        Lunar2D::SpriteManager testSpriteManager;
+
+        //shader manager
+        LunarUtils::ShaderManager shaderManager;
+    private:
+        //methods
+        void processInput();
     };
 }
