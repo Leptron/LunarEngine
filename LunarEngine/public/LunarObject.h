@@ -6,6 +6,7 @@
 #include <array>
 
 #include "LuanarShader.h"
+#include "LunarImageLoader.h"
 
 namespace LunarRenderer {
 	class LunarOpenglObject {
@@ -13,9 +14,9 @@ namespace LunarRenderer {
 		LunarOpenglObject();
 		LunarOpenglObject(std::vector<float> verts, std::vector<unsigned int> indices, LunarShader* shader, std::string stexture="checker");
 
-		void Draw();
-		void Clean();
-	private:
+		virtual void Draw();
+		virtual void Clean();
+	protected:
 		unsigned int VBO, VAO, EBO;
 		int indexCount;
 

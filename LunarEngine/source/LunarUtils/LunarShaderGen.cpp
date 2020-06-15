@@ -10,7 +10,7 @@ namespace LunarUtils {
 	}
 	
 	void LunarShaderGenerator::AddLayout(std::string layoutLocation, std::string layoutDataType, std::string layoutName) {
-		outputStream << "layout (location = " << layoutLocation << ") " << layoutDataType << " " << layoutName << ";" << std::endl;
+		outputStream << "layout (location = " << layoutLocation << ") in " << layoutDataType << " " << layoutName << ";" << std::endl;
 		layouts.push_back(layoutName);
 	}
 
@@ -27,7 +27,11 @@ namespace LunarUtils {
 	}
 
 	void LunarShaderGenerator::SetVertexPosition(std::string variable) {
-		mainStream << "gl_Position = vec4(" << variable << ", 1.0);" << std::endl;
+		mainStream << "vec4 vPosition = vec4(" << variable << ", 1.0);" << std::endl;
+	}
+
+	void LunarShaderGenerator::SetGlPosition(std::string expression) {
+		mainStream << "gl_Position = " << expression << ";" << std::endl;
 	}
 
 	void LunarShaderGenerator::SetVariable(std::string targetVariable, std::string value) {

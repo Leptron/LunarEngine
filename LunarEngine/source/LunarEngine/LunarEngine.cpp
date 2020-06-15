@@ -12,6 +12,8 @@ namespace LunarEngine {
         width = 1280;
         height = 720;
 
+        testSpriteManager.UpdateScreenDims(width, height);
+
         glfwInit();
 
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -34,46 +36,8 @@ namespace LunarEngine {
         glViewport(0, 0, width, height);
         glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-        //test shader
-        LunarRenderer::LunarShader testShader("shaders/shader.vert", "shaders/shader.frag");
-        shaders.push_back(testShader);
-
-        std::vector<float> vertices({
-            0.2f,  0.2f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-             0.2f, -0.2f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-            -0.2f, -0.2f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-            -0.2f,  0.2f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
-        });
-        std::vector<unsigned int> indices({  // note that we start from 0!
-            0, 1, 3,  // first Triangle
-            1, 2, 3   // second Triangle
-        });
-
-        LunarUtils::LunarShaderGenerator vertShader;
-
-        vertShader.AddLayout("0", "vec3", "aPos");
-        vertShader.AddLayout("1", "vec3", "aColor");
-        vertShader.AddLayout("2", "vec2", "aTexCoord");
-
-        vertShader.AddOutput("ourColor", "vec3");
-        vertShader.AddOutput("TexCoord", "vec2");
-
-        vertShader.SetVertexPosition("aPos");
-        vertShader.SetVariable("ourColor", "aColor");
-        vertShader.SetVariable("TexCoord", "aTexCoord");
-
-        LunarUtils::LunarShaderGenerator fragShader;
-
-        fragShader.AddOutput("FragColor", "vec4");
-        
-        fragShader.AddInput("ourColor", "vec3");
-        fragShader.AddInput("TexCoord", "vec2");
-        fragShader.AddUniform("ourTexture", "sampler2D");
-
-        fragShader.SetVariable("FragColor", fragShader.ShaderTexture("ourTexture", "TexCoord"));
-
-        LunarRenderer::LunarOpenglObject testObject(vertices, indices, &shaders[0]);
-        layers[0].addObject(testObject, "quad");
+        testSpriteManager.InitResources();
+        testSpriteManager.CreateSprite("zhongou");
     }
 
     void LunarEngine::MainLoop() {
@@ -86,6 +50,8 @@ namespace LunarEngine {
 
             for (auto layer : layers)
                 layer.Draw();
+            
+            testSpriteManager.Draw();
 
             glfwSwapBuffers(window);
             glfwPollEvents();
@@ -107,5 +73,6 @@ namespace LunarEngine {
 
     void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
         glViewport(0, 0, width, height);
+        
     }
 }

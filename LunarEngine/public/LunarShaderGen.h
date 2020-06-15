@@ -24,6 +24,7 @@ namespace LunarUtils {
 		void AddInput(std::string inputName, std::string inputDataType);
 
 		void SetVertexPosition(std::string variable);
+		void SetGlPosition(std::string expression);
 		void SetVariable(std::string targetVariable, std::string value);
 
 		//glsl functions

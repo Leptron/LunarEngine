@@ -1,8 +1,5 @@
 #include "../../public/LunarObject.h"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include <tinygltf/stb_image.h>
-
 namespace LunarRenderer {
 	LunarOpenglObject::LunarOpenglObject() {
 
@@ -50,17 +47,22 @@ namespace LunarRenderer {
 		if (stexture == "checker") {
 			//use checkerboard
 			std::cout << "using checkerboard" << std::endl;
-			int width, height, nrChannels;
-			unsigned char* data = stbi_load("textures/checkerboard.png", &width, &height, &nrChannels, 0);
+			LunarUtils::LunarImageLoader loader;
+			LunarUtils::ImageLoaded ldata = loader.load(textureLoc.c_str());
+			unsigned char* data = ldata.imageData;
+
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, ldata.width, ldata.height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glGenerateMipmap(GL_TEXTURE_2D);
+			
 			if (data) {
-				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, ldata.width, ldata.height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glGenerateMipmap(GL_TEXTURE_2D);
 			}
 			else {
 				std::cout << "Failed to load texture" << std::endl;
 			}
 
-			stbi_image_free(data);
+			loader.free();
 		}
 		else {
 			//use requested texture

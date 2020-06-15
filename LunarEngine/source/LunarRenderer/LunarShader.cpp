@@ -1,6 +1,10 @@
 #include "../../public/LuanarShader.h"
 
 namespace LunarRenderer {
+	LunarShader::LunarShader() {
+
+	}
+
 	LunarShader::LunarShader(const char* vertexPath, const char* fragmentPath) {
 		//retrieve fragment source from file path
 		std::string vertexCode;
@@ -74,8 +78,53 @@ namespace LunarRenderer {
 		glDeleteShader(fragment);
 	}
 
-	LunarShader::LunarShader(LunarUtils::LunarShaderGenerator vertexShader, LunarUtils::LunarShaderGenerator fragmentShader) {
+	LunarShader::LunarShader(LunarUtils::LunarShaderGenerator* vertexShader, LunarUtils::LunarShaderGenerator* fragmentShader) {
+		std::string vertexCode = vertexShader->GenShader();
+		std::string fragmentCode = fragmentShader->GenShader();
 
+		const char* vShaderCode = vertexCode.c_str();
+		const char* fShaderCode = fragmentCode.c_str();
+
+		//compile the shaders
+		unsigned int vertex, fragment;
+		int success;
+		char infoLog[512];
+
+		//vertex shader
+		vertex = glCreateShader(GL_VERTEX_SHADER);
+		glShaderSource(vertex, 1, &vShaderCode, NULL);
+		glCompileShader(vertex);
+		//print compile errors if any
+		glGetShaderiv(vertex, GL_COMPILE_STATUS, &success);
+		if (!success) {
+			glGetShaderInfoLog(vertex, 512, NULL, infoLog);
+			std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+		}
+		//fragment
+		fragment = glCreateShader(GL_FRAGMENT_SHADER);
+		glShaderSource(fragment, 1, &fShaderCode, NULL);
+		glCompileShader(fragment);
+		//print compile errors
+		glGetShaderiv(fragment, GL_COMPILE_STATUS, &success);
+		if (!success) {
+			glGetShaderInfoLog(fragment, 512, NULL, infoLog);
+			std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+		}
+
+		//shader program
+		ID = glCreateProgram();
+		glAttachShader(ID, vertex);
+		glAttachShader(ID, fragment);
+		glLinkProgram(ID);
+		//print linking errors
+		glGetProgramiv(ID, GL_LINK_STATUS, &success);
+		if (!success) {
+			glGetProgramInfoLog(ID, 512, NULL, infoLog);
+			std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+		}
+
+		glDeleteShader(vertex);
+		glDeleteShader(fragment);
 	}
 
 	void LunarShader::use() {
@@ -92,6 +141,14 @@ namespace LunarRenderer {
 
 	void LunarShader::setFloat(const std::string& name, float value) const {
 		glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+	}
+
+	void LunarShader::SetMatrix4(const char* name, const glm::mat4& matrix) {
+		glUniformMatrix4fv(glGetUniformLocation(this->ID, name), 1, false, glm::value_ptr(matrix));
+	}
+
+	void LunarShader::SetVector3f(const char* name, const glm::vec3& value) {
+		glUniform3f(glGetUniformLocation(this->ID, name), value.x, value.y, value.z);
 	}
 
 	void LunarShader::Clean() {

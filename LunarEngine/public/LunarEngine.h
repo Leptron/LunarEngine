@@ -10,6 +10,8 @@
 #include "LunarObject.h"
 #include "LunarLayer.h"
 #include "LunarShaderGen.h"
+#include "LunarShaderManager.h"
+#include "LunarPrimitives/SpriteManager.h"
 
 namespace LunarEngine {
     void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -27,6 +29,12 @@ namespace LunarEngine {
 
         std::vector<LunarRenderer::LunarShader> shaders;
         std::array<LunarRenderer::Layer, 1> layers;
+
+        //sprite manager
+        Lunar2D::SpriteManager testSpriteManager;
+
+        //shader manager
+        LunarUtils::ShaderManager shaderManager;
     private:
         //methods
         void processInput();
