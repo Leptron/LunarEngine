@@ -29,18 +29,27 @@ namespace LunarEngine {
         }
         glfwMakeContextCurrent(window);
 
+        LunarLogger::Logger::getInstance()->log("Created Opengl Window", "Engine", "MAGENTA");
+
         //load glad
         if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
             throw std::runtime_error("failed to load GLAD");
 
         glViewport(0, 0, width, height);
         glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+        LunarLogger::Logger::getInstance()->log("Created Opengl Instance", "Engine", "MAGENTA");
 
         testSpriteManager.InitResources();
         testSpriteManager.CreateSprite("zhongou");
     }
 
     void LunarEngine::MainLoop() {
+        LunarLogger::Logger::getInstance()->log("Created Opengl Rendering Loop", "Engine", "MAGENTA");
+
+        //fps counting
+        int frames = 0;
+        double t, t0, fps;
+        t0 = glfwGetTime();
 
         while (!glfwWindowShouldClose(window)) {
             processInput();
@@ -53,6 +62,20 @@ namespace LunarEngine {
             
             testSpriteManager.Draw();
 
+            t = glfwGetTime();
+            if ((t - t0) > 1.0 || frames == 0) {
+                fps = (double)frames / (t - t0);
+                
+                std::stringstream messageStream;
+                messageStream << "Lunar Engine fps " << fps;
+                LunarLogger::Logger::getInstance()->log(messageStream.str(), "Performance", "green");
+
+                t0 = t;
+                frames = 0;
+            }
+
+            frames++;
+
             glfwSwapBuffers(window);
             glfwPollEvents();
         }
@@ -63,6 +86,7 @@ namespace LunarEngine {
         for(auto shader : shaders)
             shader.Clean();
 
+        LunarLogger::Logger::getInstance()->log("Destroyed all resources", "Engine", "MAGENTA");
         glfwTerminate();
     }
 
@@ -72,7 +96,10 @@ namespace LunarEngine {
     }
 
     void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+        std::stringstream messageStream;
+        messageStream << "Opengl Viewport resized to " << width << " by " << height;
+
+        LunarLogger::Logger::getInstance()->log(messageStream.str(), "Engine", "MAGENTA");
         glViewport(0, 0, width, height);
-        
     }
 }

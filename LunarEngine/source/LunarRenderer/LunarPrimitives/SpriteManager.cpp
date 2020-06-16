@@ -9,6 +9,7 @@ namespace Lunar2D {
 	}
 
 	void SpriteManager::InitResources() {
+		LunarLogger::Logger::getInstance()->log("Created Sprite Manager Instance", "Sprite Manager", "red");
 		LunarUtils::LunarShaderGenerator vertShader;
 
 		vertShader.AddLayout("0", "vec4", "vertex");
@@ -42,7 +43,6 @@ namespace Lunar2D {
 		shader.use();
 		shader.SetMatrix4("projection", projection);
 		shader.SetMatrix4("view", view);
-		std::cout << glGetError() << std::endl;
 	}
 
 	void SpriteManager::UpdateScreenDims(int width, int height) {
@@ -60,6 +60,8 @@ namespace Lunar2D {
 
 		auto n_tuple = std::make_tuple(id, n_Sprite);
 		sprites.push_back(n_tuple);
+
+		LunarLogger::Logger::getInstance()->log("Created Sprite with id of " + id, "Sprite Manager", "red");
 	}
 
 	void SpriteManager::Draw() {
