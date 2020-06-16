@@ -2,6 +2,7 @@
 #include "SpriteRenderer.h"
 #include "../LunarShaderGen.h"
 #include "../LuanarShader.h"
+#include "../LunarLogger.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

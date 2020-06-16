@@ -27,7 +27,7 @@ namespace Lunar2D {
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 
-		position = glm::vec2(-30.0f, 300.0f);
+		position = glm::vec2(50.0f, 330.0f);
 		size = glm::vec2(100.0f, 100.0f);
 		rotate = 0.0f;
 		color = glm::vec3(0.0f, 1.0f, 0.0f);

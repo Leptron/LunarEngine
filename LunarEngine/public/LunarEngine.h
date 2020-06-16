@@ -2,6 +2,7 @@
 #include <string>
 #include <stdexcept>
 #include <array>
+#include <sstream>
 
 #include "../public/glad/glad.h"
 #include <GLFW/glfw3.h>
@@ -12,6 +13,7 @@
 #include "LunarShaderGen.h"
 #include "LunarShaderManager.h"
 #include "LunarPrimitives/SpriteManager.h"
+#include "LunarLogger.h"
 
 namespace LunarEngine {
     void framebuffer_size_callback(GLFWwindow* window, int width, int height);

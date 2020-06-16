@@ -15,7 +15,7 @@ link_directories(${CMAKE_SOURCE_DIR}/lib/bin)
 
 add_executable(${PROJECT_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 if(WIN32)
-target_link_libraries(${PROJECT_NAME} LunarEngine glfw)
+target_link_libraries(${PROJECT_NAME} LunarEngine glfw -mwindows)
 else(UNIX)
 target_link_libraries(${PROJECT_NAME} LunarEngine glfw)
 endif()
