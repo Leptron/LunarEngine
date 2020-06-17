@@ -18,8 +18,9 @@ namespace Lunar2D {
 		vertShader.AddUniform("model", "mat4");
 		vertShader.AddUniform("view", "mat4");
 		vertShader.AddUniform("projection", "mat4");
+		vertShader.AddUniform("texCoordShift", "vec2");
 
-		vertShader.SetVariable("TexCoords", "vertex.zw");
+		vertShader.SetVariable("TexCoords", "vertex.zw + texCoordShift");
 		
 		vertShader.SetGlPosition("projection * model * vec4(vertex.xy, 0.0, 1.0)");
 

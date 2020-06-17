@@ -5,21 +5,28 @@ namespace Lunar2D {
 		model = glm::mat4(1.0f);
 
 		float vertices[] = {
-			// pos      // tex
-			0.0f, 1.0f, 0.0f, 1.0f,
-			1.0f, 0.0f, 1.0f, 0.0f,
-			0.0f, 0.0f, 0.0f, 0.0f,
-
-			0.0f, 1.0f, 0.0f, 1.0f,
-			1.0f, 1.0f, 1.0f, 1.0f,
-			1.0f, 0.0f, 1.0f, 0.0f
+			0.5f,  0.5f,   1.0f, 1.0f, // top right
+			0.5f, -0.5f,   1.0f, 0.0f, // bottom right
+			-0.5f, -0.5f,  0.0f, 0.0f, // bottom left (Index 0)
+			-0.5f,  0.5f,  0.0f, 1.0f  // top left
 		};
 
-		glGenVertexArrays(1, &this->VAO);
+		unsigned int indices[] = {
+			0, 1, 3, // first triangle
+			1, 2, 3  // second triangle
+		};
+
+		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
+		glGenBuffers(1, &EBO);
+
+		glBindVertexArray(VAO);
 
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 		glBindVertexArray(this->VAO);
 		glEnableVertexAttribArray(0);
@@ -27,10 +34,10 @@ namespace Lunar2D {
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 
-		position = glm::vec2(50.0f, 330.0f);
-		size = glm::vec2(100.0f, 100.0f);
+		position = glm::vec2(500.0f, 300.0f);
+		size = glm::vec2(300.0f, 300.0f);
 		rotate = 0.0f;
-		color = glm::vec3(0.0f, 1.0f, 0.0f);
+		color = glm::vec3(1.0f);
 	}
 
 	void Sprite::PassShader(LunarRenderer::LunarShader* spriteShader) {
@@ -58,8 +65,8 @@ namespace Lunar2D {
 
 		this->spriteTexture.Use();
 
-		glBindVertexArray(this->VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 	}
 

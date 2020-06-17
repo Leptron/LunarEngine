@@ -14,6 +14,7 @@
 #include "LunarShaderManager.h"
 #include "LunarPrimitives/SpriteManager.h"
 #include "LunarLogger.h"
+#include "LunarPrimitives/SpriteSheetRenderer.h"
 
 namespace LunarEngine {
     void framebuffer_size_callback(GLFWwindow* window, int width, int height);

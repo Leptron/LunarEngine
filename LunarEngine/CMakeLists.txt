@@ -10,7 +10,7 @@ file(GLOB_RECURSE HEADER_FILES
 include_directories(${CMAKE_SOURCE_DIR}/Lib/include 
                     ${CMAKE_SOURCE_DIR}/glfw/include)
 
-add_library(LunarEngine STATIC ${SOURCE_FILES} "public/LunarShaderGen.h" "source/LunarUtils/LunarShaderGen.cpp" "public/LunarShaderManager.h" "source/LunarUtils/LunarShaderManager.cpp" "public/LunarPrimitives/SpriteRenderer.h"  "source/LunarRenderer/LunarPrimitives/SpriteRenderer.cpp" "public/LunarPrimitives/SpriteManager.h" "source/LunarRenderer/LunarPrimitives/SpriteManager.cpp" "public/LunarPrimitives/LunarTexture.h" "source/LunarRenderer/LunarPrimitives/LunarTexture.cpp" "source/LunarUtils/LunarUtils.cpp")
+add_library(LunarEngine STATIC ${SOURCE_FILES} "public/LunarShaderGen.h" "source/LunarUtils/LunarShaderGen.cpp" "public/LunarShaderManager.h" "source/LunarUtils/LunarShaderManager.cpp" "public/LunarPrimitives/SpriteRenderer.h"  "source/LunarRenderer/LunarPrimitives/SpriteRenderer.cpp" "public/LunarPrimitives/SpriteManager.h" "source/LunarRenderer/LunarPrimitives/SpriteManager.cpp" "public/LunarPrimitives/LunarTexture.h" "source/LunarRenderer/LunarPrimitives/LunarTexture.cpp" "source/LunarUtils/LunarUtils.cpp" "public/LunarPrimitives/SpriteSheetRenderer.h" "source/LunarRenderer/LunarPrimitives/SpriteSheetRenderer.cpp")
 if(WIN32)
 target_link_libraries(${PROJECT_NAME} glfw -mwindows)
 else(UNIX)
