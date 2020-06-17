@@ -1,5 +1,7 @@
 #pragma once
 #include "SpriteRenderer.h"
+#include "SpriteSheetRenderer.h"
+
 #include "../LunarShaderGen.h"
 #include "../LuanarShader.h"
 #include "../LunarLogger.h"
@@ -20,7 +22,9 @@ namespace Lunar2D {
 
 		void InitResources();
 		void UpdateScreenDims(int width, int height);
+
 		void CreateSprite(std::string id, std::string texture = "empty"); // add options
+		void CreateTiledSprite(std::string id, std::string texture = "empty", int xDim = 2, int yDim = 2);
 
 		void Draw();
 	private:
@@ -35,6 +39,7 @@ namespace Lunar2D {
 
 		//sprite list
 		std::vector<std::tuple<std::string, Sprite>> sprites;
+		std::vector<std::tuple<std::string, SpriteSheetRenderer>> spriteSheetSprites;
 		//shader
 		LunarRenderer::LunarShader shader;
 	};

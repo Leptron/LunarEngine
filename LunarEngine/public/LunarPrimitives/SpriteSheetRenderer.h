@@ -20,7 +20,7 @@ namespace Lunar2D {
 		void PassShader(LunarRenderer::LunarShader* spriteShader);
 
 		void UseSprite(int index);
-		void Draw();
+		void Draw(glm::mat4 projection, glm::mat4 view);
 
 	private:
 		//model stuff

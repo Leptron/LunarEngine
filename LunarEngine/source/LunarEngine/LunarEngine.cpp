@@ -41,6 +41,7 @@ namespace LunarEngine {
 
         testSpriteManager.InitResources();
         testSpriteManager.CreateSprite("zhongou");
+        testSpriteManager.CreateTiledSprite("lol");
     }
 
     void LunarEngine::MainLoop() {
