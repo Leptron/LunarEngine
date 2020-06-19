@@ -60,18 +60,18 @@ namespace LunarEngine {
         while (!glfwWindowShouldClose(window)) {
             processInput();
 
+            float now = glfwGetTime();
+            deltaTime = now - prevTime;
+            prevTime = now;
+            _animationManager.Update(deltaTime);
+
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
             for (auto layer : layers)
                 layer.Draw();
-            
-            testSpriteManager.Draw();
 
-            float now = glfwGetTime();
-            deltaTime = now - prevTime;
-            prevTime = now;
-            _animationManager.Update(deltaTime);
+            testSpriteManager.Draw();
 
             glfwSwapBuffers(window);
             glfwPollEvents();
