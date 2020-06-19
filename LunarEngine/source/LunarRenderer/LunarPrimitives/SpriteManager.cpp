@@ -18,8 +18,9 @@ namespace Lunar2D {
 		vertShader.AddUniform("model", "mat4");
 		vertShader.AddUniform("view", "mat4");
 		vertShader.AddUniform("projection", "mat4");
+		vertShader.AddUniform("texCoordShift", "vec2");
 
-		vertShader.SetVariable("TexCoords", "vertex.zw");
+		vertShader.SetVariable("TexCoords", "vertex.zw + texCoordShift");
 		
 		vertShader.SetGlPosition("projection * model * vec4(vertex.xy, 0.0, 1.0)");
 
@@ -64,8 +65,36 @@ namespace Lunar2D {
 		LunarLogger::Logger::getInstance()->log("Created Sprite with id of " + id, "Sprite Manager", "red");
 	}
 
+	void SpriteManager::CreateTiledSprite(std::string id, std::string texture, int xDim, int yDim) {
+		SpriteSheetRenderer n_Sprite;
+		
+		n_Sprite.SpriteDims(xDim, yDim);
+		n_Sprite.PassShader(&shader);
+		n_Sprite.InitResources(texture);
+
+		auto n_tupe = std::make_tuple(id, n_Sprite);
+		spriteSheetSprites.push_back(n_tupe);
+
+		LunarLogger::Logger::getInstance()->log("Created Tiled Sprite with id of " + id, "Sprite Manager", "red");
+	}
+
+	void SpriteManager::UpdateTiledTile(std::string id, int index) {
+		for (auto sprite : spriteSheetSprites) {
+			auto _id = std::get<0>(sprite);
+			if (id == _id) {
+				auto _sprite = std::get<1>(sprite);
+				_sprite.UseSprite(index);
+			}
+		}
+	}
+
 	void SpriteManager::Draw() {
 		for (auto sprite : sprites) {
+			auto n_sprite = std::get<1>(sprite);
+			n_sprite.Draw(projection, view);
+		}
+
+		for (auto sprite : spriteSheetSprites) {
 			auto n_sprite = std::get<1>(sprite);
 			n_sprite.Draw(projection, view);
 		}

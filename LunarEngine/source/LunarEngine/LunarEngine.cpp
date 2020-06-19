@@ -41,40 +41,37 @@ namespace LunarEngine {
 
         testSpriteManager.InitResources();
         testSpriteManager.CreateSprite("zhongou");
+        testSpriteManager.CreateTiledSprite("lol");
+
+        //setup animation manager
+        _animationManager.PassManager(&testSpriteManager);
+        
+        //test animation
+        std::vector<int> frames = { 0, 1, 2, 3 };
+        _animationManager.CreateAnimation("testAnimation", "lol", frames, 10);
+        _animationManager.PlayAnimation("testAnimation");
     }
 
     void LunarEngine::MainLoop() {
         LunarLogger::Logger::getInstance()->log("Created Opengl Rendering Loop", "Engine", "MAGENTA");
 
-        //fps counting
-        int frames = 0;
-        double t, t0, fps;
-        t0 = glfwGetTime();
+        prevTime = glfwGetTime();
 
         while (!glfwWindowShouldClose(window)) {
             processInput();
+
+            float now = glfwGetTime();
+            deltaTime = now - prevTime;
+            prevTime = now;
+            _animationManager.Update(deltaTime);
 
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
             for (auto layer : layers)
                 layer.Draw();
-            
+
             testSpriteManager.Draw();
-
-            t = glfwGetTime();
-            if ((t - t0) > 1.0 || frames == 0) {
-                fps = (double)frames / (t - t0);
-                
-                std::stringstream messageStream;
-                messageStream << "Lunar Engine fps " << fps;
-                LunarLogger::Logger::getInstance()->log(messageStream.str(), "Performance", "green");
-
-                t0 = t;
-                frames = 0;
-            }
-
-            frames++;
 
             glfwSwapBuffers(window);
             glfwPollEvents();
