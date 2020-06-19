@@ -15,7 +15,7 @@ namespace Lunar2D {
 
 	void SpriteSheetRenderer::InitResources(std::string spriteSheet) {
 		model = glm::mat4(1.0f);
-		baseIndex = getUVBox(2);
+		baseIndex = getUVBox(0);
 
 		float vertices[] = {
 			0.5f,  0.5f,   baseIndex.x + baseIndex.z, baseIndex.y + baseIndex.w, // bottom right

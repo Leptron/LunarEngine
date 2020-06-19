@@ -15,6 +15,7 @@
 #include "LunarPrimitives/SpriteManager.h"
 #include "LunarLogger.h"
 #include "LunarPrimitives/SpriteSheetRenderer.h"
+#include "LunarManager/LunarAnimationManager.h"
 
 namespace LunarEngine {
     void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -38,6 +39,13 @@ namespace LunarEngine {
 
         //shader manager
         LunarUtils::ShaderManager shaderManager;
+
+        //anim manager
+        LunarAnimation::LunarSpriteAnimationManager _animationManager;
+
+        //time
+        float prevTime;
+        float deltaTime;
     private:
         //methods
         void processInput();

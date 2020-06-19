@@ -78,6 +78,16 @@ namespace Lunar2D {
 		LunarLogger::Logger::getInstance()->log("Created Tiled Sprite with id of " + id, "Sprite Manager", "red");
 	}
 
+	void SpriteManager::UpdateTiledTile(std::string id, int index) {
+		for (auto sprite : spriteSheetSprites) {
+			auto _id = std::get<0>(sprite);
+			if (id == _id) {
+				auto _sprite = std::get<1>(sprite);
+				_sprite.UseSprite(index);
+			}
+		}
+	}
+
 	void SpriteManager::Draw() {
 		for (auto sprite : sprites) {
 			auto n_sprite = std::get<1>(sprite);

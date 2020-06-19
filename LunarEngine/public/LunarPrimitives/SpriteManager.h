@@ -21,7 +21,9 @@ namespace Lunar2D {
 		~SpriteManager();
 
 		void InitResources();
+
 		void UpdateScreenDims(int width, int height);
+		void UpdateTiledTile(std::string id, int index);
 
 		void CreateSprite(std::string id, std::string texture = "empty"); // add options
 		void CreateTiledSprite(std::string id, std::string texture = "empty", int xDim = 2, int yDim = 2);
