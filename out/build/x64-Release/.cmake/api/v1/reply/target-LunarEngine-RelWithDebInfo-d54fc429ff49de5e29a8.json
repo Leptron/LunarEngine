@@ -1,0 +1,442 @@
+{
+	"archive" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "/machine:x64",
+				"role" : "flags"
+			}
+		]
+	},
+	"artifacts" : 
+	[
+		{
+			"path" : "LunarEngine/LunarEngine.lib"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_link_libraries",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"LunarEngine/CMakeLists.txt",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 13,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 15,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 11,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 12,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 13,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 14,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 15,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 16,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 17,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 10,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-fpermissive -DVK_USE_PLATFORM_WIN32_KHR -DNOMINMAX -D_USE_MATH_DEFINES /EHsc /MD /Zi /Ox /Ob1 /DNDEBUG  "
+				},
+				{
+					"fragment" : "-std:c++17"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"define" : "VK_EXAMPLE_DATA_DIR=\"D:/code/LunarEngine/data/\""
+				},
+				{
+					"define" : "_CRT_SECURE_NO_WARNINGS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 4,
+					"path" : "D:/code/LunarEngine/external"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "D:/code/LunarEngine/external/glm"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "D:/code/LunarEngine/external/gli"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "D:/code/LunarEngine/external/assimp"
+				},
+				{
+					"backtrace" : 8,
+					"path" : "D:/code/LunarEngine/external/imgui"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "D:/code/LunarEngine/external/tinygltf"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "D:/code/LunarEngine/external/glfw/include"
+				},
+				{
+					"backtrace" : 11,
+					"path" : "D:/code/LunarEngine/Lib/include"
+				},
+				{
+					"backtrace" : 11,
+					"path" : "D:/code/LunarEngine/glfw/include"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13
+			]
+		},
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /MD /Zi /O2 /Ob1 /DNDEBUG  "
+				}
+			],
+			"defines" : 
+			[
+				{
+					"define" : "VK_EXAMPLE_DATA_DIR=\"D:/code/LunarEngine/data/\""
+				},
+				{
+					"define" : "_CRT_SECURE_NO_WARNINGS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 4,
+					"path" : "D:/code/LunarEngine/external"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "D:/code/LunarEngine/external/glm"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "D:/code/LunarEngine/external/gli"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "D:/code/LunarEngine/external/assimp"
+				},
+				{
+					"backtrace" : 8,
+					"path" : "D:/code/LunarEngine/external/imgui"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "D:/code/LunarEngine/external/tinygltf"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "D:/code/LunarEngine/external/glfw/include"
+				},
+				{
+					"backtrace" : 11,
+					"path" : "D:/code/LunarEngine/Lib/include"
+				},
+				{
+					"backtrace" : 11,
+					"path" : "D:/code/LunarEngine/glfw/include"
+				}
+			],
+			"language" : "C",
+			"sourceIndexes" : 
+			[
+				14
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "glfw::@ca12bac854c2ac6b2230"
+		}
+	],
+	"id" : "LunarEngine::@42630e7590b9e7683b8d",
+	"name" : "LunarEngine",
+	"nameOnDisk" : "LunarEngine.lib",
+	"paths" : 
+	{
+		"build" : "LunarEngine",
+		"source" : "LunarEngine"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "LunarEngine/source/LunarBatching/StaticSquareBatch.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "LunarEngine/source/LunarEngine/LunarEngine.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "LunarEngine/source/LunarManager/LunarAnimationManager.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "LunarEngine/source/LunarRenderer/LunarLayer.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "LunarEngine/source/LunarRenderer/LunarObject.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "LunarEngine/source/LunarRenderer/LunarPrimitives/LunarTexture.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "LunarEngine/source/LunarRenderer/LunarPrimitives/SpriteManager.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "LunarEngine/source/LunarRenderer/LunarPrimitives/SpriteRenderer.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "LunarEngine/source/LunarRenderer/LunarPrimitives/SpriteSheetRenderer.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "LunarEngine/source/LunarRenderer/LunarShader.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "LunarEngine/source/LunarUtils/LunarLogger.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "LunarEngine/source/LunarUtils/LunarShaderGen.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "LunarEngine/source/LunarUtils/LunarShaderManager.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "LunarEngine/source/LunarUtils/LunarUtils.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "LunarEngine/source/glad.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "LunarEngine/public/LunarShaderGen.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "LunarEngine/public/LunarShaderManager.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "LunarEngine/public/LunarPrimitives/SpriteRenderer.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "LunarEngine/public/LunarPrimitives/SpriteManager.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "LunarEngine/public/LunarPrimitives/LunarTexture.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "LunarEngine/public/LunarPrimitives/SpriteSheetRenderer.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "LunarEngine/public/LunarManager/LunarAnimationManager.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "LunarEngine/public/LunarManager/LunarSpriteBatchManager.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "LunarEngine/public/LunarManager/LunarCameraManager.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "LunarEngine/public/LunarBatching/StaticSquareBatch.h",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

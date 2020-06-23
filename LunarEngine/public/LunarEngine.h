@@ -16,6 +16,7 @@
 #include "LunarLogger.h"
 #include "LunarPrimitives/SpriteSheetRenderer.h"
 #include "LunarManager/LunarAnimationManager.h"
+#include "LunarBatching/StaticSquareBatch.h"
 
 namespace LunarEngine {
     void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -42,6 +43,9 @@ namespace LunarEngine {
 
         //anim manager
         LunarAnimation::LunarSpriteAnimationManager _animationManager;
+
+        //test batching
+        LunarBatching::StaticSquareBatch _testBatch;
 
         //time
         float prevTime;
