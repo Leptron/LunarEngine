@@ -1,5 +1,5 @@
 #include "../../../public/LunarPrimitives/SpriteSheetRenderer.h"
-#include "..\..\..\public\LunarPrimitives\SpriteSheetRenderer.h"
+
 
 namespace Lunar2D {
 	SpriteSheetRenderer::SpriteSheetRenderer() {

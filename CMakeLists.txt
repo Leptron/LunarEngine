@@ -74,8 +74,6 @@ ELSEIF(USE_WAYLAND_WSI)
 			COMMAND ${WAYLAND_SCANNER} private-code ${protocol_dir}/stable/xdg-shell/xdg-shell.xml ${CMAKE_BINARY_DIR}/xdg-shell-protocol.c)
 	include_directories(${CMAKE_BINARY_DIR})
 ELSE(USE_D2D_WSI)
-	find_package(XCB REQUIRED)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DVK_USE_PLATFORM_XCB_KHR")
 ENDIF(USE_D2D_WSI)
 	# Todo : android?
 ENDIF(WIN32)
