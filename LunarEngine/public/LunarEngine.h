@@ -7,6 +7,9 @@
 #include "../public/glad/glad.h"
 #include <GLFW/glfw3.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 #include "LuanarShader.h"
 #include "LunarObject.h"
 #include "LunarLayer.h"
@@ -28,9 +31,12 @@ namespace LunarEngine {
 
         void InitResources();
         void MainLoop();
+        
+        //vars
+        static int width, height;
+        static bool dimsChanged;
     private:
         GLFWwindow* window;
-        int width, height;
 
         std::vector<LunarRenderer::LunarShader> shaders;
         std::array<LunarRenderer::Layer, 1> layers;
@@ -50,6 +56,9 @@ namespace LunarEngine {
         //time
         float prevTime;
         float deltaTime;
+        
+        //ortho
+        glm::mat4 orthoProjection;
     private:
         //methods
         void processInput();

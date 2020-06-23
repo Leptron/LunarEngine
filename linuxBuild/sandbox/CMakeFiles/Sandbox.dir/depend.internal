@@ -4,6 +4,7 @@
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o
  ../LunarEngine/public/KHR/khrplatform.h
  ../LunarEngine/public/LuanarShader.h
+ ../LunarEngine/public/LunarBatching/StaticSquareBatch.h
  ../LunarEngine/public/LunarEngine.h
  ../LunarEngine/public/LunarImageLoader.h
  ../LunarEngine/public/LunarLayer.h
@@ -94,8 +95,16 @@ sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o
  ../external/glm/glm/gtc/quaternion.hpp
  ../external/glm/glm/gtc/quaternion.inl
  ../external/glm/glm/gtc/quaternion_simd.inl
+ ../external/glm/glm/gtc/type_precision.hpp
+ ../external/glm/glm/gtc/type_precision.inl
  ../external/glm/glm/gtc/type_ptr.hpp
  ../external/glm/glm/gtc/type_ptr.inl
+ ../external/glm/glm/gtc/vec1.hpp
+ ../external/glm/glm/gtc/vec1.inl
+ ../external/glm/glm/gtx/dual_quaternion.hpp
+ ../external/glm/glm/gtx/dual_quaternion.inl
+ ../external/glm/glm/gtx/string_cast.hpp
+ ../external/glm/glm/gtx/string_cast.inl
  ../external/glm/glm/integer.hpp
  ../external/glm/glm/mat2x2.hpp
  ../external/glm/glm/mat2x3.hpp

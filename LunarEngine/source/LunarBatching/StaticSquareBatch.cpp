@@ -68,6 +68,10 @@ namespace LunarBatching {
 			objects.push_back(_batch);
 		}
 	}
+	
+	void StaticSquareBatch::UpdateOrtho(glm::mat4 orthoProjection) {
+		this->orthoProjection = orthoProjection;
+	}
 
 	void StaticSquareBatch::Batch() {
 		instantiated = true;

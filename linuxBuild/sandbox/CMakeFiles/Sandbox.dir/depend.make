@@ -3,6 +3,7 @@
 
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../LunarEngine/public/KHR/khrplatform.h
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../LunarEngine/public/LuanarShader.h
+sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../LunarEngine/public/LunarBatching/StaticSquareBatch.h
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../LunarEngine/public/LunarEngine.h
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../LunarEngine/public/LunarImageLoader.h
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../LunarEngine/public/LunarLayer.h
@@ -93,8 +94,16 @@ sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/gtc/matrix
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/gtc/quaternion.hpp
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/gtc/quaternion.inl
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/gtc/quaternion_simd.inl
+sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/gtc/type_precision.hpp
+sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/gtc/type_precision.inl
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/gtc/type_ptr.hpp
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/gtc/type_ptr.inl
+sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/gtc/vec1.hpp
+sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/gtc/vec1.inl
+sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/gtx/dual_quaternion.hpp
+sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/gtx/dual_quaternion.inl
+sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/gtx/string_cast.hpp
+sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/gtx/string_cast.inl
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/integer.hpp
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/mat2x2.hpp
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../external/glm/glm/mat2x3.hpp

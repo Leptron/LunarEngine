@@ -191,6 +191,33 @@ LunarEngine/fast:
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild && $(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/build
 .PHONY : LunarEngine/fast
 
+source/LunarBatching/StaticSquareBatch.o: source/LunarBatching/StaticSquareBatch.cpp.o
+
+.PHONY : source/LunarBatching/StaticSquareBatch.o
+
+# target to build an object file
+source/LunarBatching/StaticSquareBatch.cpp.o:
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild && $(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarBatching/StaticSquareBatch.cpp.o
+.PHONY : source/LunarBatching/StaticSquareBatch.cpp.o
+
+source/LunarBatching/StaticSquareBatch.i: source/LunarBatching/StaticSquareBatch.cpp.i
+
+.PHONY : source/LunarBatching/StaticSquareBatch.i
+
+# target to preprocess a source file
+source/LunarBatching/StaticSquareBatch.cpp.i:
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild && $(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarBatching/StaticSquareBatch.cpp.i
+.PHONY : source/LunarBatching/StaticSquareBatch.cpp.i
+
+source/LunarBatching/StaticSquareBatch.s: source/LunarBatching/StaticSquareBatch.cpp.s
+
+.PHONY : source/LunarBatching/StaticSquareBatch.s
+
+# target to generate assembly for a file
+source/LunarBatching/StaticSquareBatch.cpp.s:
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild && $(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarBatching/StaticSquareBatch.cpp.s
+.PHONY : source/LunarBatching/StaticSquareBatch.cpp.s
+
 source/LunarEngine/LunarEngine.o: source/LunarEngine/LunarEngine.cpp.o
 
 .PHONY : source/LunarEngine/LunarEngine.o
@@ -582,6 +609,9 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... LunarEngine"
+	@echo "... source/LunarBatching/StaticSquareBatch.o"
+	@echo "... source/LunarBatching/StaticSquareBatch.i"
+	@echo "... source/LunarBatching/StaticSquareBatch.s"
 	@echo "... source/LunarEngine/LunarEngine.o"
 	@echo "... source/LunarEngine/LunarEngine.i"
 	@echo "... source/LunarEngine/LunarEngine.s"

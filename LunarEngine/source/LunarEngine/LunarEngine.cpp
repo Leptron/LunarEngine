@@ -7,11 +7,13 @@ namespace LunarEngine {
     LunarEngine::~LunarEngine() {
 
     }
+    
+    int LunarEngine::width = 1280;
+    int LunarEngine::height = 720;
+    bool LunarEngine::dimsChanged = false;
 
     void LunarEngine::InitResources() {
-        width = 1280;
-        height = 720;
-
+		orthoProjection = glm::ortho(0.0f, static_cast<float>(width), static_cast<float>(height), 0.0f, -1.0f, 1.0f);
         testSpriteManager.UpdateScreenDims(width, height);
 
         glfwInit();
@@ -51,6 +53,7 @@ namespace LunarEngine {
         _animationManager.PlayAnimation("testAnimation");
 
         _testBatch.CreateQuad(glm::vec2(200.0f, 200.0f), glm::vec2(100.0f, 100.0f), 0.0f);
+        _testBatch.UpdateOrtho(orthoProjection);
         _testBatch.Batch();
     }
 
@@ -61,6 +64,14 @@ namespace LunarEngine {
 
         while (!glfwWindowShouldClose(window)) {
             processInput();
+            
+            if(dimsChanged) {
+            	orthoProjection = glm::ortho(0.0f, static_cast<float>(width), static_cast<float>(height), 0.0f, -1.0f, 1.0f);
+            	_testBatch.UpdateOrtho(orthoProjection);
+            	testSpriteManager.UpdateScreenDims(width, height);
+            	
+            	dimsChanged = false;
+            }
 
             float now = glfwGetTime();
             deltaTime = now - prevTime;
@@ -100,5 +111,9 @@ namespace LunarEngine {
 
         LunarLogger::Logger::getInstance()->log(messageStream.str(), "Engine", "MAGENTA");
         glViewport(0, 0, width, height);
+        
+        LunarEngine::width = width;
+        LunarEngine::height = height;
+        LunarEngine::dimsChanged = true;
     }
 }

@@ -25,6 +25,7 @@ namespace LunarBatching {
 		~StaticSquareBatch();
 
 		void CreateQuad(glm::vec2 position, glm::vec2 size, float rot);
+		void UpdateOrtho(glm::mat4 orthoProjection);
 		void Batch();
 	private:
 		const int INDEX_INCREMENT = 4;
@@ -35,6 +36,9 @@ namespace LunarBatching {
 
 		unsigned int VBO, VAO, EBO;
 		int indexCount;
+		
+		//projection
+		glm::mat4 orthoProjection;
 
 		//shader
 		LunarRenderer::LunarShader shader;
