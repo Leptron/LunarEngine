@@ -52,7 +52,8 @@ namespace LunarEngine {
         _animationManager.CreateAnimation("testAnimation", "lol", frames, 10);
         _animationManager.PlayAnimation("testAnimation");
 
-        _testBatch.CreateQuad(glm::vec2(200.0f, 200.0f), glm::vec2(100.0f, 100.0f), 0.0f);
+        _testBatch.CreateQuad(glm::vec2(300.0f, 300.0f), glm::vec2(50.0f, 50.0f), 0.0f);
+        _testBatch.CreateQuad(glm::vec2(500.0f, 400.0f), glm::vec2(50.0f, 50.0f), 0.0f);
         _testBatch.UpdateOrtho(orthoProjection);
         _testBatch.Batch();
     }
@@ -81,10 +82,11 @@ namespace LunarEngine {
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
+            _testBatch.Draw();
             for (auto layer : layers)
                 layer.Draw();
 
-            testSpriteManager.Draw();
+            //testSpriteManager.Draw();
 
             glfwSwapBuffers(window);
             glfwPollEvents();

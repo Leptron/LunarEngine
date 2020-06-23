@@ -16,7 +16,7 @@
 namespace LunarBatching {
 	struct BatchedQuad {
 		std::vector<float> vertices;
-		std::vector<int> indices;
+		std::vector<unsigned int> indices;
 	};
 
 	class StaticSquareBatch {
@@ -26,10 +26,12 @@ namespace LunarBatching {
 
 		void CreateQuad(glm::vec2 position, glm::vec2 size, float rot);
 		void UpdateOrtho(glm::mat4 orthoProjection);
+
 		void Batch();
+		void Draw(glm::mat4 viewMat = glm::mat4(1));
 	private:
-		const int INDEX_INCREMENT = 4;
-		int currIndexIncrement = 0;
+		const unsigned int INDEX_INCREMENT = 4;
+		unsigned int currIndexIncrement = 0;
 
 		std::vector<BatchedQuad> objects;
 		bool instantiated = false;

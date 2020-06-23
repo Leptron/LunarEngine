@@ -55,7 +55,7 @@ namespace LunarBatching {
 				finalBottomLeft.x, finalBottomLeft.y, 0.0f, 1.0f
 			};
 
-			std::vector<int> indexs = {
+			std::vector<unsigned int> indexs = {
 				currIndexIncrement, currIndexIncrement + 1, currIndexIncrement + 3,
 				currIndexIncrement + 1, currIndexIncrement + 2, currIndexIncrement + 3
 			};
@@ -73,11 +73,25 @@ namespace LunarBatching {
 		this->orthoProjection = orthoProjection;
 	}
 
+	void StaticSquareBatch::Draw(glm::mat4 viewMat) {
+		this->shader.use();
+
+		this->shader.SetMatrix4("view", viewMat);
+		this->shader.SetMatrix4("projection", orthoProjection);
+		this->shader.SetVector3f("spriteColor", glm::vec3(1.0f));
+
+		this->shader.use();
+
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+	}
+
 	void StaticSquareBatch::Batch() {
 		instantiated = true;
 
 		std::vector<float> unbatchedVerts;
-		std::vector<int> unbatchedIndicies;
+		std::vector<unsigned int> unbatchedIndicies;
 		for (auto object : objects) {
 			//loop over floats and ints
 			for (auto vert : object.vertices)
@@ -85,6 +99,9 @@ namespace LunarBatching {
 			for (auto index : object.indices)
 				unbatchedIndicies.push_back(index);
 		}
+
+		std::cout << unbatchedVerts[0] << std::endl;
+		std::cout << unbatchedIndicies[0] << std::endl;
 
 		std::stringstream messageStream;
 		messageStream << "Created a Sprite Batch with " << unbatchedVerts.size() << " vertices" << std::endl;
@@ -122,7 +139,7 @@ namespace LunarBatching {
 		vertShaderGen.AddUniform("projection", "mat4");
 
 		vertShaderGen.SetVariable("TexCoords", "vertex.zw");
-		vertShaderGen.SetGlPosition("projection * view * vec4(vertex.xy, 0.0, 1.0)");
+		vertShaderGen.SetGlPosition("projection * vec4(vertex.xy, 0.0, 1.0)");
 		//frag shader
 		LunarUtils::LunarShaderGenerator fragShaderGen;
 
