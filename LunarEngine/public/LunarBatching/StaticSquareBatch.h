@@ -19,6 +19,13 @@ namespace LunarBatching {
 		std::vector<unsigned int> indices;
 	};
 
+	struct LunarBatchedColor {
+		glm::vec3 lColor;
+		glm::vec3 lTColor;
+		glm::vec3 rColor;
+		glm::vec4 rTColor;
+	};
+
 	class StaticSquareBatch {
 	public:
 		StaticSquareBatch();
