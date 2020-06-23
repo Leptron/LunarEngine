@@ -18,10 +18,10 @@ namespace Lunar2D {
 		baseIndex = getUVBox(0);
 
 		float vertices[] = {
-			0.5f,  0.5f,   baseIndex.x + baseIndex.z, baseIndex.y + baseIndex.w, // bottom right
-			0.5f, -0.5f,   baseIndex.x + baseIndex.z, baseIndex.y, // top right
-			-0.5f, -0.5f,  baseIndex.x, baseIndex.y, // top left
-			-0.5f,  0.5f,  baseIndex.x, baseIndex.y + baseIndex.w  // bottom left 
+			1.0f,  1.0f,   baseIndex.x + baseIndex.z, baseIndex.y + baseIndex.w, // bottom right
+			1.0f, -1.0f,   baseIndex.x + baseIndex.z, baseIndex.y, // top right
+			-1.0f, -1.0f,  baseIndex.x, baseIndex.y, // top left
+			-1.0f,  1.0f,  baseIndex.x, baseIndex.y + baseIndex.w  // bottom left 
 		};
 
 		unsigned int indices[] = {
@@ -47,8 +47,16 @@ namespace Lunar2D {
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 
-		position = glm::vec2(800.0f, 300.0f);
-		size = glm::vec2(100.0f, 100.0f);
+		if (spriteSheet == "empty") {
+			//checkerboard sprite
+			spriteTexture.LoadTexture();
+		}
+		else {
+			spriteTexture.LoadTexture(spriteSheet);
+		}
+
+		position = glm::vec2(400.0f, 400.0f);
+		size = glm::vec2(300.0f, 300.0f);
 		rotate = 0.0f;
 		color = glm::vec3(1.0f);
 	}

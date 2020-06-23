@@ -40,7 +40,6 @@ namespace LunarEngine {
         LunarLogger::Logger::getInstance()->log("Created Opengl Instance", "Engine", "MAGENTA");
 
         testSpriteManager.InitResources();
-        testSpriteManager.CreateSprite("zhongou");
         testSpriteManager.CreateTiledSprite("lol");
 
         //setup animation manager
@@ -50,6 +49,9 @@ namespace LunarEngine {
         std::vector<int> frames = { 0, 1, 2, 3 };
         _animationManager.CreateAnimation("testAnimation", "lol", frames, 10);
         _animationManager.PlayAnimation("testAnimation");
+
+        _testBatch.CreateQuad(glm::vec2(200.0f, 200.0f), glm::vec2(100.0f, 100.0f), 0.0f);
+        _testBatch.Batch();
     }
 
     void LunarEngine::MainLoop() {

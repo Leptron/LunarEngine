@@ -22,7 +22,7 @@ namespace Lunar2D {
 
 		vertShader.SetVariable("TexCoords", "vertex.zw + texCoordShift");
 		
-		vertShader.SetGlPosition("projection * model * vec4(vertex.xy, 0.0, 1.0)");
+		vertShader.SetGlPosition("projection * view * model * vec4(vertex.xy, 0.0, 1.0)");
 
 		LunarUtils::LunarShaderGenerator fragShader;
 
@@ -37,9 +37,7 @@ namespace Lunar2D {
 		shader = LunarRenderer::LunarShader(&vertShader, &fragShader);
 
 		//set the default glm
-		view = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f),
-						   glm::vec3(0.0f, 0.0f, 0.0f),
-						   glm::vec3(0.0f, 1.0f, 0.0f));
+		view = glm::mat4(1.0f);
 
 		shader.use();
 		shader.SetMatrix4("projection", projection);
