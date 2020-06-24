@@ -9,7 +9,7 @@ namespace LunarBatching {
 
 	}
 
-	void StaticSquareBatch::CreateQuad(glm::vec2 position, glm::vec2 size, float rot) {
+	void StaticSquareBatch::CreateQuad(glm::vec2 position, glm::vec2 size, float rot, LunarBatchedColor vertColors) {
 		if (!instantiated) {
 			glm::mat4 _tmpModel = glm::mat4(1.0f);
 
@@ -49,10 +49,10 @@ namespace LunarBatching {
 			finalBottomLeft = _tmpModel * glm::vec4(bottomLeftVertices, 0.0f, 1.0f);
 
 			std::vector<float> verts = {
-				finalBottomRight.x, finalBottomRight.y, 1.0f, 1.0f,
-				finalTopRight.x, finalTopRight.y, 1.0f, 0.0f,
-				finalTopLeft.x, finalTopLeft.y, 0.0f, 0.0f,
-				finalBottomLeft.x, finalBottomLeft.y, 0.0f, 1.0f
+				finalBottomRight.x, finalBottomRight.y, 1.0f, 1.0f, vertColors.rColor.x, vertColors.rColor.y, vertColors.rColor.z,
+				finalTopRight.x, finalTopRight.y, 		1.0f, 0.0f, vertColors.rTColor.x, vertColors.rTColor.y, vertColors.rTColor.z,
+				finalTopLeft.x, finalTopLeft.y, 		0.0f, 0.0f, vertColors.lTColor.x, vertColors.lTColor.y, vertColors.lTColor.z,
+				finalBottomLeft.x, finalBottomLeft.y, 	0.0f, 1.0f, vertColors.lColor.x, vertColors.lColor.y, vertColors.lColor.z
 			};
 
 			std::vector<unsigned int> indexs = {
@@ -100,9 +100,6 @@ namespace LunarBatching {
 				unbatchedIndicies.push_back(index);
 		}
 
-		std::cout << unbatchedVerts[0] << std::endl;
-		std::cout << unbatchedIndicies[0] << std::endl;
-
 		std::stringstream messageStream;
 		messageStream << "Created a Sprite Batch with " << unbatchedVerts.size() << " vertices" << std::endl;
 		LunarLogger::Logger::getInstance()->log(messageStream.str(), "Static Batch", "red");
@@ -124,8 +121,13 @@ namespace LunarBatching {
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, unbatchedIndicies.size() * sizeof(int), unbatchedIndicies.data(), GL_STATIC_DRAW);
 
 		glBindVertexArray(VAO);
+
+		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(4 * sizeof(float)));
+		glEnableVertexAttribArray(1);
+
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 
@@ -133,21 +135,26 @@ namespace LunarBatching {
 		LunarUtils::LunarShaderGenerator vertShaderGen;
 		
 		vertShaderGen.AddLayout("0", "vec4", "vertex");
+		vertShaderGen.AddLayout("1", "vec3", "vColor");
+
+		vertShaderGen.AddOutput("OurColor", "vec3");
 		vertShaderGen.AddOutput("TexCoords", "vec2");
 
 		vertShaderGen.AddUniform("view", "mat4");
 		vertShaderGen.AddUniform("projection", "mat4");
 
 		vertShaderGen.SetVariable("TexCoords", "vertex.zw");
+		vertShaderGen.SetVariable("OurColor", "vColor");
 		vertShaderGen.SetGlPosition("projection * vec4(vertex.xy, 0.0, 1.0)");
 		//frag shader
 		LunarUtils::LunarShaderGenerator fragShaderGen;
 
 		fragShaderGen.AddInput("TexCoords", "vec2");
+		fragShaderGen.AddInput("OurColor", "vec3");
 		fragShaderGen.AddOutput("color", "vec4");
 
 		fragShaderGen.AddUniform("spriteColor", "vec3");
-		fragShaderGen.SetVariable("color", "vec4(spriteColor, 1.0)");
+		fragShaderGen.SetVariable("color", "vec4(OurColor, 1.0)");
 
 		shader = LunarRenderer::LunarShader(&vertShaderGen, &fragShaderGen);
 	}

@@ -23,7 +23,7 @@ namespace LunarBatching {
 		glm::vec3 lColor;
 		glm::vec3 lTColor;
 		glm::vec3 rColor;
-		glm::vec4 rTColor;
+		glm::vec3 rTColor;
 	};
 
 	class StaticSquareBatch {
@@ -31,7 +31,7 @@ namespace LunarBatching {
 		StaticSquareBatch();
 		~StaticSquareBatch();
 
-		void CreateQuad(glm::vec2 position, glm::vec2 size, float rot);
+		void CreateQuad(glm::vec2 position, glm::vec2 size, float rot, LunarBatchedColor vertColors);
 		void UpdateOrtho(glm::mat4 orthoProjection);
 
 		void Batch();

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\code\LunarEngine\build\CMakeFiles\3cbd24e037593ebe3201f4b1279389b9\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{367A7BD8-95D7-3479-8743-E982DC98F06A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
