@@ -103,9 +103,35 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.s: cma
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.s"
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarEngine/LunarEngine.cpp -o CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.s
 
+LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.o: LunarEngine/CMakeFiles/LunarEngine.dir/flags.make
+LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.o: ../LunarEngine/source/LunarGUI/LunarGui.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.o"
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.o -c /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarGUI/LunarGui.cpp
+
+LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.i"
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarGUI/LunarGui.cpp > CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.i
+
+LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.s"
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarGUI/LunarGui.cpp -o CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.s
+
+LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.o: LunarEngine/CMakeFiles/LunarEngine.dir/flags.make
+LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.o: ../LunarEngine/source/LunarGUI/LunarGuiPane.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.o"
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.o -c /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarGUI/LunarGuiPane.cpp
+
+LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.i"
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarGUI/LunarGuiPane.cpp > CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.i
+
+LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.s"
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarGUI/LunarGuiPane.cpp -o CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.s
+
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarManager/LunarAnimationManager.cpp.o: LunarEngine/CMakeFiles/LunarEngine.dir/flags.make
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarManager/LunarAnimationManager.cpp.o: ../LunarEngine/source/LunarManager/LunarAnimationManager.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarManager/LunarAnimationManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarManager/LunarAnimationManager.cpp.o"
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LunarEngine.dir/source/LunarManager/LunarAnimationManager.cpp.o -c /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarManager/LunarAnimationManager.cpp
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarManager/LunarAnimationManager.cpp.i: cmake_force
@@ -118,7 +144,7 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarManager/LunarAnimationManager
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarLayer.cpp.o: LunarEngine/CMakeFiles/LunarEngine.dir/flags.make
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarLayer.cpp.o: ../LunarEngine/source/LunarRenderer/LunarLayer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarLayer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarLayer.cpp.o"
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarLayer.cpp.o -c /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarRenderer/LunarLayer.cpp
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarLayer.cpp.i: cmake_force
@@ -131,7 +157,7 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarLayer.cpp.s: cm
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarObject.cpp.o: LunarEngine/CMakeFiles/LunarEngine.dir/flags.make
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarObject.cpp.o: ../LunarEngine/source/LunarRenderer/LunarObject.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarObject.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarObject.cpp.o"
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarObject.cpp.o -c /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarRenderer/LunarObject.cpp
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarObject.cpp.i: cmake_force
@@ -144,7 +170,7 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarObject.cpp.s: c
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/LunarTexture.cpp.o: LunarEngine/CMakeFiles/LunarEngine.dir/flags.make
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/LunarTexture.cpp.o: ../LunarEngine/source/LunarRenderer/LunarPrimitives/LunarTexture.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/LunarTexture.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/LunarTexture.cpp.o"
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/LunarTexture.cpp.o -c /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarRenderer/LunarPrimitives/LunarTexture.cpp
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/LunarTexture.cpp.i: cmake_force
@@ -157,7 +183,7 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/Luna
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteManager.cpp.o: LunarEngine/CMakeFiles/LunarEngine.dir/flags.make
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteManager.cpp.o: ../LunarEngine/source/LunarRenderer/LunarPrimitives/SpriteManager.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteManager.cpp.o"
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteManager.cpp.o -c /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarRenderer/LunarPrimitives/SpriteManager.cpp
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteManager.cpp.i: cmake_force
@@ -170,7 +196,7 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/Spri
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteRenderer.cpp.o: LunarEngine/CMakeFiles/LunarEngine.dir/flags.make
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteRenderer.cpp.o: ../LunarEngine/source/LunarRenderer/LunarPrimitives/SpriteRenderer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteRenderer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteRenderer.cpp.o"
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteRenderer.cpp.o -c /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarRenderer/LunarPrimitives/SpriteRenderer.cpp
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteRenderer.cpp.i: cmake_force
@@ -183,7 +209,7 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/Spri
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteSheetRenderer.cpp.o: LunarEngine/CMakeFiles/LunarEngine.dir/flags.make
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteSheetRenderer.cpp.o: ../LunarEngine/source/LunarRenderer/LunarPrimitives/SpriteSheetRenderer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteSheetRenderer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteSheetRenderer.cpp.o"
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteSheetRenderer.cpp.o -c /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarRenderer/LunarPrimitives/SpriteSheetRenderer.cpp
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/SpriteSheetRenderer.cpp.i: cmake_force
@@ -196,7 +222,7 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarPrimitives/Spri
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarShader.cpp.o: LunarEngine/CMakeFiles/LunarEngine.dir/flags.make
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarShader.cpp.o: ../LunarEngine/source/LunarRenderer/LunarShader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarShader.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarShader.cpp.o"
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarShader.cpp.o -c /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarRenderer/LunarShader.cpp
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarShader.cpp.i: cmake_force
@@ -209,7 +235,7 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarShader.cpp.s: c
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarLogger.cpp.o: LunarEngine/CMakeFiles/LunarEngine.dir/flags.make
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarLogger.cpp.o: ../LunarEngine/source/LunarUtils/LunarLogger.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarLogger.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarLogger.cpp.o"
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarLogger.cpp.o -c /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarUtils/LunarLogger.cpp
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarLogger.cpp.i: cmake_force
@@ -222,7 +248,7 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarLogger.cpp.s: cmak
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarShaderGen.cpp.o: LunarEngine/CMakeFiles/LunarEngine.dir/flags.make
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarShaderGen.cpp.o: ../LunarEngine/source/LunarUtils/LunarShaderGen.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarShaderGen.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarShaderGen.cpp.o"
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarShaderGen.cpp.o -c /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarUtils/LunarShaderGen.cpp
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarShaderGen.cpp.i: cmake_force
@@ -235,7 +261,7 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarShaderGen.cpp.s: c
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarShaderManager.cpp.o: LunarEngine/CMakeFiles/LunarEngine.dir/flags.make
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarShaderManager.cpp.o: ../LunarEngine/source/LunarUtils/LunarShaderManager.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarShaderManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarShaderManager.cpp.o"
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarShaderManager.cpp.o -c /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarUtils/LunarShaderManager.cpp
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarShaderManager.cpp.i: cmake_force
@@ -248,7 +274,7 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarShaderManager.cpp.
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarUtils.cpp.o: LunarEngine/CMakeFiles/LunarEngine.dir/flags.make
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarUtils.cpp.o: ../LunarEngine/source/LunarUtils/LunarUtils.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarUtils.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarUtils.cpp.o"
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarUtils.cpp.o -c /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarUtils/LunarUtils.cpp
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarUtils.cpp.i: cmake_force
@@ -261,7 +287,7 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarUtils/LunarUtils.cpp.s: cmake
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/glad.c.o: LunarEngine/CMakeFiles/LunarEngine.dir/flags.make
 LunarEngine/CMakeFiles/LunarEngine.dir/source/glad.c.o: ../LunarEngine/source/glad.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object LunarEngine/CMakeFiles/LunarEngine.dir/source/glad.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object LunarEngine/CMakeFiles/LunarEngine.dir/source/glad.c.o"
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LunarEngine.dir/source/glad.c.o   -c /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/glad.c
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/glad.c.i: cmake_force
@@ -276,6 +302,8 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/glad.c.s: cmake_force
 LunarEngine_OBJECTS = \
 "CMakeFiles/LunarEngine.dir/source/LunarBatching/StaticSquareBatch.cpp.o" \
 "CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.o" \
+"CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.o" \
+"CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.o" \
 "CMakeFiles/LunarEngine.dir/source/LunarManager/LunarAnimationManager.cpp.o" \
 "CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarLayer.cpp.o" \
 "CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarObject.cpp.o" \
@@ -295,6 +323,8 @@ LunarEngine_EXTERNAL_OBJECTS =
 
 LunarEngine/libLunarEngine.a: LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarBatching/StaticSquareBatch.cpp.o
 LunarEngine/libLunarEngine.a: LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.o
+LunarEngine/libLunarEngine.a: LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.o
+LunarEngine/libLunarEngine.a: LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.o
 LunarEngine/libLunarEngine.a: LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarManager/LunarAnimationManager.cpp.o
 LunarEngine/libLunarEngine.a: LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarLayer.cpp.o
 LunarEngine/libLunarEngine.a: LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarObject.cpp.o
@@ -310,7 +340,7 @@ LunarEngine/libLunarEngine.a: LunarEngine/CMakeFiles/LunarEngine.dir/source/Luna
 LunarEngine/libLunarEngine.a: LunarEngine/CMakeFiles/LunarEngine.dir/source/glad.c.o
 LunarEngine/libLunarEngine.a: LunarEngine/CMakeFiles/LunarEngine.dir/build.make
 LunarEngine/libLunarEngine.a: LunarEngine/CMakeFiles/LunarEngine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX static library libLunarEngine.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX static library libLunarEngine.a"
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && $(CMAKE_COMMAND) -P CMakeFiles/LunarEngine.dir/cmake_clean_target.cmake
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild/LunarEngine && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/LunarEngine.dir/link.txt --verbose=$(VERBOSE)
 

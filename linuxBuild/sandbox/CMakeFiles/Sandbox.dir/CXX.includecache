@@ -91,6 +91,22 @@ LunarManager/LunarAnimationManager.h
 ../LunarEngine/public/LunarManager/LunarAnimationManager.h
 LunarBatching/StaticSquareBatch.h
 ../LunarEngine/public/LunarBatching/StaticSquareBatch.h
+LunarGUI/LunarGui.h
+../LunarEngine/public/LunarGUI/LunarGui.h
+
+../LunarEngine/public/LunarGUI/LunarGui.h
+../LunarLogger.h
+../LunarEngine/public/LunarLogger.h
+LunarGuiPane.h
+../LunarEngine/public/LunarGUI/LunarGuiPane.h
+string
+-
+
+../LunarEngine/public/LunarGUI/LunarGuiPane.h
+../LunarLogger.h
+../LunarEngine/public/LunarLogger.h
+string
+-
 
 ../LunarEngine/public/LunarImageLoader.h
 

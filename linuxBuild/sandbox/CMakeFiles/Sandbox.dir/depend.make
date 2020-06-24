@@ -5,6 +5,8 @@ sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../LunarEngine/public/KHR/khrp
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../LunarEngine/public/LuanarShader.h
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../LunarEngine/public/LunarBatching/StaticSquareBatch.h
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../LunarEngine/public/LunarEngine.h
+sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../LunarEngine/public/LunarGUI/LunarGui.h
+sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../LunarEngine/public/LunarGUI/LunarGuiPane.h
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../LunarEngine/public/LunarImageLoader.h
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../LunarEngine/public/LunarLayer.h
 sandbox/CMakeFiles/Sandbox.dir/source/main.cpp.o: ../LunarEngine/public/LunarLogger.h

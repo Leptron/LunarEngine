@@ -13,6 +13,7 @@ namespace LunarEngine {
     bool LunarEngine::dimsChanged = false;
 
     void LunarEngine::InitResources() {
+        _manager.CreateGUIPane("shaders/test.lnGUI");
 		orthoProjection = glm::ortho(0.0f, static_cast<float>(width), static_cast<float>(height), 0.0f, -1.0f, 1.0f);
         testSpriteManager.UpdateScreenDims(width, height);
 

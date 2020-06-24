@@ -1,4 +1,5 @@
 #include "../LunarLogger.h"
+#include "LunarGuiPane.h"
 
 #include <string>
 

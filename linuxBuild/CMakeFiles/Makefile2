@@ -194,7 +194,7 @@ sandbox/clean: sandbox/CMakeFiles/Sandbox.dir/clean
 external/CMakeFiles/ktx.dir/all:
 	$(MAKE) $(MAKESILENT) -f external/CMakeFiles/ktx.dir/build.make external/CMakeFiles/ktx.dir/depend
 	$(MAKE) $(MAKESILENT) -f external/CMakeFiles/ktx.dir/build.make external/CMakeFiles/ktx.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=36,37,38,39,40,41,42 "Built target ktx"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=38,39,40,41,42,43,44 "Built target ktx"
 .PHONY : external/CMakeFiles/ktx.dir/all
 
 # Build rule for subdir invocation for target.
@@ -248,7 +248,7 @@ external/glfw/CMakeFiles/uninstall.dir/clean:
 external/glfw/src/CMakeFiles/glfw.dir/all:
 	$(MAKE) $(MAKESILENT) -f external/glfw/src/CMakeFiles/glfw.dir/build.make external/glfw/src/CMakeFiles/glfw.dir/depend
 	$(MAKE) $(MAKESILENT) -f external/glfw/src/CMakeFiles/glfw.dir/build.make external/glfw/src/CMakeFiles/glfw.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35 "Built target glfw"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37 "Built target glfw"
 .PHONY : external/glfw/src/CMakeFiles/glfw.dir/all
 
 # Build rule for subdir invocation for target.
@@ -275,12 +275,12 @@ external/glfw/src/CMakeFiles/glfw.dir/clean:
 LunarEngine/CMakeFiles/LunarEngine.dir/all: external/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/depend
 	$(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 "Built target LunarEngine"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18 "Built target LunarEngine"
 .PHONY : LunarEngine/CMakeFiles/LunarEngine.dir/all
 
 # Build rule for subdir invocation for target.
 LunarEngine/CMakeFiles/LunarEngine.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles 33
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles 35
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 LunarEngine/CMakeFiles/LunarEngine.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles 0
 .PHONY : LunarEngine/CMakeFiles/LunarEngine.dir/rule
@@ -303,12 +303,12 @@ sandbox/CMakeFiles/Sandbox.dir/all: external/glfw/src/CMakeFiles/glfw.dir/all
 sandbox/CMakeFiles/Sandbox.dir/all: LunarEngine/CMakeFiles/LunarEngine.dir/all
 	$(MAKE) $(MAKESILENT) -f sandbox/CMakeFiles/Sandbox.dir/build.make sandbox/CMakeFiles/Sandbox.dir/depend
 	$(MAKE) $(MAKESILENT) -f sandbox/CMakeFiles/Sandbox.dir/build.make sandbox/CMakeFiles/Sandbox.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=17,18 "Built target Sandbox"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles --progress-num=19,20 "Built target Sandbox"
 .PHONY : sandbox/CMakeFiles/Sandbox.dir/all
 
 # Build rule for subdir invocation for target.
 sandbox/CMakeFiles/Sandbox.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles 35
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles 37
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sandbox/CMakeFiles/Sandbox.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/akshantlanjewar/code/LunarEngine/linuxBuild/CMakeFiles 0
 .PHONY : sandbox/CMakeFiles/Sandbox.dir/rule

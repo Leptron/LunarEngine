@@ -252,6 +252,8 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.o
  /home/akshantlanjewar/code/LunarEngine/LunarEngine/public/LuanarShader.h
  /home/akshantlanjewar/code/LunarEngine/LunarEngine/public/LunarBatching/StaticSquareBatch.h
  /home/akshantlanjewar/code/LunarEngine/LunarEngine/public/LunarEngine.h
+ /home/akshantlanjewar/code/LunarEngine/LunarEngine/public/LunarGUI/LunarGui.h
+ /home/akshantlanjewar/code/LunarEngine/LunarEngine/public/LunarGUI/LunarGuiPane.h
  /home/akshantlanjewar/code/LunarEngine/LunarEngine/public/LunarImageLoader.h
  /home/akshantlanjewar/code/LunarEngine/LunarEngine/public/LunarLayer.h
  /home/akshantlanjewar/code/LunarEngine/LunarEngine/public/LunarLogger.h
@@ -265,6 +267,15 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.o
  /home/akshantlanjewar/code/LunarEngine/LunarEngine/public/LunarShaderManager.h
  /home/akshantlanjewar/code/LunarEngine/LunarEngine/public/glad/glad.h
  /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarEngine/LunarEngine.cpp
+LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.o
+ /home/akshantlanjewar/code/LunarEngine/LunarEngine/public/LunarGUI/LunarGui.h
+ /home/akshantlanjewar/code/LunarEngine/LunarEngine/public/LunarGUI/LunarGuiPane.h
+ /home/akshantlanjewar/code/LunarEngine/LunarEngine/public/LunarLogger.h
+ /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarGUI/LunarGui.cpp
+LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.o
+ /home/akshantlanjewar/code/LunarEngine/LunarEngine/public/LunarGUI/LunarGuiPane.h
+ /home/akshantlanjewar/code/LunarEngine/LunarEngine/public/LunarLogger.h
+ /home/akshantlanjewar/code/LunarEngine/LunarEngine/source/LunarGUI/LunarGuiPane.cpp
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarManager/LunarAnimationManager.cpp.o
  ../external/glm/glm/common.hpp
  ../external/glm/glm/detail/_fixes.hpp

@@ -245,6 +245,60 @@ source/LunarEngine/LunarEngine.cpp.s:
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild && $(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.s
 .PHONY : source/LunarEngine/LunarEngine.cpp.s
 
+source/LunarGUI/LunarGui.o: source/LunarGUI/LunarGui.cpp.o
+
+.PHONY : source/LunarGUI/LunarGui.o
+
+# target to build an object file
+source/LunarGUI/LunarGui.cpp.o:
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild && $(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.o
+.PHONY : source/LunarGUI/LunarGui.cpp.o
+
+source/LunarGUI/LunarGui.i: source/LunarGUI/LunarGui.cpp.i
+
+.PHONY : source/LunarGUI/LunarGui.i
+
+# target to preprocess a source file
+source/LunarGUI/LunarGui.cpp.i:
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild && $(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.i
+.PHONY : source/LunarGUI/LunarGui.cpp.i
+
+source/LunarGUI/LunarGui.s: source/LunarGUI/LunarGui.cpp.s
+
+.PHONY : source/LunarGUI/LunarGui.s
+
+# target to generate assembly for a file
+source/LunarGUI/LunarGui.cpp.s:
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild && $(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.s
+.PHONY : source/LunarGUI/LunarGui.cpp.s
+
+source/LunarGUI/LunarGuiPane.o: source/LunarGUI/LunarGuiPane.cpp.o
+
+.PHONY : source/LunarGUI/LunarGuiPane.o
+
+# target to build an object file
+source/LunarGUI/LunarGuiPane.cpp.o:
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild && $(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.o
+.PHONY : source/LunarGUI/LunarGuiPane.cpp.o
+
+source/LunarGUI/LunarGuiPane.i: source/LunarGUI/LunarGuiPane.cpp.i
+
+.PHONY : source/LunarGUI/LunarGuiPane.i
+
+# target to preprocess a source file
+source/LunarGUI/LunarGuiPane.cpp.i:
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild && $(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.i
+.PHONY : source/LunarGUI/LunarGuiPane.cpp.i
+
+source/LunarGUI/LunarGuiPane.s: source/LunarGUI/LunarGuiPane.cpp.s
+
+.PHONY : source/LunarGUI/LunarGuiPane.s
+
+# target to generate assembly for a file
+source/LunarGUI/LunarGuiPane.cpp.s:
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild && $(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.s
+.PHONY : source/LunarGUI/LunarGuiPane.cpp.s
+
 source/LunarManager/LunarAnimationManager.o: source/LunarManager/LunarAnimationManager.cpp.o
 
 .PHONY : source/LunarManager/LunarAnimationManager.o
@@ -615,6 +669,12 @@ help:
 	@echo "... source/LunarEngine/LunarEngine.o"
 	@echo "... source/LunarEngine/LunarEngine.i"
 	@echo "... source/LunarEngine/LunarEngine.s"
+	@echo "... source/LunarGUI/LunarGui.o"
+	@echo "... source/LunarGUI/LunarGui.i"
+	@echo "... source/LunarGUI/LunarGui.s"
+	@echo "... source/LunarGUI/LunarGuiPane.o"
+	@echo "... source/LunarGUI/LunarGuiPane.i"
+	@echo "... source/LunarGUI/LunarGuiPane.s"
 	@echo "... source/LunarManager/LunarAnimationManager.o"
 	@echo "... source/LunarManager/LunarAnimationManager.i"
 	@echo "... source/LunarManager/LunarAnimationManager.s"
