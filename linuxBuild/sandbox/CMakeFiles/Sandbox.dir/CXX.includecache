@@ -107,6 +107,22 @@ string
 ../LunarEngine/public/LunarLogger.h
 string
 -
+vector
+-
+tuple
+-
+algorithm
+-
+cstdio
+-
+cerrno
+-
+sstream
+-
+numeric
+-
+iterator
+-
 
 ../LunarEngine/public/LunarImageLoader.h
 
