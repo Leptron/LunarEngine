@@ -35,6 +35,8 @@ namespace LunarGUI {
     struct GUINode {
         bool endTag;
         std::string nodeName;
+
+        int index;
     };
 
     struct GUINodeAttrib {
@@ -43,6 +45,16 @@ namespace LunarGUI {
 
         std::string nodeName;
         std::vector<std::tuple<std::string, std::string>> attributes;
+
+        int index;
+    };
+
+    struct Stack {
+        std::string stackElem;
+        std::vector<std::tuple<std::string, std::string>> attributes;
+
+        int startNode;
+        int endNode;
     };
 
     class GUIPane {
@@ -54,9 +66,11 @@ namespace LunarGUI {
 
     private:
         void CreateNodeList(std::string contents);
-
+        void PushStack(int attribIndex);
     private:
         std::vector<GUINode> nodeList;
         std::vector<GUINodeAttrib> nodeAttribList;
+
+        std::vector<Stack> stack;  
     };
 }
