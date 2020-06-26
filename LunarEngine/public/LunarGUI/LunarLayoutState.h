@@ -11,8 +11,8 @@ namespace LunarGUI {
     };
 
     struct Offsets {
-        int offsetHeight, offsetWidth;
-    };
+        std::string offsetHeight, offsetWidth;
+    }; 
 
     struct SpaceAlloc {
         std::string type;
@@ -33,8 +33,10 @@ namespace LunarGUI {
 
         //member methods
         void CreateSpaceAllocation(std::string type, int width, int height, int nodeIndex);
-
+        void RequestObject(std::string reqWidth, std::string reqHeight, int nodeIndex);
+        void UpdateDims(int width, int height);
     private:
         std::vector<SpaceAlloc> allocations;
+        int width, height;
     };
 }

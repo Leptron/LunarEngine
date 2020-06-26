@@ -1,4 +1,5 @@
 #include "../LunarLogger.h"
+#include "LunarGUIData.h"
 #include "LunarLayoutState.h"
 
 #include <string>
@@ -34,48 +35,6 @@
 */
 
 namespace LunarGUI {
-    struct GUINode {
-        bool endTag;
-        std::string nodeName;
-
-        int index;
-    };
-
-    struct GUINodeAttrib {
-        bool endTag;
-        bool hasAttrib;
-
-        std::string nodeName;
-        std::vector<std::tuple<std::string, std::string>> attributes;
-
-        int index;
-    };
-
-    struct Stack {
-        std::string stackElem;
-        std::vector<std::tuple<std::string, std::string>> attributes;
-
-        int startNode;
-        int endNode;
-    };
-
-    enum DrawPrimitive {
-        Box
-    };
-
-    enum BasicColor {
-        White,
-        Black
-    };
-
-    struct DrawCommand {
-        DrawPrimitive cmd;
-        BasicColor clearColor;
-
-        int width, height;
-        int xPos, yPos;
-    };
-
     class GUIPane {
     public:
         GUIPane();
@@ -89,12 +48,12 @@ namespace LunarGUI {
         void CreateLayout();
         void CreateDrawCommands();
 
+        //DOM Funcs
+        Node text(std::string data);
+        Node elem(std::string name, std::unordered_map<std::string, std::string> attributes, std::vector<Node> children);
+
         int width, height;
     private:
-        std::vector<GUINode> nodeList;
-        std::vector<GUINodeAttrib> nodeAttribList;
-
-        std::vector<Stack> stack;  
-        std::vector<DrawCommand> cmdBuffer;
+        
     };
 }
