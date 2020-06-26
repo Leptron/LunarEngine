@@ -1,4 +1,5 @@
 #include "../LunarLogger.h"
+#include "LunarLayoutState.h"
 
 #include <string>
 #include <vector>
@@ -8,6 +9,7 @@
 #include <cerrno>
 #include <sstream>
 #include <numeric>
+#include <unordered_map>
 #include <iterator>
 
 //TEST
@@ -57,20 +59,42 @@ namespace LunarGUI {
         int endNode;
     };
 
+    enum DrawPrimitive {
+        Box
+    };
+
+    enum BasicColor {
+        White,
+        Black
+    };
+
+    struct DrawCommand {
+        DrawPrimitive cmd;
+        BasicColor clearColor;
+
+        int width, height;
+        int xPos, yPos;
+    };
+
     class GUIPane {
     public:
         GUIPane();
         ~GUIPane();
 
-        void CreatePane(std::string loc);
-
+        void CreatePane(std::string loc, int width = 800, int height = 600);
+        void UpdateScreenDims(int width, int height);
     private:
         void CreateNodeList(std::string contents);
         void PushStack(int attribIndex);
+        void CreateLayout();
+        void CreateDrawCommands();
+
+        int width, height;
     private:
         std::vector<GUINode> nodeList;
         std::vector<GUINodeAttrib> nodeAttribList;
 
         std::vector<Stack> stack;  
+        std::vector<DrawCommand> cmdBuffer;
     };
 }

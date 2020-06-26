@@ -13,7 +13,8 @@ namespace LunarEngine {
     bool LunarEngine::dimsChanged = false;
 
     void LunarEngine::InitResources() {
-        _manager.CreateGUIPane("shaders/test.lnGUI");
+        _manager.CreateGUIPane("shaders/test.lnGUI", width, height);
+
 		orthoProjection = glm::ortho(0.0f, static_cast<float>(width), static_cast<float>(height), 0.0f, -1.0f, 1.0f);
         testSpriteManager.UpdateScreenDims(width, height);
 
@@ -59,7 +60,7 @@ namespace LunarEngine {
         colors.rColor = glm::vec3(1.0f);
         colors.rTColor = glm::vec3(1.0f);
 
-        _testBatch.CreateQuad(glm::vec2(300.0f, 300.0f), glm::vec2(50.0f, 200.0f), 0.0f, colors);
+        _testBatch.CreateQuad(glm::vec2(0.0f, 0.0f), glm::vec2(1280.0f, 720.0f), 0.0f, colors);
         _testBatch.UpdateOrtho(orthoProjection);
         _testBatch.Batch();
     }

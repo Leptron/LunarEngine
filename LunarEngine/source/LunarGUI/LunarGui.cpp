@@ -9,10 +9,10 @@ namespace LunarGUI {
 
     }
 
-    void GUIManager::CreateGUIPane(std::string paneDefLoc) {
+    void GUIManager::CreateGUIPane(std::string paneDefLoc, int width, int height) {
         LunarLogger::Logger::getInstance()->log("Creating a GUI Pane", "GUI", "yellow");
         //implement TODO
         GUIPane _pane;
-        _pane.CreatePane(paneDefLoc);
+        _pane.CreatePane(paneDefLoc, width, height);
     }
 }

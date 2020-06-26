@@ -105,6 +105,8 @@ string
 ../LunarEngine/public/LunarGUI/LunarGuiPane.h
 ../LunarLogger.h
 ../LunarEngine/public/LunarLogger.h
+LunarLayoutState.h
+../LunarEngine/public/LunarGUI/LunarLayoutState.h
 string
 -
 vector
@@ -121,7 +123,17 @@ sstream
 -
 numeric
 -
+unordered_map
+-
 iterator
+-
+
+../LunarEngine/public/LunarGUI/LunarLayoutState.h
+vector
+-
+string
+-
+iostream
 -
 
 ../LunarEngine/public/LunarImageLoader.h

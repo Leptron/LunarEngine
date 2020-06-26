@@ -9,8 +9,11 @@ namespace LunarGUI {
 
     }
 
-    void GUIPane::CreatePane(std::string loc) {
+    void GUIPane::CreatePane(std::string loc, int width, int height) {
         std::string fileContents;
+
+        this->width = width;
+        this->height = height;
 
         std::FILE *fp = std::fopen(loc.c_str(), "rb");
         if(fp) {
@@ -28,6 +31,13 @@ namespace LunarGUI {
         fileContents.erase(std::remove(fileContents.begin(), fileContents.end(), '\t'), fileContents.end());
         
         CreateNodeList(fileContents);
+    }
+
+    void GUIPane::UpdateScreenDims(int width, int height) {
+        this->width = width;
+        this->height = height;
+
+        CreateDrawCommands();
     }
 
     void GUIPane::CreateNodeList(std::string contents) {
@@ -98,6 +108,7 @@ namespace LunarGUI {
 
                     attribName = "";
                     attribValue = "";
+                    attribValueBol = false;
                 }
 
                 GUINodeAttrib _nodeAttrib = {};
@@ -122,9 +133,11 @@ namespace LunarGUI {
         for(int i = 0; i < nodeAttribList.size() ; i++) { 
             if(nodeAttribList[i].endTag)
                 continue;
-            std::cout << i << std::endl;
             PushStack(i);
         }
+
+        CreateLayout();
+        CreateDrawCommands();
     }
 
     void GUIPane::PushStack(int attribIndex) {
@@ -150,5 +163,31 @@ namespace LunarGUI {
                 break;
             }
         }
+    }
+
+    void GUIPane::CreateLayout() {
+        std::unordered_map<int, int> calculatedWidths;
+        std::unordered_map<int, int> calculatedHeights;
+        std::string layout = "block";
+
+
+        for(int i = 0; i < stack.size(); i++) {
+            auto _stack = stack[i];
+            bool hasChild = false;
+
+            for(auto _pChild : stack) {
+                if(_stack.startNode <= _pChild.startNode && _pChild.startNode <= _stack.endNode && _stack.startNode != _pChild.startNode) {
+                    hasChild = true;
+                }
+            }
+
+            if(hasChild)
+                LayoutState::getInstance()->CreateSpaceAllocation(layout, this->width, this->height, i);
+        }
+    }
+
+    void GUIPane::CreateDrawCommands() {
+        cmdBuffer.clear();
+        
     }
 }

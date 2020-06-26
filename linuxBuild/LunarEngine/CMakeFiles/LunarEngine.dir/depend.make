@@ -253,6 +253,7 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.o: ../
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.o: ../LunarEngine/public/LunarEngine.h
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.o: ../LunarEngine/public/LunarGUI/LunarGui.h
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.o: ../LunarEngine/public/LunarGUI/LunarGuiPane.h
+LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.o: ../LunarEngine/public/LunarGUI/LunarLayoutState.h
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.o: ../LunarEngine/public/LunarImageLoader.h
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.o: ../LunarEngine/public/LunarLayer.h
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.o: ../LunarEngine/public/LunarLogger.h
@@ -269,12 +270,17 @@ LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.o: ../
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.o: ../LunarEngine/public/LunarGUI/LunarGui.h
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.o: ../LunarEngine/public/LunarGUI/LunarGuiPane.h
+LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.o: ../LunarEngine/public/LunarGUI/LunarLayoutState.h
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.o: ../LunarEngine/public/LunarLogger.h
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.o: ../LunarEngine/source/LunarGUI/LunarGui.cpp
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.o: ../LunarEngine/public/LunarGUI/LunarGuiPane.h
+LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.o: ../LunarEngine/public/LunarGUI/LunarLayoutState.h
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.o: ../LunarEngine/public/LunarLogger.h
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.o: ../LunarEngine/source/LunarGUI/LunarGuiPane.cpp
+
+LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarLayoutState.cpp.o: ../LunarEngine/public/LunarGUI/LunarLayoutState.h
+LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarLayoutState.cpp.o: ../LunarEngine/source/LunarGUI/LunarLayoutState.cpp
 
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarManager/LunarAnimationManager.cpp.o: ../external/glm/glm/common.hpp
 LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarManager/LunarAnimationManager.cpp.o: ../external/glm/glm/detail/_fixes.hpp

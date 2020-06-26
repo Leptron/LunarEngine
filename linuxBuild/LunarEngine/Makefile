@@ -299,6 +299,33 @@ source/LunarGUI/LunarGuiPane.cpp.s:
 	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild && $(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.s
 .PHONY : source/LunarGUI/LunarGuiPane.cpp.s
 
+source/LunarGUI/LunarLayoutState.o: source/LunarGUI/LunarLayoutState.cpp.o
+
+.PHONY : source/LunarGUI/LunarLayoutState.o
+
+# target to build an object file
+source/LunarGUI/LunarLayoutState.cpp.o:
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild && $(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarLayoutState.cpp.o
+.PHONY : source/LunarGUI/LunarLayoutState.cpp.o
+
+source/LunarGUI/LunarLayoutState.i: source/LunarGUI/LunarLayoutState.cpp.i
+
+.PHONY : source/LunarGUI/LunarLayoutState.i
+
+# target to preprocess a source file
+source/LunarGUI/LunarLayoutState.cpp.i:
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild && $(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarLayoutState.cpp.i
+.PHONY : source/LunarGUI/LunarLayoutState.cpp.i
+
+source/LunarGUI/LunarLayoutState.s: source/LunarGUI/LunarLayoutState.cpp.s
+
+.PHONY : source/LunarGUI/LunarLayoutState.s
+
+# target to generate assembly for a file
+source/LunarGUI/LunarLayoutState.cpp.s:
+	cd /home/akshantlanjewar/code/LunarEngine/linuxBuild && $(MAKE) $(MAKESILENT) -f LunarEngine/CMakeFiles/LunarEngine.dir/build.make LunarEngine/CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarLayoutState.cpp.s
+.PHONY : source/LunarGUI/LunarLayoutState.cpp.s
+
 source/LunarManager/LunarAnimationManager.o: source/LunarManager/LunarAnimationManager.cpp.o
 
 .PHONY : source/LunarManager/LunarAnimationManager.o
@@ -675,6 +702,9 @@ help:
 	@echo "... source/LunarGUI/LunarGuiPane.o"
 	@echo "... source/LunarGUI/LunarGuiPane.i"
 	@echo "... source/LunarGUI/LunarGuiPane.s"
+	@echo "... source/LunarGUI/LunarLayoutState.o"
+	@echo "... source/LunarGUI/LunarLayoutState.i"
+	@echo "... source/LunarGUI/LunarLayoutState.s"
 	@echo "... source/LunarManager/LunarAnimationManager.o"
 	@echo "... source/LunarManager/LunarAnimationManager.i"
 	@echo "... source/LunarManager/LunarAnimationManager.s"

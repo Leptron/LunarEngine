@@ -9,6 +9,6 @@ namespace LunarGUI {
         GUIManager();
         ~GUIManager();
 
-        void CreateGUIPane(std::string paneDefLoc);
+        void CreateGUIPane(std::string paneDefLoc, int width = 800, int height = 600);
     };
 }

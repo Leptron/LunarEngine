@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/LunarEngine.dir/source/LunarEngine/LunarEngine.cpp.o"
   "CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGui.cpp.o"
   "CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarGuiPane.cpp.o"
+  "CMakeFiles/LunarEngine.dir/source/LunarGUI/LunarLayoutState.cpp.o"
   "CMakeFiles/LunarEngine.dir/source/LunarManager/LunarAnimationManager.cpp.o"
   "CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarLayer.cpp.o"
   "CMakeFiles/LunarEngine.dir/source/LunarRenderer/LunarObject.cpp.o"
