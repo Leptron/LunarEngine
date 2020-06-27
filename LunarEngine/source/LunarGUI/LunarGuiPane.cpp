@@ -31,7 +31,8 @@ namespace LunarGUI {
         fileContents.erase(std::remove(fileContents.begin(), fileContents.end(), '\n'), fileContents.end());
         fileContents.erase(std::remove(fileContents.begin(), fileContents.end(), '\t'), fileContents.end());
         
-        CreateNodeList(fileContents);
+        Parser _parser;
+        Node rootNode = _parser.Parse(fileContents);
     }
 
     void GUIPane::UpdateScreenDims(int width, int height) {
@@ -47,32 +48,6 @@ namespace LunarGUI {
 
         CreateLayout();
         CreateDrawCommands();
-    }
-
-    Node GUIPane::text(std::string data) {
-        Node _node = {};
-
-        NodeType _type = {};
-        _type.Text = data;
-        
-        std::vector<Node> _child;
-        _node.children = _child;
-        _node.node_type = _type;
-    }
-
-    Node GUIPane::elem(std::string name, std::unordered_map<std::string, std::string> attributes, std::vector<Node> children) {
-        Node _node = {};
-        _node.children = children;
-
-        ElementData _elemData = {};
-        _elemData.TagName = name;
-        _elemData.attribues = attributes;
-
-        NodeType _type = {};
-        _type.Element = _elemData;
-        _node.node_type = _type;
-
-        return _node;
     }
 
     void GUIPane::PushStack(int attribIndex) {

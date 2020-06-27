@@ -1,6 +1,7 @@
 #include "../LunarLogger.h"
 #include "LunarGUIData.h"
 #include "LunarLayoutState.h"
+#include "LunarGUIParser.h"
 
 #include <string>
 #include <vector>
@@ -47,10 +48,6 @@ namespace LunarGUI {
         void PushStack(int attribIndex);
         void CreateLayout();
         void CreateDrawCommands();
-
-        //DOM Funcs
-        Node text(std::string data);
-        Node elem(std::string name, std::unordered_map<std::string, std::string> attributes, std::vector<Node> children);
 
         int width, height;
     private:

@@ -1,19 +1,18 @@
 #pragma once
 
+#include <vector>
+#include <string>
+#include <unordered_map>
+
 namespace LunarGUI {
-    struct Node {
-        std::vector<Node> children;
-        NodeType node_type;
+    struct ElementData {
+        std::string TagName;
+        std::unordered_map<std::string, std::string> attribues;
     };
 
     struct NodeType {
         std::string Text;
         ElementData Element;
-    };
-
-    struct ElementData {
-        std::string TagName;
-        std::unordered_map<std::string, std::string> attribues;
     };
 
     enum DrawPrimitive {
@@ -25,11 +24,8 @@ namespace LunarGUI {
         Black
     };
 
-    struct DrawCommand {
-        DrawPrimitive cmd;
-        BasicColor clearColor;
-
-        int width, height;
-        int xPos, yPos;
+    struct Node {
+        std::vector<Node> children;
+        NodeType node_type;
     };
 }
