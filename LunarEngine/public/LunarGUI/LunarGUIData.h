@@ -38,7 +38,8 @@ namespace LunarGUI {
     };
 
     enum Unit {
-        Px
+        Px,
+        None,
     };
     
     struct Color {

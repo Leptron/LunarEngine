@@ -2,6 +2,12 @@
 
 #include "LunarGUIData.h"
 #include <stdexcept>
+#include <algorithm>
+#include <vector>
+#include <string>
+
+#include <sstream>
+
 
 namespace LunarGUI {
     enum ConsumeType {
@@ -9,7 +15,8 @@ namespace LunarGUI {
         Characters,
         Text,
         OpenQuote,
-        ValidIdentifierChar
+        ValidIdentifierChar,
+        Float
     };
 
     class CssParser {
@@ -37,6 +44,20 @@ namespace LunarGUI {
         Specifity specificity(SimpleSelector _simple);
 
         std::vector<Selector> parse_selectors();
+
+        Rule parse_rule();
+        std::vector<Rule> parse_rules();
+
+        std::vector<Declaration> parse_declarations();
+        Declaration parse_declaration();
+
+        Value parse_value();
+        Value parse_length();
+        Value parse_color();
+
+        float parse_float();
+        Unit parse_unit();
+        int parse_hex_pair();
     private:
         size_t pos;
         std::string input;

@@ -9,6 +9,120 @@ namespace LunarGUI {
 
     }
 
+    Rule CssParser::parse_rule() {
+        Rule _rule = {};
+        _rule.selectors = parse_selectors();
+        //do declarations
+        _rule.declarations = parse_declarations();
+    }
+
+    std::vector<Rule> CssParser::parse_rules() {
+        std::vector<Rule> _rules;
+        while(1) {
+            consume_whitespace();
+            if(eof())
+                break;
+
+            //_rules.push_back()
+        }
+
+        return _rules;
+    }
+
+    std::vector<Declaration> CssParser::parse_declarations() {
+        if(consume_char() == '{')
+            throw std::runtime_error("css parsing error");
+
+        std::vector<Declaration> _declarations;
+        while(1) {
+            consume_whitespace();
+            if(next_char() == '}') {
+                consume_char();
+                break;
+            }
+
+            
+        }
+    }
+
+    Declaration CssParser::parse_declaration() {
+        auto property_name = parse_identifier();
+        consume_whitespace();
+        
+        if(consume_char() == ':')
+            throw std::runtime_error("declaration parsing error");
+        consume_whitespace();
+
+        
+    }
+
+    Value CssParser::parse_value() {
+        if(next_char() == '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9')
+            return parse_length();
+        else if(next_char() == '#')
+            return parse_color();
+        else {
+            Value _val = {};
+
+            _val.Keyword = parse_identifier();
+            return _val;
+        }
+    }
+
+    Value CssParser::parse_length() {
+        Value _val = {};
+
+        float _f = parse_float();
+        Unit _u = parse_unit();
+
+        auto _t = std::make_tuple(_f, _u);
+        _val.length = _t;
+
+        return _val;
+    }
+
+    float CssParser::parse_float() {
+        auto _s = consume_while(ConsumeType::Float);
+        return std::stof(_s);
+    }
+
+    Unit CssParser::parse_unit() {
+        auto _s = parse_identifier();
+        if(_s == "px")
+            return Unit::Px;
+        else
+            return Unit::None;
+    }
+
+    Value CssParser::parse_color() {
+        if(consume_char() != '#')
+            throw std::runtime_error("failed to parse color");
+
+        Color c_value = {};
+        c_value.r = parse_hex_pair();
+        c_value.g = parse_hex_pair();
+        c_value.b = parse_hex_pair();
+        c_value.a = 255;
+
+        Value _val = {};
+        _val.color_value = c_value;
+        return _val;
+    }
+
+    int CssParser::parse_hex_pair() {
+        auto s = input[pos];
+        auto sTwo = input[pos + 1];
+
+        pos += 2;
+        std::stringstream ss;
+        ss << std::hex << s + sTwo;
+
+        unsigned int _out;
+        ss >> _out;
+
+        return static_cast<int>(_out);
+    }
+
     void CssParser::Parse(std::string input) {
         this->input = input;
     }
@@ -61,6 +175,11 @@ namespace LunarGUI {
 
             bool compare = lCaseTest | uCaseTest | nTest | uTest;
             return compare;
+        } else if (consuming == ConsumeType::Float) {
+            char nChar = next_char();
+            bool nTest = nTest = std::find(numerics.begin(), numerics.end(), c) != numerics.end();
+
+            return nTest || nChar == '.';
         }
     }
 
