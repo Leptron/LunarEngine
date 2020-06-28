@@ -32,7 +32,7 @@ namespace LunarGUI {
         fileContents.erase(std::remove(fileContents.begin(), fileContents.end(), '\t'), fileContents.end());
         
         Parser _parser;
-        Node rootNode = _parser.Parse(fileContents);
+        rootNode = _parser.Parse(fileContents);
     }
 
     void GUIPane::UpdateScreenDims(int width, int height) {

@@ -50,6 +50,7 @@ namespace LunarGUI {
         void CreateDrawCommands();
 
         int width, height;
+        Node rootNode;
     private:
         
     };
