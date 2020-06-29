@@ -10,11 +10,13 @@ namespace LunarGUI {
     }
 
     void GUIPane::CreatePane(std::string loc, int width, int height) {
+        std::string cssLoc = "shaders/style.css";
+        
         std::string fileContents;
+        std::string cssContents;
 
         this->width = width;
         this->height = height;
-        LayoutState::getInstance()->UpdateDims(this->width, this->height);
 
         std::FILE *fp = std::fopen(loc.c_str(), "rb");
         if(fp) {
@@ -28,18 +30,27 @@ namespace LunarGUI {
             fileContents = contents;
         }
 
-        fileContents.erase(std::remove(fileContents.begin(), fileContents.end(), '\n'), fileContents.end());
-        fileContents.erase(std::remove(fileContents.begin(), fileContents.end(), '\t'), fileContents.end());
-        
-        Parser _parser;
+        std::FILE *fpp = std::fopen(cssLoc.c_str(), "rb");
+        if(fpp) {
+            std::string contents;
+            std::fseek(fpp, 0, SEEK_END);
+            contents.resize(std::ftell(fpp));
+
+            std::rewind(fpp);
+            std::fread(&contents[0], 1, contents.size(), fpp);
+            std::fclose(fpp);
+            cssContents = contents;
+        }
+
+        XMLParser _parser;
         rootNode = _parser.Parse(fileContents);
+        
     }
 
     void GUIPane::UpdateScreenDims(int width, int height) {
         this->width = width;
         this->height = height;
 
-        LayoutState::getInstance()->UpdateDims(this->width, this->height);
         CreateDrawCommands();
     }
 

@@ -1,7 +1,6 @@
 #include "../LunarLogger.h"
 #include "LunarGUIData.h"
-#include "LunarLayoutState.h"
-#include "LunarGUIParser.h"
+#include "XMLParser.h"
 
 #include <string>
 #include <vector>
@@ -52,6 +51,6 @@ namespace LunarGUI {
         int width, height;
         Node rootNode;
     private:
-        
+        Stylesheet _stylesheet;
     };
 }

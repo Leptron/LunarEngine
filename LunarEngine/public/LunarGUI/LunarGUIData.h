@@ -12,6 +12,15 @@ namespace LunarGUI {
         std::unordered_map<std::string, std::string> attribues;
     };
 
+    enum ConsumeType {
+        WhiteSpace,
+        Characters,
+        Text,
+        OpenQuote,
+        ValidIdentifierChar,
+        Float
+    };
+
     struct NodeType {
         std::string Text;
         ElementData Element;
@@ -28,7 +37,9 @@ namespace LunarGUI {
 
     struct Node {
         std::vector<Node> children;
-        NodeType node_type;
+
+        bool textNode;
+        std::string text;
     };
 
     struct SimpleSelector {
