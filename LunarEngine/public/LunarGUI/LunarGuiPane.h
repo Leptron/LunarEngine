@@ -1,6 +1,7 @@
 #include "../LunarLogger.h"
 #include "LunarGUIData.h"
 #include "XMLParser.h"
+#include "StyleSheetParser.h"
 
 #include <string>
 #include <vector>

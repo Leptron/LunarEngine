@@ -40,6 +40,7 @@ namespace LunarGUI {
 
         bool textNode;
         std::string text;
+        std::unordered_map<std::string, std::string> attributes;
     };
 
     struct SimpleSelector {

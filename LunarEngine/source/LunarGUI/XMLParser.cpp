@@ -97,10 +97,34 @@ namespace LunarGUI {
 
         tok.erase(tok.begin());
         
+        std::unordered_map<std::string, std::string> _attributes;
+        for(auto _tok : tok) {
+            bool valFound = false;
+            std::string identifier;
+            std::string value;
+
+            std::vector<char> _tokCharacters;
+            _tokCharacters = std::vector<char>(_tok.begin(), _tok.end());
+
+            //loop through the characters
+            for(auto _char : _tokCharacters) {
+                if(_char == '=') {
+                    valFound = true;
+                    continue;
+                } else if(!valFound) {
+                    identifier += _char;
+                } else if(valFound) {
+                    value += _char;
+                }
+            }
+
+            _attributes[identifier] = value;
+        }
 
         Node _node = {};
         _node.textNode = false;
-        _node.children = _children;        
+        _node.children = _children;
+        _node.attributes = _attributes;        
 
         return _node;
     }
