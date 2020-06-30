@@ -46,7 +46,7 @@ namespace LunarGUI {
         rootNode = _parser.Parse(fileContents);
         
         StyleSheetParser _styleSheetParser;
-        _styleSheetParser.Parse(cssContents);
+        _stylesheet = _styleSheetParser.Parse(cssContents);
     }
 
     void GUIPane::UpdateScreenDims(int width, int height) {

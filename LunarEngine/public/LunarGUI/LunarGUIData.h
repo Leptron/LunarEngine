@@ -83,8 +83,8 @@ namespace LunarGUI {
     };
 
     struct Rule {
-        std::vector<Selector> selectors;
-        std::vector<Declaration> declarations;
+        std::vector<std::string> selectors;
+        std::unordered_map<std::string, std::string> declarations;
     };  
 
     struct Stylesheet {

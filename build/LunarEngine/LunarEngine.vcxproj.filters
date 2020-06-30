@@ -13,6 +13,9 @@
     <ClCompile Include="D:\code\LunarEngine\LunarEngine\source\LunarGUI\LunarGuiPane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\code\LunarEngine\LunarEngine\source\LunarGUI\StyleSheetParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\code\LunarEngine\LunarEngine\source\LunarGUI\XMLParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
