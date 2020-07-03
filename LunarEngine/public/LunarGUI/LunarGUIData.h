@@ -36,6 +36,7 @@ namespace LunarGUI {
     };
 
     struct Node {
+        std::string nodeType;
         std::vector<Node> children;
 
         bool textNode;
@@ -89,5 +90,11 @@ namespace LunarGUI {
 
     struct Stylesheet {
         std::vector<Rule> rules;
+    };
+
+    struct StyledNode {
+        Node* node;
+        std::vector<std::tuple<std::string, std::string>> _properties;
+        std::vector<StyledNode> children;
     };
 }

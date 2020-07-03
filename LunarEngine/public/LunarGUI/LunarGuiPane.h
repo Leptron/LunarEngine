@@ -2,6 +2,7 @@
 #include "LunarGUIData.h"
 #include "XMLParser.h"
 #include "StyleSheetParser.h"
+#include "LunarGUIStyler.h"
 
 #include <string>
 #include <vector>

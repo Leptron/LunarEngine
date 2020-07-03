@@ -266,6 +266,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClCompile Include="D:\code\LunarEngine\LunarEngine\source\LunarBatching\StaticSquareBatch.cpp" />
     <ClCompile Include="D:\code\LunarEngine\LunarEngine\source\LunarEngine\LunarEngine.cpp" />
+    <ClCompile Include="D:\code\LunarEngine\LunarEngine\source\LunarGUI\LunarGUIStyler.cpp" />
     <ClCompile Include="D:\code\LunarEngine\LunarEngine\source\LunarGUI\LunarGui.cpp" />
     <ClCompile Include="D:\code\LunarEngine\LunarEngine\source\LunarGUI\LunarGuiPane.cpp" />
     <ClCompile Include="D:\code\LunarEngine\LunarEngine\source\LunarGUI\StyleSheetParser.cpp" />

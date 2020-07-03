@@ -19,6 +19,7 @@ namespace LunarGUI {
         Node rootNode = {};
         rootNode.children = nodes;
         rootNode.textNode = false;
+        rootNode.nodeType = "root";
 
         return rootNode;
     }
@@ -94,7 +95,8 @@ namespace LunarGUI {
         std::vector<std::string> tok;
         while(std::getline(ss, token, ' '))
             tok.push_back(token);
-
+        
+        std::string name = tok[0];
         tok.erase(tok.begin());
         
         std::unordered_map<std::string, std::string> _attributes;
@@ -124,7 +126,8 @@ namespace LunarGUI {
         Node _node = {};
         _node.textNode = false;
         _node.children = _children;
-        _node.attributes = _attributes;        
+        _node.attributes = _attributes;
+        _node.nodeType = name;        
 
         return _node;
     }

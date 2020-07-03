@@ -7,6 +7,9 @@
     <ClCompile Include="D:\code\LunarEngine\LunarEngine\source\LunarEngine\LunarEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\code\LunarEngine\LunarEngine\source\LunarGUI\LunarGUIStyler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\code\LunarEngine\LunarEngine\source\LunarGUI\LunarGui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
