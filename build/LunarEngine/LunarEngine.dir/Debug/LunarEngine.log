@@ -1,3 +1,7 @@
 ﻿cl : command line warning D9002: ignoring unknown option '-fpermissive'
-  LunarGUIStyler.cpp
+  LunarEngine.cpp
+  LunarGui.cpp
+  LunarGuiPane.cpp
+  LunarLayoutAllocator.cpp
+  Generating Code...
   LunarEngine.vcxproj -> D:\code\LunarEngine\build\LunarEngine\Debug\LunarEngine.lib

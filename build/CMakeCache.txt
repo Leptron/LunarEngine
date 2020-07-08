@@ -282,7 +282,7 @@ GLFW_VULKAN_STATIC:BOOL=OFF
 LunarEngine_BINARY_DIR:STATIC=D:/code/LunarEngine/build/LunarEngine
 
 //Dependencies for the target
-LunarEngine_LIB_DEPENDS:STATIC=general;glfw;general;-mwindows;
+LunarEngine_LIB_DEPENDS:STATIC=general;Ultralight;general;UltralightCore;general;glfw;general;-mwindows;
 
 //Value Computed by CMake
 LunarEngine_SOURCE_DIR:STATIC=D:/code/LunarEngine/LunarEngine

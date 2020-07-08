@@ -1,2 +1,5 @@
-﻿LINK : warning LNK4044: unrecognized option '/mwindows'; ignored
+﻿cl : command line warning D9002: ignoring unknown option '-fpermissive'
+  main.cpp
+LINK : warning LNK4044: unrecognized option '/mwindows'; ignored
+LINK : warning LNK4044: unrecognized option '/mwindows'; ignored
   Sandbox.vcxproj -> D:\code\LunarEngine\build\sandbox\Debug\Sandbox.exe

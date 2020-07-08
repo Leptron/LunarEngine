@@ -1,9 +1,9 @@
 <GUIPane clear="black">
-    <GUIContainer id="container1" width="72px" height="100%" clear="yellow" block="inline">
+    <GUIContainer id="container1" width="72px" height="100%" clear="white" block="inline">
     </GUIContainer>
     <GUIContainer clear="white" block="inline" width="a-space" height="100%">
         <GUIContainer id="container2" width="30%" height="20px" clear="white">
-            <span color="black">testNode</span>
+            <span color="black">Trent get a test</span>
         </GUIContainer>
         <GUIContainer id="container3" width="300px" height="30px" clear="black" marginTop="20px">
         </GUIContainer>

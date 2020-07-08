@@ -86,7 +86,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\external\ultralight;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) -fpermissive</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -103,10 +103,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;VK_USE_PLATFORM_WIN32_KHR;NOMINMAX;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;VK_EXAMPLE_DATA_DIR=\"D:/code/LunarEngine/data/\";CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\external\ultralight;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\external\ultralight;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -114,8 +114,8 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\LunarEngine\Debug\LunarEngine.lib;..\external\glfw\src\Debug\glfw3.lib;-mwindows;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:/code/LunarEngine/lib/bin;D:/code/LunarEngine/lib/bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Ultralight.lib;UltralightCore.lib;..\LunarEngine\Debug\LunarEngine.lib;..\external\glfw\src\Debug\glfw3.lib;-mwindows;Ultralight.lib;UltralightCore.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/code/LunarEngine/lib/bin;D:/code/LunarEngine/lib/bin/$(Configuration);D:/code/LunarEngine/libs/ultralight;D:/code/LunarEngine/libs/ultralight/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -129,7 +129,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\external\ultralight;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) -fpermissive</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -146,10 +146,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;VK_USE_PLATFORM_WIN32_KHR;NOMINMAX;_USE_MATH_DEFINES;NDEBUG;_CRT_SECURE_NO_WARNINGS;VK_EXAMPLE_DATA_DIR=\"D:/code/LunarEngine/data/\";CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\external\ultralight;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\external\ultralight;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -157,8 +157,8 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\LunarEngine\Release\LunarEngine.lib;..\external\glfw\src\Release\glfw3.lib;-mwindows;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:/code/LunarEngine/lib/bin;D:/code/LunarEngine/lib/bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Ultralight.lib;UltralightCore.lib;..\LunarEngine\Release\LunarEngine.lib;..\external\glfw\src\Release\glfw3.lib;-mwindows;Ultralight.lib;UltralightCore.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/code/LunarEngine/lib/bin;D:/code/LunarEngine/lib/bin/$(Configuration);D:/code/LunarEngine/libs/ultralight;D:/code/LunarEngine/libs/ultralight/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -172,7 +172,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\external\ultralight;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) -fpermissive</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -189,10 +189,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;VK_USE_PLATFORM_WIN32_KHR;NOMINMAX;_USE_MATH_DEFINES;NDEBUG;_CRT_SECURE_NO_WARNINGS;VK_EXAMPLE_DATA_DIR=\"D:/code/LunarEngine/data/\";CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\external\ultralight;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\external\ultralight;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -200,8 +200,8 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\LunarEngine\MinSizeRel\LunarEngine.lib;..\external\glfw\src\MinSizeRel\glfw3.lib;-mwindows;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:/code/LunarEngine/lib/bin;D:/code/LunarEngine/lib/bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Ultralight.lib;UltralightCore.lib;..\LunarEngine\MinSizeRel\LunarEngine.lib;..\external\glfw\src\MinSizeRel\glfw3.lib;-mwindows;Ultralight.lib;UltralightCore.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/code/LunarEngine/lib/bin;D:/code/LunarEngine/lib/bin/$(Configuration);D:/code/LunarEngine/libs/ultralight;D:/code/LunarEngine/libs/ultralight/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -215,7 +215,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\external\ultralight;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) -fpermissive</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -231,10 +231,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;VK_USE_PLATFORM_WIN32_KHR;NOMINMAX;_USE_MATH_DEFINES;NDEBUG;_CRT_SECURE_NO_WARNINGS;VK_EXAMPLE_DATA_DIR=\"D:/code/LunarEngine/data/\";CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\external\ultralight;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\code\LunarEngine\external;D:\code\LunarEngine\external\glm;D:\code\LunarEngine\external\gli;D:\code\LunarEngine\external\assimp;D:\code\LunarEngine\external\imgui;D:\code\LunarEngine\external\tinygltf;D:\code\LunarEngine\external\glfw\include;D:\code\LunarEngine\external\ultralight;D:\code\LunarEngine\Lib\include;D:\code\LunarEngine\LunarEngine\public;D:\code\LunarEngine\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -242,8 +242,8 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\LunarEngine\RelWithDebInfo\LunarEngine.lib;..\external\glfw\src\RelWithDebInfo\glfw3.lib;-mwindows;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:/code/LunarEngine/lib/bin;D:/code/LunarEngine/lib/bin/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Ultralight.lib;UltralightCore.lib;..\LunarEngine\RelWithDebInfo\LunarEngine.lib;..\external\glfw\src\RelWithDebInfo\glfw3.lib;-mwindows;Ultralight.lib;UltralightCore.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/code/LunarEngine/lib/bin;D:/code/LunarEngine/lib/bin/$(Configuration);D:/code/LunarEngine/libs/ultralight;D:/code/LunarEngine/libs/ultralight/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
