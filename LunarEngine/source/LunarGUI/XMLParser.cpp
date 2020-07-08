@@ -120,6 +120,8 @@ namespace LunarGUI {
                 }
             }
 
+            value.erase(std::remove(value.begin(), value.end(), '\"'), value.end());
+
             _attributes[identifier] = value;
         }
 

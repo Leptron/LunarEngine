@@ -3,6 +3,8 @@
 #include "XMLParser.h"
 #include "StyleSheetParser.h"
 #include "LunarGUIStyler.h"
+#include "LunarLayout.h"
+#include "LunarLayoutAllocator.h"
 
 #include <string>
 #include <vector>
@@ -54,5 +56,7 @@ namespace LunarGUI {
         Node rootNode;
     private:
         Stylesheet _stylesheet;
+        StyledNode _styledNodes;
+        LayoutBox  _layoutTree;
     };
 }

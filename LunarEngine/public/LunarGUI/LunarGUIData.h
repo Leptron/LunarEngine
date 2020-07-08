@@ -92,9 +92,61 @@ namespace LunarGUI {
         std::vector<Rule> rules;
     };
 
+    enum Display {
+        Inline,
+        Block,
+        NoneD,
+    };
+
     struct StyledNode {
         Node* node;
+        Display _displayType;
+
         std::vector<std::tuple<std::string, std::string>> _properties;
         std::vector<StyledNode> children;
+        std::string nodeName;
+    };
+
+    enum BoxTypeE {
+        BlockNode,
+        InlineNode,
+        AnonymousBlock
+    };
+
+    struct BoxTypeS {
+        BoxTypeE _boxType;
+        StyledNode* _node;
+    };
+
+    struct EdgeSizes {
+        float left;
+        float right;
+        float top;
+        float bottom;
+    };
+
+    struct Rect {
+        float x;
+        float y;
+        float width;
+        float height;
+    };
+
+    struct Dimensions {
+        Rect content;
+
+        EdgeSizes padding;
+        EdgeSizes border;
+        EdgeSizes margin;
+    };
+
+    struct LayoutBox {
+        Dimensions dimensions;
+        BoxTypeS box_type;
+        bool anonBox;
+
+        std::vector<LayoutBox> children;
+        std::string nodeName;
+        std::vector<std::tuple<std::string, std::string>> _properties;
     };
 }

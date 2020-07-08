@@ -49,7 +49,13 @@ namespace LunarGUI {
         _stylesheet = _styleSheetParser.Parse(cssContents);
 
         NodeStyler _styler;
-        _styler.StyleNodes(_stylesheet, rootNode);
+        _styledNodes = _styler.StyleNodes(_stylesheet, rootNode);
+
+        LayoutManager lManager;
+        _layoutTree = lManager.BuildLayoutTree(_styledNodes.children[0]);
+
+        LayoutAllocater _allocator;
+        _allocator.AllocateBlock(_layoutTree, {});
     }
 
     void GUIPane::UpdateScreenDims(int width, int height) {

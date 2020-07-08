@@ -41,6 +41,8 @@ namespace LunarGUI {
         std::vector<StyledNode> _styled_nodes;
 
         for(auto _node : _nodes) {
+            StyledNode _sNode = {};
+
             std::vector<std::string> selector;
 
             if(_node.attributes.find("id") == _node.attributes.end()) {
@@ -110,14 +112,33 @@ namespace LunarGUI {
                 if(selector == "block" && !hasBlock) {
                     _tmpAttrs.push_back(_pTup);
                     hasBlock = true;
+
+                    if(value == "block") {
+                        _sNode._displayType = Display::Block;
+                    } else if (value == "inline") {
+                        _sNode._displayType = Display::Inline;
+                    } else if (value == "none") {
+                        _sNode._displayType = Display::NoneD;
+                    }
                 } else if (selector == "block" && hasBlock) {
                     for(int i = 0; i < _tmpAttrs.size(); i++) {
                         auto _g = _tmpAttrs[i];
-                        if(std::get<0>(_g) == "block")
+                        if(std::get<0>(_g) == "block") {
                             _tmpAttrs[i] = _pTup;
+
+                            if(value == "block") {
+                                _sNode._displayType = Display::Block;
+                            } else if (value == "inline") {
+                                _sNode._displayType = Display::Inline;
+                            } else if (value == "none") {
+                                _sNode._displayType = Display::NoneD;
+                            }
+                        }
                     }
                 }
             }
+
+            _sNode._displayType = Display::Block;
 
             for(auto _selec : selector) {
                 std::unordered_map<std::string, std::string> _selectorStyles;
@@ -125,6 +146,7 @@ namespace LunarGUI {
                     _selectorStyles = _attrValues[_selec];
 
                 for(std::pair<std::string, std::string> elem : _selectorStyles) {
+                    std::string value = elem.second;
                     auto _tup = std::make_tuple(elem.first, elem.second);
 
                     if(elem.first == "clear" && !hasClear) {     
@@ -163,11 +185,28 @@ namespace LunarGUI {
                     if(elem.first == "block" && !hasBlock) {     
                         _tmpAttrs.push_back(_tup);
                         hasBlock = true;
+
+                        if(value == "block") {
+                            _sNode._displayType = Display::Block;
+                        } else if (value == "inline") {
+                            _sNode._displayType = Display::Inline;
+                        } else if (value == "none") {
+                            _sNode._displayType = Display::NoneD;
+                        }
                     } else if(elem.first == "block" && hasBlock) {
                         for(int i = 0; i < _tmpAttrs.size(); i++) {
                             auto _g = _tmpAttrs[i];
-                            if(std::get<0>(_g) == "block")
+                            if(std::get<0>(_g) == "block") {
                                 _tmpAttrs[i] = _tup;
+
+                                if(value == "block") {
+                                    _sNode._displayType = Display::Block;
+                                } else if (value == "inline") {
+                                    _sNode._displayType = Display::Inline;
+                                } else if (value == "none") {
+                                    _sNode._displayType = Display::NoneD;
+                                }
+                            }
                         }
                     }
                 }             
@@ -175,6 +214,9 @@ namespace LunarGUI {
 
             //do the node attribute stylea
             for(std::pair<std::string, std::string> elem : _node.attributes) {
+                std::string value = elem.second;
+                
+                
                 auto _tup = std::make_tuple(elem.first, elem.second);
 
                 if(elem.first == "clear" && !hasClear) {     
@@ -213,11 +255,29 @@ namespace LunarGUI {
                 if(elem.first == "block" && !hasBlock) {     
                     _tmpAttrs.push_back(_tup);
                     hasBlock = true;
+
+                    if(value == "block") {
+                        _sNode._displayType = Display::Block;
+                    } else if (value == "inline") {
+                        
+                        _sNode._displayType = Display::Inline;
+                    } else if (value == "none") {
+                        _sNode._displayType = Display::NoneD;
+                    }
                 } else if(elem.first == "block" && hasBlock) {
                     for(int i = 0; i < _tmpAttrs.size(); i++) {
                         auto _g = _tmpAttrs[i];
-                        if(std::get<0>(_g) == "block")
+                        if(std::get<0>(_g) == "block") {
                             _tmpAttrs[i] = _tup;
+
+                            if(value == "block") {
+                                _sNode._displayType = Display::Block;
+                            } else if (value == "inline") {
+                                _sNode._displayType = Display::Inline;
+                            } else if (value == "none") {
+                                _sNode._displayType = Display::NoneD;
+                            }
+                        }
                     }
                 }
             }
@@ -225,11 +285,11 @@ namespace LunarGUI {
 
 
             auto _children = StyleNode(_node.children, _tmpAttrs);
-
-            StyledNode _sNode = {};
+            
             _sNode.node = &_node;
             _sNode._properties = _tmpAttrs;
             _sNode.children = _children;
+            _sNode.nodeName = _node.nodeType;
 
             _styled_nodes.push_back(_sNode);
         }
