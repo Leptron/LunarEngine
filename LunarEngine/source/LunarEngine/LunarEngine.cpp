@@ -13,6 +13,8 @@ namespace LunarEngine {
     bool LunarEngine::dimsChanged = false;
 
     void LunarEngine::InitResources() {
+        //_manager.CreateGUIPane("shaders/test.lnGUI", width, height);
+
 		orthoProjection = glm::ortho(0.0f, static_cast<float>(width), static_cast<float>(height), 0.0f, -1.0f, 1.0f);
         testSpriteManager.UpdateScreenDims(width, height);
 
@@ -52,8 +54,13 @@ namespace LunarEngine {
         _animationManager.CreateAnimation("testAnimation", "lol", frames, 10);
         _animationManager.PlayAnimation("testAnimation");
 
-        _testBatch.CreateQuad(glm::vec2(300.0f, 300.0f), glm::vec2(50.0f, 50.0f), 0.0f);
-        _testBatch.CreateQuad(glm::vec2(500.0f, 400.0f), glm::vec2(50.0f, 50.0f), 0.0f);
+        LunarBatching::LunarBatchedColor colors = {};
+        colors.lColor = glm::vec3(1.0f, 0.8f, 0.8f);
+        colors.lTColor = glm::vec3(1.0f);
+        colors.rColor = glm::vec3(1.0f);
+        colors.rTColor = glm::vec3(1.0f);
+
+        _testBatch.CreateQuad(glm::vec2(0.0f, 0.0f), glm::vec2(1280.0f, 720.0f), 0.0f, colors);
         _testBatch.UpdateOrtho(orthoProjection);
         _testBatch.Batch();
     }
@@ -62,16 +69,17 @@ namespace LunarEngine {
         LunarLogger::Logger::getInstance()->log("Created Opengl Rendering Loop", "Engine", "MAGENTA");
 
         prevTime = glfwGetTime();
+        bool test = true;
 
         while (!glfwWindowShouldClose(window)) {
             processInput();
-            
-            if(dimsChanged) {
-            	orthoProjection = glm::ortho(0.0f, static_cast<float>(width), static_cast<float>(height), 0.0f, -1.0f, 1.0f);
-            	_testBatch.UpdateOrtho(orthoProjection);
-            	testSpriteManager.UpdateScreenDims(width, height);
-            	
-            	dimsChanged = false;
+
+            if (dimsChanged) {
+                orthoProjection = glm::ortho(0.0f, static_cast<float>(width), static_cast<float>(height), 0.0f, -1.0f, 1.0f);
+                _testBatch.UpdateOrtho(orthoProjection);
+                testSpriteManager.UpdateScreenDims(width, height);
+
+                dimsChanged = false;
             }
 
             float now = glfwGetTime();
@@ -82,11 +90,11 @@ namespace LunarEngine {
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            _testBatch.Draw();
             for (auto layer : layers)
                 layer.Draw();
 
-            //testSpriteManager.Draw();
+            testSpriteManager.Draw();
+            _testBatch.Draw();
 
             glfwSwapBuffers(window);
             glfwPollEvents();

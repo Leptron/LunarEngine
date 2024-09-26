@@ -1,0 +1,2 @@
+D:\code\LunarEngine\build\external\Debug\ktx.pdb
+D:\code\LunarEngine\build\external\ktx.dir\Debug\ktx.pdb

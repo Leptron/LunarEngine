@@ -4,7 +4,7 @@ if("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 2.5)
    message(FATAL_ERROR "CMake >= 2.6.0 required")
 endif()
 cmake_policy(PUSH)
-cmake_policy(VERSION 2.6)
+cmake_policy(VERSION 2.6...3.17)
 #----------------------------------------------------------------
 # Generated CMake target import file.
 #----------------------------------------------------------------
@@ -55,7 +55,7 @@ add_library(glfw STATIC IMPORTED)
 
 set_target_properties(glfw PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "/usr/lib/libxcb.so;/usr/lib/libvulkan.so;/usr/lib/libvulkan.so;libassimp.so.5;-lpthread;\$<LINK_ONLY:Threads::Threads>;/usr/lib/librt.so;/usr/lib/libm.so;\$<LINK_ONLY:dl>"
+  INTERFACE_LINK_LIBRARIES "\$<LINK_ONLY:Threads::Threads>"
 )
 
 # Load information for each installed configuration.
